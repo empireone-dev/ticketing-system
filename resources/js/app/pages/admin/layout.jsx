@@ -4,20 +4,17 @@ import AdminTopnavComponents from './components/admin-topnav-components'
 
 export default function AdminLayout({ children }) {
   return (
-    <div>
-      <div>
+    <div className="flex flex-col h-screen">
+      <AdminTopnavComponents />
 
-
-        <AdminTopnavComponents />
-
+      <div className="flex flex-1">
         <AdminSidebarComponents />
 
-        <div class="p-4 sm:ml-64">
-          <div class="p-4  mt-14">
+        <div className="p-4 sm:ml-64 flex-1">
+          <div className="p-4 mt-14">
             {children}
           </div>
         </div>
-
       </div>
     </div>
   )
