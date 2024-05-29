@@ -35,7 +35,7 @@ export default function AdminTopnavComponents() {
               </button>
               <a href="https://flowbite.com" class="flex ms-2 md:me-24">
                 <img src="/images/Final I.T Logo.png" class="h-12 me-2" alt="FlowBite Logo" />
-                <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">I.T Department</span>
+                <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">I.T Department Ticketing System</span>
               </a>
             </div>
             <div class="flex items-center">
