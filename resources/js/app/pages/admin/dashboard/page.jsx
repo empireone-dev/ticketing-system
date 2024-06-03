@@ -4,7 +4,7 @@ import DashboardSection from './sections/dashboard-section'
 
 export default function AdminDashboardPage() {
   return (
-    <AdminLayout>
+    <AdminLayout account="1">
       <DashboardSection/>
     </AdminLayout>
   )

@@ -4,7 +4,7 @@ import AdminTopnavComponents from './components/admin-topnav-components'
 
 export default function AdminLayout({ children }) {
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-slate-800">
       <AdminTopnavComponents />
 
       <div className="flex flex-1">
