@@ -22,19 +22,19 @@ export default function AdminSidebarComponents() {
              </Link>
           </li>
           <li>
-             <a href="#" class="flex items-center p-1 text-white rounded-lg hover:bg-gray-100 hover:text-gray-900 group">
+             <a href="/admin/tickets" class="flex items-center p-1 text-white rounded-lg hover:bg-gray-100 hover:text-gray-900 group">
                 <TicketIcon className='h-7 text-gray-400'/>
                 <span class="flex-1 ms-2 whitespace-nowrap">Tickets Section</span>
              </a>
           </li>
           <li>
-             <a href="#" class="flex items-center p-1 text-white rounded-lg hover:bg-gray-100 hover:text-gray-900 group">
+             <a href="/admin/category" class="flex items-center p-1 text-white rounded-lg hover:bg-gray-100 hover:text-gray-900 group">
                 <BarsArrowDownIcon className='h-7 text-gray-400'/>
                 <span class="flex-1 ms-2 whitespace-nowrap">Category Section</span>
              </a>
           </li>
           <li>
-             <a href="#" class="flex items-center p-1 text-white rounded-lg hover:bg-gray-100 hover:text-gray-900 group">
+             <a href="/admin/feedback" class="flex items-center p-1 text-white rounded-lg hover:bg-gray-100 hover:text-gray-900 group">
                 <ChatBubbleLeftEllipsisIcon className='h-7 text-gray-400'/>
                 <span class="flex-1 ms-2 whitespace-nowrap">Feedback Section</span>
              </a>

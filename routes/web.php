@@ -44,5 +44,11 @@ Route::get('/admin/it', function () {
 Route::get('/admin/tickets', function () {
     return Inertia::render('admin/tickets/page');
 });
+Route::get('/admin/category', function () {
+    return Inertia::render('admin/category/page');
+});
+Route::get('/admin/feedback', function () {
+    return Inertia::render('admin/feedback/page');
+});
 
 require __DIR__.'/auth.php';
