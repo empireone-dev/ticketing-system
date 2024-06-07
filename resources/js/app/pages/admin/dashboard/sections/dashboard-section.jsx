@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardCardSection from './dashboard-card-section'
-import { TicketIcon } from '@heroicons/react/24/solid'
+import { ChartPieIcon, TicketIcon } from '@heroicons/react/24/solid'
 import DashboardTableSection from './dashboard-table-section'
 import { PieChart } from 'react-minimal-pie-chart'
 
@@ -50,8 +50,9 @@ export default function DashboardSection() {
                     </div>
                     <DashboardTableSection />
                 </div>
-                <div className='bg-white shadow-lg p-3 rounded-lg'>
-                    <div className='text-3xl'>
+                <div className='bg-slate-700 shadow-lg p-3 rounded-lg'>
+                    <div className='flex text-3xl text-gray-300 font-bold'>
+                    <ChartPieIcon className='size-10' />    
                     PIE CHART
                     </div>
                     <PieChart
