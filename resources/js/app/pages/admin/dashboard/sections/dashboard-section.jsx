@@ -1,12 +1,16 @@
-import React from 'react'
-import DashboardCardSection from './dashboard-card-section'
-import { ChartPieIcon, TicketIcon } from '@heroicons/react/24/solid'
-import DashboardTableSection from './dashboard-table-section'
-import { PieChart } from 'react-minimal-pie-chart'
+import React, { useState } from 'react';
+import DashboardCardSection from './dashboard-card-section';
+import { ChartPieIcon, TicketIcon } from '@heroicons/react/24/solid';
+import DashboardTableSection from './dashboard-table-section';
+import { PieChart } from 'react-minimal-pie-chart';
 
 export default function DashboardSection() {
+    const [hovered, setHovered] = useState(null);
 
-    const shiftSize = 7;
+    const handleSegmentClick = (event, segmentIndex, data) => {
+        console.log('Clicked segment:', segmentIndex);
+    };
+
     return (
         <div className='flex flex-col gap-8'>
             <div className='flex flex-wrap gap-7 rounded-md'>
@@ -52,26 +56,48 @@ export default function DashboardSection() {
                 </div>
                 <div className='bg-slate-700 shadow-lg p-3 rounded-lg'>
                     <div className='flex text-3xl text-gray-300 font-bold'>
-                    <ChartPieIcon className='size-10' />    
-                    PIE CHART
+                        <ChartPieIcon className='size-10' />
+                        PIE CHART
                     </div>
                     <PieChart
-                        onClick={(e, segmentIndex)=>{
-                           console.log('e',e)
+                        style={{ height: '300px' }}
+                        lineWidth={55}
+                        animate
+                        animationDuration={1000}
+                        label={({ dataEntry }) => `${Math.round(dataEntry.percentage)}%`}
+                        labelStyle={(index) => ({
+                            fill: 'black',
+                            fontSize: '7px',
+                            fontFamily: 'sans-serif',
+                            transform: index === hovered ? 'scale(1.1)' : 'scale(1)', 
+                            transition: 'transform 0.3s' 
+                        })}
+                        labelPosition={74}
+                        paddingAngle={1.8} 
+                        onMouseOver={(event, segmentIndex, data) => {
+                            setHovered(segmentIndex);
                         }}
-                        // segmentsShift={({ dataEntry }) => dataEntry.value}
-                        label={({ dataEntry }) => dataEntry.value}
+                        onMouseOut={() => {
+                            setHovered(null);
+                        }}
+                        onClick={(event, segmentIndex, data) => {
+                            handleSegmentClick(event, segmentIndex, data);
+                        }}
                         data={[
-                            { title: 'One', value: 10, color: '#E38627' },
-                            { title: 'Two', value: 15, color: '#C13C37' },
-                            { title: 'Three', value: 20, color: '#6A2135' },
+                            { title: 'One', value: 10, color: '#FF6B6B' },
+                            { title: 'Two', value: 15, color: '#48BB78' },
+                            { title: 'Three', value: 20, color: '#4299E1' },
+                            { title: 'Four', value: 23, color: '#FFFF00' },
+                            { title: 'Five', value: 20, color: '#FF00FF' },
                         ]}
+                        segmentsStyle={(index) => ({
+                            transition: 'transform 0.3s',
+                            transform: index === hovered ? 'scale(1.1)' : 'scale(1)'
+                        })}
                     />
+
                 </div>
             </div>
         </div>
-
-
-
-    )
+    );
 }
