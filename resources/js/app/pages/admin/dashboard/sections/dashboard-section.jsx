@@ -55,9 +55,9 @@ export default function DashboardSection() {
                     <DashboardTableSection />
                 </div>
                 <div className='bg-slate-700 shadow-lg p-3 rounded-lg'>
-                    <div className='flex text-3xl text-gray-300 font-bold'>
+                    <div className='flex text-3xl text-gray-300 font-bold mb-3 p-3'>
                         <ChartPieIcon className='size-10' />
-                        PIE CHART
+                        Inquiry Chart
                     </div>
                     <PieChart
                         style={{ height: '300px' }}
