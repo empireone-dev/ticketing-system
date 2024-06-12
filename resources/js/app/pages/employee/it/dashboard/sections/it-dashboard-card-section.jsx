@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function DashboardCardSection({ icon, title, href }) {
+export default function ItDashboardCardSection({ icon, title, href }) {
     return (
         <div class="flex flex-1">
             <div class="group relative overflow-hidden bg-slate-700 px-6 pt-10 pb-8 shadow-2xl ring-1 ring-gray-900/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl sm:rounded-lg sm:px-10 w-full">

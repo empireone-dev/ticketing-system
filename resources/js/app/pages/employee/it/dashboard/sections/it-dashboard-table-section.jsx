@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function DashboardTableSection() {
+export default function ItDashboardTableSection() {
   return (
     <div>
                     <table class="w-full text-sm text-left rtl:text-right text-gray-300">

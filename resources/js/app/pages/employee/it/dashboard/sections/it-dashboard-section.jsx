@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
-import DashboardCardSection from './dashboard-card-section';
-import { ChartPieIcon, TicketIcon } from '@heroicons/react/24/solid';
-import DashboardTableSection from './dashboard-table-section';
-import { PieChart } from 'react-minimal-pie-chart';
+import { TicketIcon } from '@heroicons/react/24/solid';
+import ItDashboardCardSection from './it-dashboard-card-section';
+import ItDashboardTableSection from './it-dashboard-table-section';
 
-export default function DashboardSection() {
+export default function ItDashboardSection() {
 
 
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex flex-wrap gap-7 rounded-md'>
-        <DashboardCardSection
+        <ItDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
           title="My Pending Tickets: 0"
           href="Go To Pending Tickets Section"
         />
-        <DashboardCardSection
+        <ItDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
           title="My Urgent Tickets: 0"
           href="Go To Urgent Tickets Section"
         />
-        <DashboardCardSection
+        <ItDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
           title="My Ongoing Tickets: 0"
           href="Go To Ongoing Tickets Section"
         />
-        <DashboardCardSection
+        <ItDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
           title="My Closed Tickets: 0"
           href="Go To Closed Tickets Section"
@@ -48,7 +47,7 @@ export default function DashboardSection() {
               <input type="text" id="table-search-users" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500     " placeholder="Search for users" />
             </div>
           </div>
-          <DashboardTableSection />
+          <ItDashboardTableSection />
         </div>
       </div>
     </div>
