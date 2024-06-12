@@ -21,8 +21,8 @@ export default function DashboardSection() {
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title="Assigned Tickets: 0"
-                    href="Go To Assigned Tickets Section"
+                    title="Urgent Tickets: 0"
+                    href="Go To Urgent Tickets Section"
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}

@@ -1,9 +1,12 @@
 import React from 'react'
+import CategoryAddSection from './category-add-section'
+import { TicketIcon } from '@heroicons/react/24/solid'
 
 export default function CategoryTableSection() {
   return (
     <div>
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <CategoryAddSection/>
                     <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 px-4 bg-slate-900 rounded-t-lg">
                         <div>
                             <h3 className='text-gray-300 font-bold text-3xl inline-flex items-center'><img src="/images/Final I.T Logo.png" class="h-12 me-2" alt="FlowBite Logo" /> Category Section</h3>
@@ -26,10 +29,16 @@ export default function CategoryTableSection() {
                                     Name of Category
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Tickets
+                                    Pending Tickets
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Status
+                                    Assigned Tickets
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Ongoing Tickets
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Closed Tickets
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Total Tickets
@@ -43,120 +52,140 @@ export default function CategoryTableSection() {
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
                                 <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
                                     <div class="ps-3">
-                                        <div class="text-base text-white font-semibold">Technical</div>
+                                         <div class="bg-indigo-400 text-gray-100 font-semibold inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Technical</div>
                                     </div>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">React Developer</div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-yellow-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Active
-                                    </div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-cyan-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-orange-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-green-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
 
                                     <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Tickets
+                                        <TicketIcon className='size-5 mr-1'/> View Tickets
                                     </button>
                                 </td>
                             </tr>
                             <tr class="border-b border-slate-500 text-white bg-slate-700 hover:bg-slate-500">
                                 <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     <div class="ps-3">
-                                        <div class="text-base text-white font-semibold">Networking</div>
+                                         <div class="bg-indigo-400 text-gray-100 font-semibold inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Networking</div>
                                     </div>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Designer</div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-yellow-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Active
-                                    </div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-cyan-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-orange-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-green-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
 
                                     <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Tickets
+                                    <TicketIcon className='size-5 mr-1'/> View Tickets
                                     </button>
                                 </td>
                             </tr>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
                                 <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     <div class="ps-3">
-                                        <div class="text-base text-white font-semibold">Programming</div>
+                                         <div class="bg-indigo-400 text-gray-100 font-semibold inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Programming</div>
                                     </div>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500"> Vue JS Developer</div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-yellow-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Active
-                                    </div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-cyan-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-orange-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-green-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
 
                                     <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Tickets
+                                    <TicketIcon className='size-5 mr-1'/> View Tickets
                                     </button>
                                 </td>
                             </tr>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
                                 <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     <div class="ps-3">
-                                        <div class="text-base text-white font-semibold">Maintenance</div>
+                                         <div class="bg-indigo-400 text-gray-100 font-semibold inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Maintenance</div>
                                     </div>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">UI/UX Engineer</div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-yellow-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div> Active
-                                    </div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-cyan-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-orange-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-green-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
 
                                     <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Tickets
+                                    <TicketIcon className='size-5 mr-1'/> View Tickets
                                     </button>
                                 </td>
                             </tr>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
                                 <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     <div class="ps-3">
-                                        <div class="text-base text-white font-semibold">Others</div>
+                                    <div class="bg-indigo-400 text-gray-100 font-semibold inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Others</div>
                                     </div>
                                 </th>
                                 <td class="px-6 py-4">
-                                    <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">SEO Specialist</div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-yellow-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center">
-                                        <div class="h-2.5 w-2.5 rounded-full bg-red-500 me-2"></div> Inactive
-                                    </div>
+                                <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-cyan-400 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-orange-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-green-400 rounded">10</div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-gray-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
 
                                     <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Tickets
+                                    <TicketIcon className='size-5 mr-1'/> View Tickets
                                     </button>
                                 </td>
                             </tr>

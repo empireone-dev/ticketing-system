@@ -1,4 +1,4 @@
-import { TicketIcon } from '@heroicons/react/24/solid'
+import { ExclamationTriangleIcon, TicketIcon } from '@heroicons/react/24/solid'
 import React from 'react'
 import TicketAddSection from './ticket-add-section'
 
@@ -71,8 +71,9 @@ export default function TicketsTableSection() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4">
-                                <div class="bg-yellow-400 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Pending-Urgent</div>
+                            <td class="flex px-6 py-4">
+                                <div class="bg-yellow-400 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Pending</div>
+                                <div class="bg-red-300 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500"><ExclamationTriangleIcon className='size-5 mr-1'/>Urgent</div>
                             </td>
                             <td class="px-6 py-4">
                             <div class="font-bold text-gray-200">June 12, 2024</div>
@@ -170,8 +171,9 @@ export default function TicketsTableSection() {
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="flex px-6 py-4">
                                 <div class="bg-cyan-400 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Assigned</div>
+                                <div class="bg-red-300 text-gray-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500"><ExclamationTriangleIcon className='size-5 mr-1'/>Urgent</div>
                             </td>
                             <td class="px-6 py-4">
                             <div class="font-bold text-gray-200">June 12, 2024</div>

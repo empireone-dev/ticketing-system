@@ -34,7 +34,7 @@ export default function ItPersonnelSection() {
                                     Status
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Pending Tickets
+                                    Assigned Tickets
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Closed Tickets

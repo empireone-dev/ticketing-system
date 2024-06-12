@@ -40,6 +40,16 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
                                             <input type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none    focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                                             <label htmlFor="floating_email" className="peer-focus:font-medium absolute text-md text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Position</label>
                                         </div>
+                                        <div className="grid md:gap-6">
+                                            <div className="relative z-0 w-full mb-6 group mt-2">
+                                                <select name="" id="" className="block py-2.5 pl-1.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                                    <option value=""></option>
+                                                    <option value="San Carlos">San Carlos Site</option>
+                                                    <option value="Carcar">Carcar Site</option>
+                                                </select>
+                                                <label htmlFor="floating_Requestor_name" className="peer-focus:font-medium absolute text-md text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Site</label>
+                                            </div>
+                                        </div>
                                         <div className="bg-gray-50 px-4 py-3 md:flex md:flex-row-reverse md:px-6">
                                             <button type="button" className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-md font-semibold text-white shadow-md hover:bg-blue-500 md:ml-3 md:w-auto">Submit</button>
                                             <button type="button" onClick={closeModal} className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-md font-semibold text-gray-900 shadow-md ring-1 ring-inset ring-gray-300 hover:bg-gray-50 md:mt-0 md:w-auto">Cancel</button>
