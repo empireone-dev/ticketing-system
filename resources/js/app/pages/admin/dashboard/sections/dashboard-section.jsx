@@ -16,22 +16,22 @@ export default function DashboardSection() {
             <div className='flex flex-wrap gap-7 rounded-md'>
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title="Pending Tickets"
+                    title="Pending Tickets: 0"
                     href="Go To Pending Tickets Section"
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title="Assigned Tickets"
+                    title="Assigned Tickets: 0"
                     href="Go To Assigned Tickets Section"
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title="Ongoing Tickets"
+                    title="Ongoing Tickets: 0"
                     href="Go To Ongoing Tickets Section"
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title="Closed Tickets"
+                    title="Closed Tickets: 0"
                     href="Go To Closed Tickets Section"
                 />
             </div>
