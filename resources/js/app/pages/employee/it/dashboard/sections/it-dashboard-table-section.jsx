@@ -20,7 +20,7 @@ export default function ItDashboardTableSection() {
                                     Assigned Tickets
                                 </th>
                                 <th scope="col" class="px-6 py-3 ">
-                                    Action
+                                    Closed Tickets
                                 </th>
                             </tr>
                         </thead>
@@ -45,10 +45,7 @@ export default function ItDashboardTableSection() {
                                     <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Assigned Tickets
-                                    </button>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                             </tr>
                             <tr class="border-b border-slate-500 text-white bg-slate-700 hover:bg-slate-500">
@@ -71,10 +68,7 @@ export default function ItDashboardTableSection() {
                                     <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Assigned Tickets
-                                    </button>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                             </tr>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
@@ -97,10 +91,7 @@ export default function ItDashboardTableSection() {
                                     <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Assigned Tickets
-                                    </button>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                             </tr>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
@@ -123,10 +114,7 @@ export default function ItDashboardTableSection() {
                                     <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Assigned Tickets
-                                    </button>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                             </tr>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
@@ -149,10 +137,7 @@ export default function ItDashboardTableSection() {
                                     <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                                 <td class="px-6 py-4">
-
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
-                                        View Assigned Tickets
-                                    </button>
+                                    <div class="flex items-center justify-center w-4 h-4 text-center text-medium p-3 font-bold text-blue-800 bg-blue-200 rounded">10</div>
                                 </td>
                             </tr>
                         </tbody>

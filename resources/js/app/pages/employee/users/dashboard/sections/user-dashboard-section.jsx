@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
 import { TicketIcon } from '@heroicons/react/24/solid';
-import ItDashboardCardSection from './it-dashboard-card-section';
-import ItDashboardTableSection from './it-dashboard-table-section';
+import UserDashboardCardSection from './user-dashboard-card-section';
+import UserDashboardTableSection from './user-dashboard-table-section';
 
-export default function ItDashboardSection() {
+export default function UserDashboardSection() {
 
 
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex flex-wrap gap-7 rounded-md'>
-        <ItDashboardCardSection
+        <UserDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
           title="My Assigned Tickets: 0"
           href="Go To Assigned Tickets Section"
         />
-        <ItDashboardCardSection
+        <UserDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
           title="My Urgent Tickets: 0"
           href="Go To Urgent Tickets Section"
         />
-        <ItDashboardCardSection
+        <UserDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
           title="My Ongoing Tickets: 0"
           href="Go To Ongoing Tickets Section"
         />
-        <ItDashboardCardSection
+        <UserDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
           title="My Closed Tickets: 0"
           href="Go To Closed Tickets Section"
@@ -47,7 +47,7 @@ export default function ItDashboardSection() {
               <input type="text" id="table-search-users" class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500     " placeholder="Search for users" />
             </div>
           </div>
-          <ItDashboardTableSection />
+          <UserDashboardTableSection />
         </div>
       </div>
     </div>

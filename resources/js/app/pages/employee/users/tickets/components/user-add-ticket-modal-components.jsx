@@ -1,7 +1,7 @@
 import { TicketIcon } from '@heroicons/react/24/solid';
 import React from 'react';
 
-export default function ItAddTicketModalComponent({ isOpen, closeModal }) {
+export default function UserAddTicketModalComponent({ isOpen, closeModal }) {
     return (
         <>
             <div className={`fixed inset-0 z-50 overflow-hidden bg-opacity-75 ${isOpen ? 'transition-opacity duration-300 opacity-100' : 'opacity-0 pointer-events-none'}`} aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -48,12 +48,12 @@ export default function ItAddTicketModalComponent({ isOpen, closeModal }) {
                                         </div>
                                         <div className="grid md:gap-6">
                                             <div className="relative z-0 w-full mb-6 group">
-                                                <textarea type="text" className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " readOnly />
+                                                <textarea type="text" className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
                                                 <label htmlFor="floating_Requestor_name" className="peer-focus:font-medium absolute text-md text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Request Details</label>
                                             </div>
                                         </div>
                                         <div className="relative z-0 w-full mb-6 group">
-                                            <input type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" value="Pending" required />
+                                            <input type="email" name="floating_email" id="floating_email" className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" value="Pending" readOnly />
                                             <label htmlFor="floating_email" className="peer-focus:font-medium absolute text-md text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Status</label>
                                         </div>
                                         <div class="flex items-center mb-4">

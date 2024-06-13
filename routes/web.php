@@ -61,4 +61,14 @@ Route::get('/employee/it/feedback', function () {
     return Inertia::render('employee/it/feedback/page');
 });
 
+Route::get('/employee/users/dashboard', function () {
+    return Inertia::render('employee/users/dashboard/page');
+});
+Route::get('/employee/users/tickets', function () {
+    return Inertia::render('employee/users/tickets/page');
+});
+Route::get('/employee/users/feedback', function () {
+    return Inertia::render('employee/users/feedback/page');
+});
+
 require __DIR__.'/auth.php';
