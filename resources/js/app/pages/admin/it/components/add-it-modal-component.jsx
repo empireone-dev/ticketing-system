@@ -25,6 +25,7 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
     }
     return (
         <>
+        
             <Modal
                 title=" IT Personnel Information"
                 okText="Submit"
