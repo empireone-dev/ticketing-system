@@ -8,4 +8,12 @@ export function create_it_service(data) {
         return error;
     }
 }
-export function get_it_service(params) {}
+
+export function get_it_service(data) {
+    try {
+        const res = axios.get("/api/user");
+        return res;
+    } catch (error) {
+        return error;
+    }
+}

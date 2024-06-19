@@ -35,21 +35,33 @@ use Inertia\Inertia;
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-Route::get('/admin/dashboard', function () {
-    return Inertia::render('admin/dashboard/page');
+Route::prefix('admin')->group(function () {
+    Route::get('dashboard', function () {
+        return Inertia::render('admin/dashboard/page');
+    });
+    Route::prefix('it')->group(function () {
+        Route::get('', function () {
+            return Inertia::render('admin/it/page');
+        });
+        Route::get('{id}', function () {
+            return Inertia::render('admin/it/id/page');
+        });
+    });
+
+    Route::get('tickets', function () {
+        return Inertia::render('admin/tickets/page');
+    });
+    Route::get('category', function () {
+        return Inertia::render('admin/category/page');
+    });
+    Route::get('feedback', function () {
+        return Inertia::render('admin/feedback/page');
+    });
 });
-Route::get('/admin/it', function () {
-    return Inertia::render('admin/it/page');
-});
-Route::get('/admin/tickets', function () {
-    return Inertia::render('admin/tickets/page');
-});
-Route::get('/admin/category', function () {
-    return Inertia::render('admin/category/page');
-});
-Route::get('/admin/feedback', function () {
-    return Inertia::render('admin/feedback/page');
-});
+
+
+
+
 
 Route::get('/employee/it/dashboard', function () {
     return Inertia::render('employee/it/dashboard/page');
@@ -71,4 +83,4 @@ Route::get('/employee/users/feedback', function () {
     return Inertia::render('employee/users/feedback/page');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

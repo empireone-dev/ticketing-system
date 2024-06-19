@@ -8,14 +8,23 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+
+    public function index(){
+        $ticket = User::orderBy('id', 'desc')->get();
+        return response()->json([
+            'result' => $ticket
+        ], 200);
+    }
     public function store(Request $request)
     {
-        $ticket = User::create([
+         User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'position'=>$request->position,
+            'site'=>$request->site,
             'password'=>Hash::make($request->password),
         ]);
+        $ticket = User::orderBy('id', 'desc')->get();
         return response()->json([
             'result' => $ticket
         ], 200);
