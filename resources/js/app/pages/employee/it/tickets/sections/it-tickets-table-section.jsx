@@ -1,12 +1,12 @@
 import { ExclamationTriangleIcon, TicketIcon } from '@heroicons/react/24/solid'
 import React from 'react'
-import TicketAddSection from './ticket-add-section'
+import ItTicketsAddSection from './it-tickets-add-section'
 
-export default function TicketsTableSection() {
+export default function ItTicketsTableSection() {
     return (
         <div>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <TicketAddSection/>
+                <ItTicketsAddSection/>
                 <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 px-4 bg-slate-900 rounded-t-lg">
                     <div>
                         <h3 className='text-gray-300 font-bold text-3xl inline-flex items-center'><img src="/images/Final I.T Logo.png" class="h-12 me-2" alt="FlowBite Logo" /> Tickets Section</h3>

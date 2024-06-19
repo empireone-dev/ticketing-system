@@ -17,7 +17,7 @@ export default function DashboardTableSection() {
                                     Status
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Pending Tickets
+                                    Assigned Tickets
                                 </th>
                                 <th scope="col" class="px-6 py-3 ">
                                     Action
@@ -26,7 +26,7 @@ export default function DashboardTableSection() {
                         </thead>
                         <tbody>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
-                                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
                                     <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
                                     <div class="ps-3">
                                         <div class="text-base text-white font-semibold">Neil Sims</div>
@@ -46,13 +46,13 @@ export default function DashboardTableSection() {
                                 </td>
                                 <td class="px-6 py-4">
 
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#2557D6]/50 me-2 mb-2">
+                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
                                         View Assigned Tickets
                                     </button>
                                 </td>
                             </tr>
                             <tr class="border-b border-slate-500 text-white bg-slate-700 hover:bg-slate-500">
-                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
                                     <div class="ps-3">
                                         <div class="text-base text-white font-semibold">Bonnie Green</div>
@@ -72,13 +72,13 @@ export default function DashboardTableSection() {
                                 </td>
                                 <td class="px-6 py-4">
 
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#2557D6]/50 me-2 mb-2">
+                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
                                         View Assigned Tickets
                                     </button>
                                 </td>
                             </tr>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
-                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
                                     <div class="ps-3">
                                         <div class="text-base text-white font-semibold">Jese Leos</div>
@@ -98,13 +98,13 @@ export default function DashboardTableSection() {
                                 </td>
                                 <td class="px-6 py-4">
 
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#2557D6]/50 me-2 mb-2">
+                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
                                         View Assigned Tickets
                                     </button>
                                 </td>
                             </tr>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
-                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
                                     <div class="ps-3">
                                         <div class="text-base text-white font-semibold">Thomas Lean</div>
@@ -124,13 +124,13 @@ export default function DashboardTableSection() {
                                 </td>
                                 <td class="px-6 py-4">
 
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#2557D6]/50 me-2 mb-2">
+                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
                                         View Assigned Tickets
                                     </button>
                                 </td>
                             </tr>
                             <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
-                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                                     <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
                                     <div class="ps-3">
                                         <div class="text-base text-white font-semibold">Leslie Livingston</div>
@@ -150,7 +150,7 @@ export default function DashboardTableSection() {
                                 </td>
                                 <td class="px-6 py-4">
 
-                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#2557D6]/50 me-2 mb-2">
+                                    <button type="button" class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2">
                                         View Assigned Tickets
                                     </button>
                                 </td>

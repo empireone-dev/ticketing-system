@@ -1,12 +1,12 @@
 import { ExclamationTriangleIcon, TicketIcon } from '@heroicons/react/24/solid'
 import React from 'react'
-import TicketAddSection from './ticket-add-section'
+import UserTicketAddSection from './user-tickets-add-section'
 
-export default function TicketsTableSection() {
+export default function UserTicketsTableSection() {
     return (
         <div>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                <TicketAddSection/>
+                <UserTicketAddSection/>
                 <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 px-4 bg-slate-900 rounded-t-lg">
                     <div>
                         <h3 className='text-gray-300 font-bold text-3xl inline-flex items-center'><img src="/images/Final I.T Logo.png" class="h-12 me-2" alt="FlowBite Logo" /> Tickets Section</h3>
@@ -25,11 +25,12 @@ export default function TicketsTableSection() {
                     <thead class="text-xs text-white-200 uppercase bg-slate-700">
                         <tr className='border-b border-slate-500'>
 
-                            <th scope="col" class="px-6 py-3">
-                                Name of Requestor
-                            </th>
+                           
                             <th scope="col" class="px-6 py-3">
                                 Ticket No.
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Category
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Assigned I.T Personnel
@@ -52,15 +53,12 @@ export default function TicketsTableSection() {
                     </thead>
                     <tbody>
                         <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
-                            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
-                                <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
-                                <div class="ps-3">
-                                    <div class="text-base text-white font-semibold">Leslie Livingston</div>
-                                    <div class="font-bold text-gray-400">leslie@flowbite.com</div>
-                                </div>
-                            </th>
+                            
                             <td class="px-6 py-4">
                             <div class="text-base text-white font-semibold flex"><TicketIcon className='size-5 mr-1'/>#IT300524000027</div>
+                            </td>
+                            <td class="px-6 py-4">
+                            <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Technical</div>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
@@ -86,15 +84,12 @@ export default function TicketsTableSection() {
                                 </td>
                         </tr>
                         <tr class="border-b border-slate-500 text-white bg-slate-700 hover:bg-slate-500">
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
-                                <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
-                                <div class="ps-3">
-                                    <div class="text-base text-white font-semibold">Leslie Livingston</div>
-                                    <div class="font-bold text-gray-400">leslie@flowbite.com</div>
-                                </div>
-                            </th>
+                        
                             <td class="px-6 py-4">
                             <div class="text-base text-white font-semibold flex"><TicketIcon className='size-5 mr-1'/>#IT300524000027</div>
+                            </td>
+                            <td class="px-6 py-4">
+                            <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">UI Designing</div>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
@@ -119,15 +114,12 @@ export default function TicketsTableSection() {
                                 </td>
                         </tr>
                         <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
-                                <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
-                                <div class="ps-3">
-                                    <div class="text-base text-white font-semibold">Leslie Livingston</div>
-                                    <div class="font-bold text-gray-400">leslie@flowbite.com</div>
-                                </div>
-                            </th>
+                        
                             <td class="px-6 py-4">
                             <div class="text-base text-white font-semibold flex"><TicketIcon className='size-5 mr-1'/>#IT300524000027</div>
+                            </td>
+                            <td class="px-6 py-4">
+                            <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Graphics Designing</div>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
@@ -152,15 +144,12 @@ export default function TicketsTableSection() {
                                 </td>
                         </tr>
                         <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
-                                <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
-                                <div class="ps-3">
-                                    <div class="text-base text-white font-semibold">Leslie Livingston</div>
-                                    <div class="font-bold text-gray-400">leslie@flowbite.com</div>
-                                </div>
-                            </th>
+                        
                             <td class="px-6 py-4">
                             <div class="text-base text-white font-semibold flex"><TicketIcon className='size-5 mr-1'/>#IT300524000027</div>
+                            </td>
+                            <td class="px-6 py-4">
+                            <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Network & Security</div>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
@@ -186,15 +175,12 @@ export default function TicketsTableSection() {
                                 </td>
                         </tr>
                         <tr class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500">
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
-                                <img class="w-10 h-10 rounded-full" src="/images/ppto.png" alt="Jese image" />
-                                <div class="ps-3">
-                                    <div class="text-base text-white font-semibold">Leslie Livingston</div>
-                                    <div class="font-bold text-gray-400">leslie@flowbite.com</div>
-                                </div>
-                            </th>
+                       
                             <td class="px-6 py-4">
                             <div class="text-base text-white font-semibold flex"><TicketIcon className='size-5 mr-1'/>#IT300524000027</div>
+                            </td>
+                            <td class="px-6 py-4">
+                            <div class="bg-indigo-400 text-gray-100 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">Web & App Development</div>
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center">

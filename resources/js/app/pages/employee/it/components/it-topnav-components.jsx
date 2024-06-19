@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function AdminTopnavComponents() {
+export default function ItTopnavComponents() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
