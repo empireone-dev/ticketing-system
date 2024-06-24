@@ -56,7 +56,12 @@ export default function LoginPage({ status, canResetPassword }) {
                             <div className="mt-2">
                                 <div className="relative z-0 w-full mb-5 group">
                                     <input
-                                        onChange={(e)=>formHandler(e.target.value,e.target.name)}
+                                        onChange={(e) =>
+                                            formHandler(
+                                                e.target.value,
+                                                e.target.name
+                                            )
+                                        }
                                         type="email"
                                         name="email"
                                         value={data?.email ?? ""}
@@ -72,13 +77,25 @@ export default function LoginPage({ status, canResetPassword }) {
                                         Email address
                                     </label>
                                 </div>
+                                {errors.email ==
+                                    "These credentials do not match our records." &&
+                                    (data?.email ?? "") !== "" && (
+                                        <p className="text-red-500 text-sm mt-1.5 font-light">
+                                            {errors.email}
+                                        </p>
+                                    )}
                             </div>
                         </div>
 
                         <div>
                             <div className="relative z-0 w-full mb-5 group">
                                 <input
-                                    onChange={(e)=>formHandler(e.target.value,e.target.name)}
+                                    onChange={(e) =>
+                                        formHandler(
+                                            e.target.value,
+                                            e.target.name
+                                        )
+                                    }
                                     type="password"
                                     name="password"
                                     value={data?.password ?? ""}
@@ -94,6 +111,13 @@ export default function LoginPage({ status, canResetPassword }) {
                                     Password
                                 </label>
                             </div>
+                            {errors.password ==
+                                "These credentials do not match our records." &&
+                                (data?.password ?? "") !== "" && (
+                                    <p className="text-red-500 text-sm mt-1.5 font-light">
+                                        {errors.password}
+                                    </p>
+                                )}
                         </div>
                         <div className="flex gap-3 flex-col">
                             <button
