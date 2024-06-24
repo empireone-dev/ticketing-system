@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id')->nullable();
+            $table->bigInteger('user_id')->nullable();
+            $table->string('ticket_id')->nullable();
+            $table->string('category_id')->nullable();
+            $table->string('details')->nullable();
+            $table->string('others')->nullable();
+            $table->bigInteger('assigned_to')->nullable();
             $table->string('status')->nullable();
-            $table->string('message')->nullable();
+            $table->string('isUrgent')->nullable();
             $table->timestamps();
         });
     }

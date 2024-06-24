@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function create_category_service(data) {
     try {
-        const res = axios.post("/api/user", data);
+        const res = axios.post("/api/category", data);
         return res;
     } catch (error) {
         return error;
@@ -11,7 +11,7 @@ export function create_category_service(data) {
 
 export function get_category_service(data) {
     try {
-        const res = axios.get("/api/user");
+        const res = axios.get("/api/category");
         return res;
     } catch (error) {
         return error;

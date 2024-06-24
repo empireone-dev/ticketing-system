@@ -2,7 +2,7 @@ import axios from "axios";
 
 export function create_ticket_service(data) {
     try {
-        const res = axios.post("/api/user", data);
+        const res = axios.post("/api/ticket", data);
         return res;
     } catch (error) {
         return error;
@@ -11,7 +11,25 @@ export function create_ticket_service(data) {
 
 export function get_ticket_service(data) {
     try {
-        const res = axios.get("/api/user");
+        const res = axios.get("/api/ticket");
+        return res;
+    } catch (error) {
+        return error;
+    }
+}
+
+export function get_ticket_by_id_service(data) {
+    try {
+        const res = axios.get(`/api/ticket/${data.id}`,data);
+        return res;
+    } catch (error) {
+        return error;
+    }
+}
+
+export function update_ticket_by_id_service(data) {
+    try {
+        const res = axios.put(`/api/ticket/${data.id}`,data);
         return res;
     } catch (error) {
         return error;

@@ -48,12 +48,24 @@ Route::prefix('admin')->group(function () {
         });
     });
 
-    Route::get('tickets', function () {
-        return Inertia::render('admin/tickets/page');
+    Route::prefix('tickets')->group(function () {
+        Route::get('', function () {
+            return Inertia::render('admin/tickets/page');
+        });
+        Route::get('/{id}', function () {
+            return Inertia::render('admin/tickets/id/page');
+        });
     });
-    Route::get('category', function () {
-        return Inertia::render('admin/category/page');
+
+    Route::prefix('category')->group(function () {
+        Route::get('', function () {
+            return Inertia::render('admin/category/page');
+        });
+        Route::get('/{id}', function () {
+            return Inertia::render('admin/category/id/page');
+        });
     });
+
     Route::get('feedback', function () {
         return Inertia::render('admin/feedback/page');
     });

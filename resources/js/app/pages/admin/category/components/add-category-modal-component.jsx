@@ -29,6 +29,10 @@ export default function AddCategoryModalComponent({ isOpen, closeModal }) {
                     <div className="grid md:gap-6">
                         <div className="relative z-0 w-full mb-6 group">
                             <input
+                                onChange={(e)=>setData({
+                                    ...data,
+                                    name:e.target.value
+                                })}
                                 type="text"
                                 className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" "

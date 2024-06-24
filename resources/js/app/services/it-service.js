@@ -17,3 +17,22 @@ export function get_it_service(data) {
         return error;
     }
 }
+
+
+export function get_it_by_id_service(data) {
+    try {
+        const res = axios.get(`/api/user/${data.id}`,data);
+        return res;
+    } catch (error) {
+        return error;
+    }
+}
+
+export function update_it_by_id_service(data) {
+    try {
+        const res = axios.put(`/api/user/${data.id}`,data);
+        return res;
+    } catch (error) {
+        return error;
+    }
+}
