@@ -93,7 +93,9 @@ export default function AdminSidebarComponents() {
                     </li>
                     <li>
                         <Link
-                            href="#"
+                            method="post"
+                            as="button"
+                            href={route("logout")}
                             className="flex items-center p-2 text-white rounded-lg hover:bg-gray-500 hover:text-gray-900 group"
                         >
                             <PoweroffOutlined className="text-xl text-gray-400" />

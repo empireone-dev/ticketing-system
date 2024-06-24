@@ -34,8 +34,15 @@ use Inertia\Inertia;
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
+Route::get('/', function () {
+    return Inertia::render('login/page');
+})->name('user.login');
 
-Route::prefix('admin')->group(function () {
+Route::get('/logout', function () {
+    return Inertia::render('logout');
+})->name('tickets.logout');
+
+Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('admin/dashboard/page');
     });
