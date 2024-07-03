@@ -11,7 +11,7 @@ export default function TicketsTableSection() {
     console.log("tickets", tickets);
     return (
         <div>
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="relative overflow-x-auto shadow-md">
                 <TicketAddSection />
                 <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 px-4 bg-slate-900 rounded-t-lg">
                     <div>
@@ -148,7 +148,7 @@ export default function TicketsTableSection() {
                                     </td>
                                     <td class="px-6 py-4">
                                         <button
-                                        onClick={()=>router.visit('/admin/tickets/'+res.id)}
+                                            onClick={() => router.visit('/admin/tickets/' + res.id)}
                                             type="button"
                                             class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2"
                                         >
@@ -162,11 +162,15 @@ export default function TicketsTableSection() {
                     </tbody>
                 </table>
             </div>
-           <div className="my-3 flex items-end justify-end text-white">
-           <Pagination 
-           itemActiveBg='#ff0000'
-           defaultCurrent={6}  total={tickets.total+500} />
-           </div>
+            <div style={{ color: "white" }} className=" bg-slate-700 flex items-end justify-end text-white">
+                <Pagination
+                    textColor='white'  // This should ensure text color is white
+                    itemActiveBg='#ff0000'
+                    defaultCurrent={6}
+                    total={tickets.total + 500}
+                    style={{ color: 'white' }}
+                />
+            </div>
         </div>
     );
 }
