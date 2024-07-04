@@ -18,9 +18,9 @@ export function get_ticket_service(data) {
     }
 }
 
-export function get_ticket_by_id_service(data) {
+export function get_ticket_by_id_service() {
     try {
-        const res = axios.get(`/api/ticket/${data.id}`,data);
+        const res = axios.get(`/api/ticket/${window.location.pathname.split('/')[3]}`,window.location.search);
         return res;
     } catch (error) {
         return error;

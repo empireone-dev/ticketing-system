@@ -5,6 +5,8 @@ import { create_ticket_thunk } from "../redux/tickets-thunk";
 import store from "@/app/store/store";
 import { stringify } from "postcss";
 import { useSelector } from "react-redux";
+import { UploadOutlined } from "@ant-design/icons";
+import { Button, Upload } from "antd";
 
 export default function AddTicketModalComponent({ isOpen, closeModal }) {
     const [loading, setLoading] = useState(false);
@@ -12,17 +14,40 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
     const { users } = useSelector((state) => state.it);
 
     const { categories } = useSelector((state) => state.category);
+    console.log("data", data);
 
+    function checkStatus(data) {
+        // Check if there is any object with status 'active'
+        const hasActive = data.some((obj) => obj.status !== "done");
+        if (hasActive) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     async function submitEvent(e) {
         e.preventDefault();
         setLoading(true);
-        await store.dispatch(create_ticket_thunk(data));
+        const fd = new FormData();
+        fd.append("assigned_to", data.assigned_to);
+        fd.append("category_id", data.category_id);
+        fd.append("details", data.details);
+        fd.append("status", data.status);
+        fd.append("isUrgent", data.isUrgent);
+        if (checkStatus(data.files)) {
+            for (let i = 0; i < data.files.length; i++) {
+                if (data.files[i].name !== "uploaded" && data.files[i].status == "done") {
+                    fd.append("files[]", data.files[i].originFileObj);
+                }
+            }
+        }
+        await store.dispatch(create_ticket_thunk(fd));
 
         setData({});
         closeModal();
         setLoading(false);
     }
-    console.log("data", data);
+
     return (
         <>
             <Modal
@@ -56,43 +81,6 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                                     );
                                 })}
 
-                                {/* <option value="Software Issues">
-                                    Software Issues
-                                </option>
-                                <option value="Network Issues">
-                                    Network Issues
-                                </option>
-                                <option value="Security Incidents">
-                                    Security Incidents
-                                </option>
-                                <option value="Email Issues">
-                                    Email Issues
-                                </option>
-                                <option value="Access Requests">
-                                    Access Requests
-                                </option>
-                                <option value="Infrastructure Issues">
-                                    Infrastructure Issues
-                                </option>
-                                <option value="Telecommunication Issues">
-                                    Telecommunication Issues
-                                </option>
-                                <option value="Training Requests">
-                                    Training Requests
-                                </option>
-                                <option value="General Inquiries">
-                                    General Inquiries
-                                </option>
-                                <option value="Hardware/Software Procurement">
-                                    Hardware/Software Procurement
-                                </option>
-                                <option value="Performance Issues">
-                                    Performance Issues
-                                </option>
-                                <option value="System Upgrades/Maintenance">
-                                    System Upgrades/Maintenance
-                                </option>
-                                <option value="Escalations">Escalations</option> */}
                                 <option value="Others">Others</option>
                             </select>
                             <label
@@ -204,7 +192,22 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                             Status
                         </label>
                     </div>
-                    <div class="flex items-center mb-4">
+                    <Upload
+                        onChange={(e) =>
+                            setData({
+                                ...data,
+                                files: e.fileList,
+                            })
+                        }
+                        multiple
+                        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                        listType="picture"
+                        method="GET"
+                        className="upload-list-inline"
+                    >
+                        <Button icon={<UploadOutlined />}>Upload</Button>
+                    </Upload>
+                    <div class="flex items-center my-4">
                         <input
                             id="default-checkbox"
                             type="checkbox"

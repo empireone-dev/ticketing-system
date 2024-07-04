@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TicketController extends Controller
 {
@@ -25,7 +27,13 @@ class TicketController extends Controller
     }
     public function store(Request $request)
     {
-        $ticket = Ticket::create($request->all());
+        $ticket = Ticket::create([
+            'assigned_to'=>intval($request->assigned_to),
+            'category_id'=>intval($request->category_id),
+            'details'=>$request->details,
+            'status'=>$request->status,
+            'isUrgent,'=>$request->isUrgent,
+        ]);
         $length = strlen($ticket->id);
 
         // Step 3: Generate a formatted id by prefixing zeros based on the length
@@ -43,13 +51,24 @@ class TicketController extends Controller
         ]);
         $perPage = $request->input('per_page', 10);
         $tickets = Ticket::paginate($perPage);
+
+        if ($request->hasFile('files')) {
+            foreach ($request->file('files') as $uploadedFile) {
+                $path = $uploadedFile->store(date("Y"), 's3');
+                $url = Storage::disk('s3')->url($path);
+                File::create([
+                    'ticket_id' =>$ticket->id,
+                    'url' => $url,
+                ]);
+            }
+        }
         return response()->json([
-            'result' => $tickets
+            'result' => $tickets,
         ], 200);
     }
     public function show(string $id)
     {
-        $ticket = Ticket::where('id', $id)->first();
+        $ticket = Ticket::where('id', $id)->with(['files','user','assigned_to','category'])->first();
         return response()->json([
             'result' => $ticket
         ], 200);
