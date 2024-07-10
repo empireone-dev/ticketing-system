@@ -5,7 +5,7 @@ export const ticketSlice = createSlice({
     initialState: {
         tickets: [],
         ticket: {},
-        activity: {},
+        activity: [],
         path: "details",
         notes: [],
     },

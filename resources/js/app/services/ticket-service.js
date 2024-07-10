@@ -1,5 +1,15 @@
 import axios from "axios";
 
+
+export function update_ticket_status_service(data) {
+    try {
+        const res = axios.put("/api/update_ticket_status/"+data.ticket_id, data);
+        return res;
+    } catch (error) {
+        return error;
+    }
+}
+
 export function create_ticket_service(data) {
     try {
         const res = axios.post("/api/ticket", data);

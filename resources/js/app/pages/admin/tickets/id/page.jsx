@@ -4,16 +4,18 @@ import TicketViewSection from '../sections/ticket-view-section'
 import store from '@/app/store/store'
 import { get_activity_by_id_thunk, get_notes_by_id_thunk, get_ticket_by_id_thunk } from '../redux/tickets-thunk'
 
-export default function TicketIDPage() {
+export default function TicketIDPage({auth}) {
 
   useEffect(() => {
   store.dispatch(get_ticket_by_id_thunk())
-  store.dispatch(get_activity_by_id_thunk(window.location.pathname.split('/')[3]))
   store.dispatch(get_notes_by_id_thunk(window.location.pathname.split('/')[3]))
   }, [])
+ 
   
   return (
-    <AdminLayout>
+    <AdminLayout
+    user={auth.user}
+    >
       <TicketViewSection />
     </AdminLayout>
   )
