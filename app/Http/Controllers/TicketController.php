@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use App\Models\File;
+use App\Models\Note;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,6 +35,11 @@ class TicketController extends Controller
                 'type' => 'moved',
             ]);
         }
+        Note::create([
+            'ticket_id'=>$id,
+            'user_id'=>$request->user_id,
+            'notes'=>$request->notes,
+        ]);
         $ticket->update([
             'status' => $request->status,
             'assigned_to' => ($request->status == 'Assigned') ? $request->assigned_to : $ticket->first()->assigned_to,

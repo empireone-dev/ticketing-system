@@ -8,7 +8,6 @@ export default function TicketIDPage({auth}) {
 
   useEffect(() => {
   store.dispatch(get_ticket_by_id_thunk())
-  store.dispatch(get_notes_by_id_thunk(window.location.pathname.split('/')[3]))
   }, [])
  
   

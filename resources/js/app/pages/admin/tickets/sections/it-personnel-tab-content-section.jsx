@@ -1,10 +1,18 @@
+import store from "@/app/store/store";
 import moment from "moment";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { get_notes_by_id_thunk } from "../redux/tickets-thunk";
 
 export default function ItPersonnelTabContentSection() {
-    const { notes } = useSelector((state) => state.tickets);
-    console.log("ticketticket", notes);
+    const { notes, path } = useSelector((state) => state.tickets);
+
+    useEffect(() => {
+        store.dispatch(
+            get_notes_by_id_thunk(window.location.pathname.split("/")[3])
+        );
+    }, [path]);
+    
     return (
         <div>
             <section class="bg-white antialiased">
