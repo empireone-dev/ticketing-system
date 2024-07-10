@@ -3,8 +3,10 @@ import { configureStore } from '@reduxjs/toolkit';
 import itSlice from '../pages/admin/it/redux/it-slice';
 import ticketSlice  from '../pages/admin/tickets/redux/tickets-slice';
 import categorySlice from '../pages/admin/category/redux/category-slice';
+import appSlice from '../redux/app-slice';
 const store = configureStore({
     reducer: {
+        app:appSlice,
         it: itSlice,
         tickets:ticketSlice,
         category:categorySlice

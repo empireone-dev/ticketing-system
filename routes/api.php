@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -25,3 +27,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('ticket', TicketController::class);
 Route::resource('user', UserController::class);
 Route::resource('category', CategoryController::class);
+Route::resource('activity', ActivityController::class);
+Route::resource('note', NoteController::class);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\File;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -13,13 +14,14 @@ class TicketController extends Controller
     {
         $query = $request->input('query', '');
         $perPage = $request->input('per_page', 10);
-    
+        
         // Step 1: Search tickets based on the query
         $tickets = Ticket::where('ticket_id', 'like', '%' . $query . '%')
-            ->with(['user','assigned_to'])
+            ->with(['user', 'assigned_to'])
             ->orWhere('ticket_id', 'like', '%' . $query . '%') // Add other fields as necessary
+            ->orderBy('id', 'desc') // Sort results in descending order based on ticket_id
             ->paginate($perPage);
-    
+        
         // Step 2: Return the paginated results in JSON format
         return response()->json([
             'result' => $tickets
@@ -28,11 +30,12 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         $ticket = Ticket::create([
+            'user_id' => $request->user_id,
             'assigned_to'=>intval($request->assigned_to),
             'category_id'=>intval($request->category_id),
             'details'=>$request->details,
             'status'=>$request->status,
-            'isUrgent,'=>$request->isUrgent,
+            'isUrgent'=>$request->isUrgent,
         ]);
         $length = strlen($ticket->id);
 
@@ -50,8 +53,14 @@ class TicketController extends Controller
             'ticket_id' => 'IT' . $id
         ]);
         $perPage = $request->input('per_page', 10);
-        $tickets = Ticket::paginate($perPage);
-
+        $tickets = Ticket::with(['user', 'assigned_to'])->orderBy('id', 'desc')->paginate($perPage);
+        Activity::create([
+            'ticket_id' => $ticket->id,
+            'user_id' => $request->user_id,
+            'message' => 'created new ' . ($request->isUrgent == 'true' ? 'urgent ' : '') . 'ticket',
+            'type' => 'create',
+        ]);
+        
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $uploadedFile) {
                 $path = $uploadedFile->store(date("Y"), 's3');
@@ -66,9 +75,10 @@ class TicketController extends Controller
             'result' => $tickets,
         ], 200);
     }
+
     public function show(string $id)
     {
-        $ticket = Ticket::where('id', $id)->with(['files','user','assigned_to','category'])->first();
+        $ticket = Ticket::where('id', $id)->with(['files','user','assigned_to','category','notes'])->first();
         return response()->json([
             'result' => $ticket
         ], 200);

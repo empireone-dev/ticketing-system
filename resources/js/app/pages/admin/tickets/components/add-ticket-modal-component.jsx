@@ -7,18 +7,20 @@ import { stringify } from "postcss";
 import { useSelector } from "react-redux";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Upload } from "antd";
+import { message } from "antd";
 
 export default function AddTicketModalComponent({ isOpen, closeModal }) {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({});
     const { users } = useSelector((state) => state.it);
+    const { user } = useSelector((state) => state.app);
+    const [messageApi, contextHolder] = message.useMessage();
 
     const { categories } = useSelector((state) => state.category);
-    console.log("data", data);
 
     function checkStatus(data) {
         // Check if there is any object with status 'active'
-        const hasActive = data.some((obj) => obj.status !== "done");
+        const hasActive = data?.some((obj) => obj.status !== "done");
         if (hasActive) {
             return false;
         } else {
@@ -34,15 +36,20 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         fd.append("details", data.details);
         fd.append("status", data.status);
         fd.append("isUrgent", data.isUrgent);
-        if (checkStatus(data.files)) {
+        fd.append("user_id", user.id);
+
+        if (checkStatus(data.files) && data.files) {
             for (let i = 0; i < data.files.length; i++) {
-                if (data.files[i].name !== "uploaded" && data.files[i].status == "done") {
+                if (
+                    data.files[i].name !== "uploaded" &&
+                    data.files[i].status == "done"
+                ) {
                     fd.append("files[]", data.files[i].originFileObj);
                 }
             }
         }
         await store.dispatch(create_ticket_thunk(fd));
-
+        messageApi.success("Created Successfully!");
         setData({});
         closeModal();
         setLoading(false);
@@ -50,6 +57,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
 
     return (
         <>
+            {contextHolder}
             <Modal
                 title="Ticket Information"
                 okText="Submit"

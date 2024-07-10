@@ -2,9 +2,10 @@ import React from 'react'
 import AdminLayout from '../layout'
 import DashboardSection from './sections/dashboard-section'
 
-export default function AdminDashboardPage() {
+export default function AdminDashboardPage({auth}) {
   return (
-    <AdminLayout account="1">
+    <AdminLayout 
+    user={auth.user}>
       <DashboardSection/>
     </AdminLayout>
   )

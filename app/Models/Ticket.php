@@ -38,5 +38,8 @@ class Ticket extends Model
     {
         return $this->hasMany(File::class,'ticket_id');
     }
-    
+    public function notes(): HasMany
+    {
+        return $this->hasMany(Note::class,'ticket_id');
+    }
 }
