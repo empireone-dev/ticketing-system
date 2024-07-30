@@ -17,3 +17,15 @@ export function get_category_service(data) {
         return error;
     }
 }
+
+
+export function get_categories_by_category_service() {
+      const category = window.location.pathname.split('/')[3]
+      const search = window.location.search
+    try {
+        const res = axios.get("/api/get_categories_by_category/"+category+search);
+        return res;
+    } catch (error) {
+        return error;
+    }
+}

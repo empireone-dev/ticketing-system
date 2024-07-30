@@ -11,16 +11,17 @@ export default function AdminTicketsIdChangeStatusSection() {
     const [messageApi, contextHolder] = message.useMessage();
     const { users } = useSelector((state) => state.it);
     const { user } = useSelector((state) => state.app);
+    console.log('useruser',user)
     const [data, setData] = useState({
         status: "Close ticket",
-        user_id:user.id,
+        user_id:user?.id,
         ticket_id: window.location.pathname.split("/")[3],
         assigned_to: users[0]?.id,
     });
     useEffect(() => {
         setData({
             ...data,
-            user_id:user.id,
+            user_id:user?.id,
             assigned_to: users[0]?.id,
         });
     }, [data.status]);

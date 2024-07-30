@@ -1,12 +1,18 @@
-import { ExclamationTriangleIcon, TicketIcon } from "@heroicons/react/24/solid";
-import React from "react";
+import store from "@/app/store/store";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import moment from "moment";
-import { Pagination } from "antd";
+import { get_categories_by_category_thunk } from "../../redux/category-thunk";
 import { router } from "@inertiajs/react";
+import { ExclamationTriangleIcon, TicketIcon } from "@heroicons/react/24/solid";
+import moment from "moment";
 
-export default function TtTableIdSection() {
-    const { tickets } = useSelector((state) => state.it);
+export default function AdminCategoriesIdTableSection() {
+    const { tickets } = useSelector((state) => state.category);
+
+    useEffect(() => {
+        store.dispatch(get_categories_by_category_thunk());
+    }, []);
+console.log('tickets',tickets)
     return (
         <div>
             <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -18,7 +24,7 @@ export default function TtTableIdSection() {
                                 class="h-12 me-2"
                                 alt="FlowBite Logo"
                             />{" "}
-                          Assigned Tickets Section
+                            Category Section
                         </h3>
                     </div>
                     <label for="table-search" class="sr-only">
@@ -57,6 +63,9 @@ export default function TtTableIdSection() {
                                 Name of Requestor
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Category
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Ticket No.
                             </th>
                             <th scope="col" class="px-6 py-3">
@@ -80,6 +89,7 @@ export default function TtTableIdSection() {
                                     key={i}
                                     class="text-white bg-slate-700  border-b border-slate-500 hover:bg-slate-500"
                                 >
+                                   
                                     <th
                                         scope="row"
                                         class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
@@ -98,6 +108,11 @@ export default function TtTableIdSection() {
                                             </div>
                                         </div>
                                     </th>
+                                    <td class="px-6 py-4">
+                                        <div class="text-base text-white font-semibold flex">
+                                            {res.category.name}
+                                        </div>
+                                    </td>
                                     <td class="px-6 py-4">
                                         <div class="text-base text-white font-semibold flex">
                                             <TicketIcon className="size-5 mr-1" />
@@ -162,13 +177,6 @@ export default function TtTableIdSection() {
                         })}
                     </tbody>
                 </table>
-            </div>
-            <div className="my-3 flex items-end justify-end text-white">
-                <Pagination
-                    itemActiveBg="#ff0000"
-                    defaultCurrent={6}
-                    total={tickets?.total??0}
-                />
             </div>
         </div>
     );

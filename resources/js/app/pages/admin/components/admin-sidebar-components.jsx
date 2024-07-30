@@ -76,7 +76,7 @@ export default function AdminSidebarComponents() {
                             </span>
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link
                             href="/admin/feedback"
                             className={`${
@@ -90,7 +90,7 @@ export default function AdminSidebarComponents() {
                                 Feedback Section
                             </span>
                         </Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link
                             method="post"

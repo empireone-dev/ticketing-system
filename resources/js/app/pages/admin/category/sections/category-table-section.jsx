@@ -124,7 +124,7 @@ export default function CategoryTableSection() {
                                     <td class="px-6 py-4">
                                         <button
                                             type="button"
-                                            onClick={()=>router.visit('/admin/category/'+res.name)}
+                                            onClick={()=>router.visit('/admin/category/'+res.id+'?page=1')}
                                             class="text-white bg-[#2557D6] hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center  me-2 mb-2"
                                         >
                                             <TicketIcon className="size-5 mr-1" />{" "}

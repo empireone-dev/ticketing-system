@@ -12,6 +12,31 @@ use Illuminate\Support\Facades\Storage;
 
 class TicketController extends Controller
 {
+    public function get_ticket_by_user_id(Request $request,$userid){
+          // $query = $request->input('query', '');
+          $perPage = $request->input('per_page', 10);
+          $tickets = Ticket::where('user_id','=',$userid)
+          ->with(['user', 'assigned_to','category'])
+          ->orderBy('id', 'desc')
+          ->paginate($perPage);
+          return response()->json([
+              'result' => $tickets
+          ], 200);
+    }
+    public function get_categories_by_category(Request $request,$category_id){
+
+        // $query = $request->input('query', '');
+        $perPage = $request->input('per_page', 10);
+        // $tickets = Ticket::where('category_id', $category_id);
+        $tickets = Ticket::where('category_id','=',$category_id)
+        ->with(['user', 'assigned_to','category'])
+        // ->orWhere('ticket_id', 'like', '%' . $query . '%')
+        ->orderBy('id', 'desc')
+        ->paginate($perPage);
+        return response()->json([
+            'result' => $tickets
+        ], 200);
+    }
 
     public function update_ticket_status(Request $request, $id)
     {

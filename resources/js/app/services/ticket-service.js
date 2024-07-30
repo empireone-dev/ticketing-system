@@ -36,6 +36,14 @@ export function get_ticket_by_id_service() {
         return error;
     }
 }
+export function get_ticket_by_user_id_service() {
+    try {
+        const res = axios.get(`/api/get_ticket_by_user_id/${window.location.pathname.split('/')[3]}`,window.location.search);
+        return res;
+    } catch (error) {
+        return error;
+    }
+}
 
 export function update_ticket_by_id_service(data) {
     try {

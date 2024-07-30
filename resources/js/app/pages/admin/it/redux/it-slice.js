@@ -4,10 +4,14 @@ export const itSlice = createSlice({
   name: 'it',
   initialState: {
     users: [],
+    tickets:[]
   },
   reducers: {
     setUsers: (state, action) => {
       state.users = action.payload
+    },
+    setTickets: (state, action) => {
+      state.tickets = action.payload
     },
   },
 })

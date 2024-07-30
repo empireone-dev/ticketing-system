@@ -26,6 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('ticket', TicketController::class);
 Route::put('/update_ticket_status/{ticket_id}', [TicketController::class, 'update_ticket_status']);
+Route::get('/get_categories_by_category/{category}', [TicketController::class, 'get_categories_by_category']);
+Route::get('/get_ticket_by_user_id/{userid}', [TicketController::class, 'get_ticket_by_user_id']);
+
 
 Route::resource('user', UserController::class);
 Route::resource('category', CategoryController::class);
