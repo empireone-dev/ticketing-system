@@ -13,6 +13,7 @@ export default function ITTicketIdLayout({ children }) {
                 <AdminTicketIdTabsSection />
             </div>
             {children}
+            
         </>
     );
 }

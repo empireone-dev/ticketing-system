@@ -7,7 +7,7 @@ export default function TicketDetailsPage({ auth }) {
     return (
         <ItLayout account={auth.user}>
             <ITTicketIdLayout>
-                {/* <ITTicketDetailsSection /> */}
+                <ITTicketDetailsSection />
             </ITTicketIdLayout>
         </ItLayout>
     );

@@ -9,6 +9,7 @@ export default function UsersTicketIdLayout({ children }) {
     }, []);
     return (
         <>
+        
             <div className="my-2">
                 <UsersTicketIdTabsSection />
             </div>
