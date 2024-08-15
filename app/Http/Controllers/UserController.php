@@ -26,7 +26,7 @@ class UserController extends Controller
          User::create([
             'name'=>$request->name,
             'email'=>$request->email,
-            'position'=>$request->position,
+            'position'=>2,
             'site'=>$request->site,
             'password'=>Hash::make($request->password),
         ]);
