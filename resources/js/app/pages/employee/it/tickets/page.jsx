@@ -7,12 +7,12 @@ import { useSelector } from 'react-redux';
 
 export default function ItTicketsPage({auth}) {
   
-  const { user } = useSelector((state) => state.app);
+  const { user,refresh } = useSelector((state) => state.app);
   useEffect(()=>{
     if (user) {
      store.dispatch(get_ticket_by_user_id_thunk(auth.user.id));
     }
-  },[user])
+  },[user,refresh])
   return (
     <ItLayout account={auth.user}>
       <ItTableTicketsSection/>
