@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal, Select, Input, message } from "antd";
 import { update_ticket_status_thunk } from "../../../../redux/tickets-thunk";
 import store from "@/app/store/store";
-import { get_it_thunk } from "../../../../../it/redux/it-thunk";
+import { get_it_thunk, get_user_by_position_thunk } from "../../../../../it/redux/it-thunk";
 import { useSelector } from "react-redux";
 const { TextArea } = Input;
 
@@ -27,7 +27,7 @@ export default function AdminTicketChangeStatusSection() {
   }, [data.status]);
 
   useEffect(() => {
-      store.dispatch(get_it_thunk());
+    store.dispatch(get_user_by_position_thunk(2));
   }, []);
   const showModal = () => {
       setIsModalOpen(true);
@@ -50,6 +50,7 @@ export default function AdminTicketChangeStatusSection() {
   const handleCancel = () => {
       setIsModalOpen(false);
   };
+  console.log('data',data)
   return (
     <div>
     {contextHolder}
@@ -75,9 +76,10 @@ export default function AdminTicketChangeStatusSection() {
                     })
                 }
                 options={[
+                    { value: "Assigned", label: "Assigned" },
                     { value: "Close ticket", label: "Close Ticket" },
                     {
-                        value: "Assigned",
+                        value: "Transfer Ticket",
                         label: "Transfer Ticket",
                     },
                     {
@@ -97,7 +99,7 @@ export default function AdminTicketChangeStatusSection() {
                             assigned_to: e,
                         })
                     }
-                    options={users.map((res) => ({
+                    options={users?.data?.map((res) => ({
                         value: res.id,
                         label: res.name,
                     }))}

@@ -1,0 +1,1 @@
+import{n as i}from"./app-DPOd3A5a.js";function a(){try{return axios.get("/api/open_ticket_notification")}catch(t){return t}}function s(t){return async function(n,e){n(i.actions.setUser(t))}}function o(t){return async function(n,e){await a()}}export{s as g,o as s};

@@ -27,7 +27,7 @@ export default function UsersTicketChangeStatusSection() {
   }, [data.status]);
 
   useEffect(() => {
-      store.dispatch(get_it_thunk());
+    //   store.dispatch(get_it_thunk());
   }, []);
   const showModal = () => {
       setIsModalOpen(true);
@@ -77,7 +77,7 @@ export default function UsersTicketChangeStatusSection() {
                 options={[
                     { value: "Close ticket", label: "Close Ticket" },
                     {
-                        value: "Assigned",
+                        value: "Transfer Ticket",
                         label: "Transfer Ticket",
                     },
                     {
@@ -86,7 +86,7 @@ export default function UsersTicketChangeStatusSection() {
                     },
                 ]}
             />
-            {data.status == "Assigned" && (
+            {/* {data.status == "Assigned" && (
                 <Select
                     size="large"
                     value={data.assigned_to}
@@ -102,7 +102,7 @@ export default function UsersTicketChangeStatusSection() {
                         label: res.name,
                     }))}
                 />
-            )}
+            )} */}
             <TextArea
                 value={data.notes ?? ""}
                 onChange={(e) =>
