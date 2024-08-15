@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { create_it_thunk } from "../redux/it-thunk";
+import { create_it_thunk, get_user_by_position_thunk } from "../redux/it-thunk";
 import store from "@/app/store/store";
 import { Button, Modal } from "antd";
 
@@ -10,11 +10,17 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
     async function submitEvent(e) {
         e.preventDefault();
         setLoading(true);
-        const result = await store.dispatch(create_it_thunk(data));
-        console.log("result", result);
-        setData({});
-        closeModal();
-        setLoading(false);
+        try {
+            const result = await store.dispatch(create_it_thunk(data));
+            await store.dispatch(get_user_by_position_thunk(2));
+            console.log("result", result);
+            setData({});
+            closeModal();
+            setLoading(false);
+        } catch (error) {
+            alert("error");
+            setLoading(false);
+        }
     }
 
     function data_handler(e) {
@@ -25,7 +31,6 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
     }
     return (
         <>
-        
             <Modal
                 title=" IT Personnel Information"
                 okText="Submit"

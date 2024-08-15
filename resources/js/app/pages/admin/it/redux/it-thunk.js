@@ -5,7 +5,7 @@ import { get_ticket_by_user_id_service } from "@/app/services/ticket-service";
 export function create_it_thunk(data) {
     return async function (dispatch, getState) {
         const result = await create_it_service(data);
-        dispatch(itSlice.actions.setUsers(result.data.result));
+        // dispatch(itSlice.actions.setUsers(result.data.result));
         return result;
     };
 }
