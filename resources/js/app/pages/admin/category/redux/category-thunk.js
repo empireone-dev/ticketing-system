@@ -17,6 +17,7 @@ export function get_category_thunk(data) {
     return async function (dispatch, getState) {
         const result = await get_category_service();
         dispatch(categorySlice.actions.setCategories(result.data.result));
+        dispatch(categorySlice.actions.setAllCategories(result.data.categories));
     };
 }
 

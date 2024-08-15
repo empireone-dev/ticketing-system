@@ -2,32 +2,37 @@ import React, { useState } from 'react';
 import { TicketIcon } from '@heroicons/react/24/solid';
 import ItDashboardCardSection from './it-dashboard-card-section';
 import ItDashboardTableSection from './it-dashboard-table-section';
+import { useSelector } from 'react-redux';
 
 export default function ItDashboardSection() {
-
+  const { dashboard } = useSelector((state) => state.employee);
 
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex flex-wrap gap-7 rounded-md'>
-        <ItDashboardCardSection
+      <ItDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
-          title="My Assigned Tickets: 0"
-          href="Go To Assigned Tickets Section"
-        />
-        <ItDashboardCardSection
-          icon={<TicketIcon className='h-12 text-white' />}
-          title="My Urgent Tickets: 0"
+          title={`My Urgent Tickets: ${dashboard.urgent??0}`}
           href="Go To Urgent Tickets Section"
+          link='/employee/it/tickets?page=1&search=isUrgent'
         />
         <ItDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
-          title="My Ongoing Tickets: 0"
+          title={`My Pending Tickets: ${dashboard.pending??0}`}
+          href="Go To Pending Tickets Section"
+          link='/employee/it/tickets?page=1&search=Pending'
+        />
+        <ItDashboardCardSection
+          icon={<TicketIcon className='h-12 text-white' />}
+          title={`My Ongoing Tickets: ${dashboard.ongoing??0}`}
           href="Go To Ongoing Tickets Section"
+          link='/employee/it/tickets?page=1&search=Ongoing'
         />
         <ItDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
-          title="My Closed Tickets: 0"
+          title={`My Closed Tickets: ${dashboard.closed??0}`}
           href="Go To Closed Tickets Section"
+          link='/employee/it/tickets?page=1&search=Closed'
         />
       </div>
       <div className='flex gap-7 rounded-md'>

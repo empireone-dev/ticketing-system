@@ -18,6 +18,16 @@ export function get_it_service(data) {
     }
 }
 
+export function get_user_by_position_service(position) {
+    try {
+        const res = axios.get("/api/get_user_by_position/"+position);
+        return res;
+    } catch (error) {
+        return error;
+    }
+}
+
+
 
 export function get_it_by_id_service(data) {
     try {

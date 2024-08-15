@@ -8,43 +8,79 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = Category::orderBy('id', 'desc')->get();
+
+        $perPage = $request->input('per_page', 10);
+
+        // Fetch all categories
+        $categories = Category::all();
 
         // Iterate through each category and count the tickets associated with it
-        foreach ($tickets as $key => $value) {
-            $pendingCount = Ticket::where([['category_id', '=', $value->id], ['status', '=', 'Pending']])->count();
-            $assignedCount = Ticket::where([['category_id', '=', $value->id], ['status', '=', 'Assigned']])->count();
-            $onGoingCount = Ticket::where([['category_id', '=', $value->id], ['status', '=', 'Ongoing']])->count();
-            $closedCount = Ticket::where([['category_id', '=', $value->id], ['status', '=', 'Closed']])->count();
-            $value->pending = $pendingCount;
-            $value->assigned = $assignedCount;
-            $value->ongoing = $onGoingCount;
-            $value->closed = $closedCount;
+        foreach ($categories as $category) {
+            $pendingCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Pending']])->count();
+            $assignedCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Assigned']])->count();
+            $onGoingCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Ongoing']])->count();
+            $closedCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Closed']])->count();
+            $category->pending = $pendingCount;
+            $category->assigned = $assignedCount;
+            $category->ongoing = $onGoingCount;
+            $category->closed = $closedCount;
+            $category->total = $pendingCount + $assignedCount + $onGoingCount + $closedCount;
         }
+
+        // Sort categories by total in descending order
+        $sortedCategories = $categories->sortByDesc('total')->values();
+
+        // Paginate the sorted categories
+        $paginatedCategories = new \Illuminate\Pagination\LengthAwarePaginator(
+            $sortedCategories->forPage($request->input('page', 1), $perPage),
+            $sortedCategories->count(),
+            $perPage,
+            $request->input('page', 1),
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
 
         // Return the result as a JSON response
         return response()->json([
-            'result' => $tickets
+            'result' => $paginatedCategories,
+            'categories'=>$categories
         ], 200);
     }
     public function store(Request $request)
     {
         Category::create($request->all());
-        $tickets = Category::orderBy('id', 'desc')->get();
-        foreach ($tickets as $key => $value) {
-            $pendingCount = Ticket::where([['category_id', '=', $value->id], ['status', '=', 'Pending']])->count();
-            $assignedCount = Ticket::where([['category_id', '=', $value->id], ['status', '=', 'Assigned']])->count();
-            $onGoingCount = Ticket::where([['category_id', '=', $value->id], ['status', '=', 'Ongoing']])->count();
-            $closedCount = Ticket::where([['category_id', '=', $value->id], ['status', '=', 'Closed']])->count();
-            $value->pending = $pendingCount;
-            $value->assigned = $assignedCount;
-            $value->ongoing = $onGoingCount;
-            $value->closed = $closedCount;
+        $perPage = $request->input('per_page', 10);
+
+        // Fetch all categories
+        $categories = Category::all();
+
+        // Iterate through each category and count the tickets associated with it
+        foreach ($categories as $category) {
+            $pendingCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Pending']])->count();
+            $assignedCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Assigned']])->count();
+            $onGoingCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Ongoing']])->count();
+            $closedCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Closed']])->count();
+            $category->pending = $pendingCount;
+            $category->assigned = $assignedCount;
+            $category->ongoing = $onGoingCount;
+            $category->closed = $closedCount;
+            $category->total = $pendingCount + $assignedCount + $onGoingCount + $closedCount;
         }
+
+        // Sort categories by total in descending order
+        $sortedCategories = $categories->sortByDesc('total')->values();
+
+        // Paginate the sorted categories
+        $paginatedCategories = new \Illuminate\Pagination\LengthAwarePaginator(
+            $sortedCategories->forPage($request->input('page', 1), $perPage),
+            $sortedCategories->count(),
+            $perPage,
+            $request->input('page', 1),
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
         return response()->json([
-            'result' => $tickets
+            'result' => $paginatedCategories
         ], 200);
     }
     public function show(string $id)

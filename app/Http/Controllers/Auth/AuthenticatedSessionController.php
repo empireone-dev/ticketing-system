@@ -34,21 +34,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if(Auth::user()->position == 'IT'){
+        if(Auth::user()->position == 1){
             return redirect()->intended(RouteServiceProvider::ADMIN);
+        }else if(Auth::user()->position == 2){
+            return redirect()->intended(RouteServiceProvider::EMPLOYEE_IT);
+        }else if(Auth::user()->position == 3){
+            return redirect()->intended(RouteServiceProvider::EMPLOYEE_USERS);
         }
-        // else if(Auth::user()->role_id == 2){
-        //     return redirect()->intended(RouteServiceProvider::CUSTOMER); 
-        // }else if(Auth::user()->role_id == 3){
-        //     return redirect()->intended(RouteServiceProvider::WAREHOUSE); 
-        // }else if(Auth::user()->role_id == 4){
-        //     return redirect()->intended(RouteServiceProvider::ASC); 
-        // }else if(Auth::user()->role_id == 5){
-        //     return redirect()->intended(RouteServiceProvider::AGENT); 
-        // }else if(Auth::user()->role_id == 6){
-        //     return redirect()->intended(RouteServiceProvider::CURTIS); 
-        // }
-        // return redirect()->intended(RouteServiceProvider::ADMIN);
     }
 
     /**

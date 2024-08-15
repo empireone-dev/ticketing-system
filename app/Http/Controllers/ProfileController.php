@@ -36,8 +36,10 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
-
-        return Redirect::route('profile.edit');
+        if ($request->user()->position == 1) {
+            return Redirect::route('settings');
+        }
+        
     }
 
     /**

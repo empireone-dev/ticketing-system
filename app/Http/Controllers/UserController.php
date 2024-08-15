@@ -9,10 +9,16 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    public function index(){
-        $ticket = User::orderBy('id', 'desc')->get();
+    public function get_user_by_position($position){
+        $users = User::where('position',$position)->orderBy('name', 'desc')->paginate();
         return response()->json([
-            'result' => $ticket
+            'result' =>$users
+        ], 200);
+    }
+    public function index(){
+        $tickets = User::orderBy('id', 'desc')->paginate();
+        return response()->json([
+            'result' => $tickets
         ], 200);
     }
     public function store(Request $request)

@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const ticketSlice = createSlice({
     name: "tickets",
     initialState: {
-        tickets: [],
+        tickets: {
+            data:[]
+        },
         ticket: {},
         activity: [],
         path: "details",

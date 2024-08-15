@@ -29,12 +29,12 @@ use Inertia\Inertia;
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-Route::get('/', function () {
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::middleware('redirectBasedOnRole')->get('/', function () {
     return Inertia::render('login/page');
 })->name('user.login');
 
@@ -42,10 +42,15 @@ Route::get('/logout', function () {
     return Inertia::render('logout');
 })->name('tickets.logout');
 
-Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+Route::middleware('auth:sanctum', 'role:1')->prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('admin/dashboard/page');
-    });
+    })->name('admin.dashboard');
+
+    Route::get('settings', function () {
+        return Inertia::render('admin/settings/page');
+    })->name('settings');
+    
     Route::prefix('it')->group(function () {
         Route::get('', function () {
             return Inertia::render('admin/it/page');
@@ -59,8 +64,17 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
         Route::get('', function () {
             return Inertia::render('admin/tickets/page');
         });
-        Route::get('/{id}', function () {
-            return Inertia::render('admin/tickets/id/page');
+        Route::get('/{id}/activities', function () {
+            return Inertia::render('admin/tickets/id/pages/activities/page');
+        });
+        Route::get('/{id}/details', function () {
+            return Inertia::render('admin/tickets/id/pages/details/page');
+        });
+        Route::get('/{id}/files', function () {
+            return Inertia::render('admin/tickets/id/pages/files/page');
+        });
+        Route::get('/{id}/notes', function () {
+            return Inertia::render('admin/tickets/id/pages/notes/page');
         });
     });
 
@@ -80,26 +94,67 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 
 
 
+Route::middleware('auth:sanctum', 'role:2')->prefix('employee/it')->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('employee/it/dashboard/page');
+    });
+    Route::get('settings', function () {
+        return Inertia::render('employee/it/settings/page');
+    })->name('it.settings');
+    Route::get('/feedback', function () {
+        return Inertia::render('employee/it/feedback/page');
+    });
+
+    Route::prefix('tickets')->group(function () {
+        Route::get('', function () {
+            return Inertia::render('employee/it/tickets/page');
+        });
+        Route::get('/{id}/activities', function () {
+            return Inertia::render('employee/it/tickets/id/pages/activities/page');
+        });
+        Route::get('/{id}/details', function () {
+            return Inertia::render('employee/it/tickets/id/pages/details/page');
+        });
+        Route::get('/{id}/files', function () {
+            return Inertia::render('employee/it/tickets/id/pages/files/page');
+        });
+        Route::get('/{id}/notes', function () {
+            return Inertia::render('employee/it/tickets/id/pages/notes/page');
+        });
+    });
+    
+});
 
 
-Route::get('/employee/it/dashboard', function () {
-    return Inertia::render('employee/it/dashboard/page');
-});
-Route::get('/employee/it/tickets', function () {
-    return Inertia::render('employee/it/tickets/page');
-});
-Route::get('/employee/it/feedback', function () {
-    return Inertia::render('employee/it/feedback/page');
-});
+Route::middleware('auth:sanctum', 'role:3')->prefix('employee/users')->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('employee/users/dashboard/page');
+    });
+    Route::get('settings', function () {
+        return Inertia::render('employee/users/settings/page');
+    })->name('users.settings');
+    // Route::get('/feedback', function () {
+    //     return Inertia::render('employee/users/feedback/page');
+    // });
 
-Route::get('/employee/users/dashboard', function () {
-    return Inertia::render('employee/users/dashboard/page');
-});
-Route::get('/employee/users/tickets', function () {
-    return Inertia::render('employee/users/tickets/page');
-});
-Route::get('/employee/users/feedback', function () {
-    return Inertia::render('employee/users/feedback/page');
+    Route::prefix('tickets')->group(function () {
+        Route::get('', function () {
+            return Inertia::render('employee/users/tickets/page');
+        });
+        Route::get('/{id}/activities', function () {
+            return Inertia::render('employee/users/tickets/id/pages/activities/page');
+        });
+        Route::get('/{id}/details', function () {
+            return Inertia::render('employee/users/tickets/id/pages/details/page');
+        });
+        Route::get('/{id}/files', function () {
+            return Inertia::render('employee/users/tickets/id/pages/files/page');
+        });
+        Route::get('/{id}/notes', function () {
+            return Inertia::render('employee/users/tickets/id/pages/notes/page');
+        });
+    });
+    
 });
 
 require __DIR__ . '/auth.php';

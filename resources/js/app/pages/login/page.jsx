@@ -23,7 +23,6 @@ export default function LoginPage({ status, canResetPassword }) {
     function formHandler(value, name) {
         setData(name, value);
     }
-
     return (
         <form
             onSubmit={submit}
@@ -131,7 +130,7 @@ export default function LoginPage({ status, canResetPassword }) {
                                 type="submit"
                                 className="flex gap-4 w-full justify-center shadow-md border border-blue-500 rounded-sm bg-white px-3 py-2.5 text-sm font-semibold leading-6 text-blue-500 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                <img src="/images/google.png" className="h-6" />{" "}
+                                {/* <img src="/images/google.png" className="h-6" />{" "} */}
                                 Sign in with Google
                             </a>
                         </div>

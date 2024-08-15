@@ -31,7 +31,7 @@ export function get_notes_by_id_thunk(id) {
 export function create_ticket_thunk(data) {
     return async function (dispatch, getState) {
         const result = await create_ticket_service(data);
-        dispatch(ticketSlice.actions.setTickets(result.data.result));
+        // dispatch(ticketSlice.actions.setTickets(result.data.result));
         return result;
     };
 }

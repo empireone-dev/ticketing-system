@@ -11,7 +11,7 @@ export function create_category_service(data) {
 
 export function get_category_service(data) {
     try {
-        const res = axios.get("/api/category");
+        const res = axios.get("/api/category"+window.location.search);
         return res;
     } catch (error) {
         return error;

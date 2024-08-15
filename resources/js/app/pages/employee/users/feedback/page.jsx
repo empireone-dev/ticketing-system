@@ -1,11 +1,11 @@
 import React from 'react'
-import UserLayout from '../layout'
-import UserFeedbackSection from './sections/user-feedback-section'
+import UsersLayout from '../layout'
+import UsersFeedbackSection from './sections/users-feedback-section'
 
-export default function UserFeedbackPage() {
-    return (
-        <UserLayout>
-            <UserFeedbackSection/>
-        </UserLayout>
-    )
+export default function UsersFeedbackPage() {
+  return (
+    <UsersLayout>
+      <UsersFeedbackSection />
+    </UsersLayout>
+  )
 }

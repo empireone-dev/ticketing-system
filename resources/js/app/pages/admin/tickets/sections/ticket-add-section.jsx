@@ -16,7 +16,7 @@ export default function TicketAddSection() {
 
     return (
         <div>
-            <Button onClick={openModalHandler} className='flex mb-3 font-semibold bg-slate-700 hover:bg-slate-300 text-gray-200 hover:text-gray-700' >
+            <Button onClick={openModalHandler} className='flex mb-3 font-semibold bg-indigo-700 hover:bg-indigo-500 text-gray-200' >
                 <TicketIcon className='size-5 mr-1' />
                 Add New Ticket
             </Button>

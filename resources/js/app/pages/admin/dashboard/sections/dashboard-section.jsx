@@ -3,44 +3,50 @@ import DashboardCardSection from './dashboard-card-section';
 import { ChartPieIcon, TicketIcon } from '@heroicons/react/24/solid';
 import DashboardTableSection from './dashboard-table-section';
 import { PieChart } from 'react-minimal-pie-chart';
+import { useSelector } from 'react-redux';
 
 export default function DashboardSection() {
     const [hovered, setHovered] = useState(null);
+    const { dashboard } = useSelector((state) => state.admin);
 
     const handleSegmentClick = (event, segmentIndex, data) => {
         console.log('Clicked segment:', segmentIndex);
     };
-
+console.log('dashboard',dashboard)
     return (
         <div className='flex flex-col gap-8'>
             <div className='flex flex-wrap gap-7 rounded-md'>
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title="Pending Tickets: 0"
+                    title={`Pending Tickets: ${dashboard.pending??0}`}
                     href="Go To Pending Tickets Section"
+                    link='/admin/tickets?page=1&search=Pending'
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title="Urgent Tickets: 0"
+                    title={`Urgent Tickets: ${dashboard.urgent??0}`}
                     href="Go To Urgent Tickets Section"
+                    link='/admin/tickets?page=1&search=isUrgent'
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title="Ongoing Tickets: 0"
+                    title={`Ongoing Tickets: ${dashboard.ongoing??0}`}
                     href="Go To Ongoing Tickets Section"
+                    link='/admin/tickets?page=1&search=Ongoing'
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title="Closed Tickets: 0"
+                    title={`Closed Tickets: ${dashboard.closed??0}`}
                     href="Go To Closed Tickets Section"
+                    link='/admin/tickets?page=1&search=Closed'
                 />
             </div>
             <div className='flex  gap-7 rounded-md'>
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-3/4">
-                    <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 px-4 bg-slate-700 ">
+                    <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 px-4 bg-white ">
                         <div>
-                            <h3 className='text-gray-300 font-bold text-3xl inline-flex items-center'><img src="/images/Final I.T Logo.png" class="h-12 me-2" alt="FlowBite Logo" /> I.T Personnel</h3>
+                            <h3 className='text-gray-900 font-bold text-3xl inline-flex items-center'><img src="/images/Final I.T Logo.png" class="h-12 me-2" alt="FlowBite Logo" /> I.T Personnel</h3>
                         </div>
                         <label for="table-search" class="sr-only">Search</label>
                         <div class="relative">
@@ -54,8 +60,8 @@ export default function DashboardSection() {
                     </div>
                     <DashboardTableSection />
                 </div>
-                <div className='bg-slate-700 shadow-lg p-3 rounded-lg'>
-                    <div className='flex text-3xl text-gray-300 font-bold mb-3 p-3'>
+                <div className='bg-white shadow-lg p-3 rounded-lg'>
+                    <div className='flex text-3xl text-gray-900 font-bold mb-3 p-3'>
                         <ChartPieIcon className='size-10' />
                         Inquiry Chart
                     </div>
