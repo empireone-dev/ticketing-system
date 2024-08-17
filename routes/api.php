@@ -21,11 +21,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-
+Route::middleware('auth:sanctum')->group(function () {
 Route::resource('ticket', TicketController::class);
 Route::put('/update_ticket_status/{ticket_id}', [TicketController::class, 'update_ticket_status']);
 Route::get('/get_categories_by_category/{category}', [TicketController::class, 'get_categories_by_category']);
@@ -42,3 +42,5 @@ Route::resource('category', CategoryController::class);
 Route::resource('activity', ActivityController::class);
 Route::resource('note', NoteController::class);
 Route::resource('dashboard', DashboardController::class);
+
+});
