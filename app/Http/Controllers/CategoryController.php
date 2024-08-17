@@ -44,8 +44,9 @@ class CategoryController extends Controller
 
         // Return the result as a JSON response
         return response()->json([
+            'user'=>$user,
             'result' => $paginatedCategories,
-            'categories'=>$categories
+            'categories'=>$categories,
         ], 200);
     }
     public function store(Request $request)
