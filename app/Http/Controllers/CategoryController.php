@@ -44,7 +44,7 @@ class CategoryController extends Controller
 
         // Return the result as a JSON response
         return response()->json([
-            'user'=>$user,
+            'user'=>Auth::user(),
             'result' => $paginatedCategories,
             'categories'=>$categories,
         ], 200);
