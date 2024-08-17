@@ -11,7 +11,7 @@ const PusherNotifications = () => {
     const [open, setOpen] = useState(false);
     const [isUrgent, setIsUrgent] = useState(false);
     const audioRef = useRef(null);
-    const [data,setData] =useState({})
+    const [data, setData] = useState({});
     function playAudio(params) {
         if (audioRef.current) {
             audioRef.current.play();
@@ -30,11 +30,11 @@ const PusherNotifications = () => {
         const handleNotification = (data) => {
             setOpen(true);
             setIsUrgent(data.message.isUrgent === "true");
-            setData(data.message)
+            setData(data.message);
             if ("Notification" in window) {
-               setTimeout(()=>{
-                playAudio();
-               },1000)
+                setTimeout(() => {
+                    playAudio();
+                }, 1000);
 
                 if (Notification.permission === "granted") {
                     new Notification("Empireone Ticket Notification", {
@@ -63,15 +63,22 @@ const PusherNotifications = () => {
     }, [dispatch]);
 
     function closeModal(value) {
-        setOpen(value)
+        setOpen(value);
         if (audioRef.current) {
             audioRef.current.pause();
         }
     }
 
     function open_concern() {
-        router.visit(`/admin/tickets/${data.id}/details`)
-        closeModal(false)
+        if (user.site_id == 1) {
+            router.visit(`/admin/tickets/${data.id}/details`);
+        } else if (user.site_id == 2) {
+            router.visit(`/employee/it/tickets/${data.id}/details`);
+        } else if (user.site_id == 3) {
+            router.visit(`/employee/users/tickets/${data.id}/details`);
+        }
+
+        closeModal(false);
     }
     return (
         <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -97,7 +104,7 @@ const PusherNotifications = () => {
                                         />
                                     </>
                                 )}
-                                   {!isUrgent && (
+                                {!isUrgent && (
                                     <>
                                         <audio ref={audioRef}>
                                             <source
