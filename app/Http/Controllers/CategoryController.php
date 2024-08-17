@@ -19,10 +19,10 @@ class CategoryController extends Controller
 
         // Iterate through each category and count the tickets associated with it
         foreach ($categories as $category) {
-            $pendingCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Pending'], ['site_id', '=', $user->site_id]])->count();
-            $assignedCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Assigned'], ['site_id', '=', $user->site_id]])->count();
-            $onGoingCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Ongoing'], ['site_id', '=', $user->site_id]])->count();
-            $closedCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Closed'], ['site_id', '=', $user->site_id]])->count();
+            $pendingCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Pending']])->count();
+            $assignedCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Assigned']])->count();
+            $onGoingCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Ongoing']])->count();
+            $closedCount = Ticket::where([['category_id', '=', $category->id], ['status', '=', 'Closed']])->count();
             $category->pending = $pendingCount;
             $category->assigned = $assignedCount;
             $category->ongoing = $onGoingCount;
