@@ -68,15 +68,15 @@ const PusherNotifications = () => {
             audioRef.current.pause();
         }
     }
-
     function open_concern() {
-        if (user.site_id == 1) {
-            router.visit(`/admin/tickets/${data.id}/details`);
-        } else if (user.site_id == 2) {
-            router.visit(`/employee/it/tickets/${data.id}/details`);
-        } else if (user.site_id == 3) {
-            router.visit(`/employee/users/tickets/${data.id}/details`);
-        }
+        // if (user.site_id == 1) {
+        //     router.visit(`/admin/tickets/${data.id}/details`);
+        // } else if (user.site_id == 2) {
+        //     router.visit(`/employee/it/tickets/${data.id}/details`);
+        // } else if (user.site_id == 3) {
+        //     router.visit(`/employee/users/tickets/${data.id}/details`);
+        // }
+        router.visit(`/employee/it/tickets/${data.id}/details`);
 
         closeModal(false);
     }
