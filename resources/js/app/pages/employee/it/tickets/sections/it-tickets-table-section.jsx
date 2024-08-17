@@ -50,8 +50,9 @@ export default function ItTicketsTableSection() {
                 )}
 
                 {res.isUrgent == "true" && (
-                    <div class="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                        <ExclamationTriangleIcon className="size-2 mr-1" />
+
+                    <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-transparent animate-border-glow">
+                        <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
                         Urgent
                     </div>
                 )}

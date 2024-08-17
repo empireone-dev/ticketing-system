@@ -15,6 +15,19 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            animation: {
+                'border-glow': 'border-glow 1s infinite',
+            },
+            keyframes: {
+                'border-glow': {
+                    '0%, 100%': { 
+                        'box-shadow': '0 0 10px 2px #FFFF00', 
+                    },
+                    '50%': { 
+                        'box-shadow': '0 0 20px 2px #FF0000', 
+                    },
+                },
+            },
         },
     },
 
