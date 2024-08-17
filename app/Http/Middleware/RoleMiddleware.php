@@ -10,7 +10,7 @@ class RoleMiddleware
 {
     public function handle(Request $request, Closure $next, $position)
     {
-        if (!$request->user() || !$this->checkRole($request->user()->position, $position)) {
+        if (!$request->user() || !$this->checkRole($request->user()->account_type, $position)) {
             return Inertia::location(route('user.login')); 
         }
 

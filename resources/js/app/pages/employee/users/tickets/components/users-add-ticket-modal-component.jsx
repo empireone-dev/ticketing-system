@@ -16,7 +16,9 @@ import { send_push_notification } from "@/app/redux/app-thunk";
 
 export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState({});
+    const [data, setData] = useState({
+        status:'Pending'
+    });
     const { users } = useSelector((state) => state.it);
     const { user } = useSelector((state) => state.app);
     const [messageApi, contextHolder] = message.useMessage();
@@ -58,7 +60,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         }
         await store.dispatch(create_ticket_thunk(fd));
         await store.dispatch(get_ticket_by_user_id_thunk(user.id));
-        await store.dispatch(send_push_notification())
+        await store.dispatch(send_push_notification(fd))
         if (data.category_id == "Others") {
             store.dispatch(get_category_thunk());
         }
@@ -127,7 +129,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                             type="text"
                         />
                     </div>
-                    <div className="relative z-0 w-full mb-6 group mt-4 ">
+                    {/* <div className="relative z-0 w-full mb-6 group mt-4 ">
                         <Select
                             value={data.assigned_to}
                             label="Select IT Personnel"
@@ -143,11 +145,11 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                                 value: res.id,
                             }))}
                         />
-                    </div>
-                    <div className="relative z-0 w-full mb-6 group">
+                    </div> */}
+                    {/* <div className="relative z-0 w-full mb-6 group mt-4 ">
                         <Select
                             value={data.status}
-                            label="Select IT Personnel"
+                            label="Select Status"
                             name="status"
                             onChange={(e) =>
                                 setData({
@@ -165,7 +167,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                                 value: res.id,
                             }))}
                         />
-                    </div>
+                    </div> */}
                     <Upload
                         onChange={(e) =>
                             setData({

@@ -7,12 +7,10 @@ use Illuminate\Http\Request;
 
 class OpenTicketNotidicationController extends Controller
 {
-    public function open_ticket_notification()
+    public function open_ticket_notification(Request $request)
     {
-        $message = 'Naay Bag ong Ticket ning Abot!';
-        event(new OpenTicketNotification($message));
-
-        return response()->json(['status' => 'Event triggered!']);
-        return 'edawda';
+        // $message = $request->all();
+        // event(new OpenTicketNotification($message));
+        // return response()->json(['status' => 'Event triggered!']);
     }
 }

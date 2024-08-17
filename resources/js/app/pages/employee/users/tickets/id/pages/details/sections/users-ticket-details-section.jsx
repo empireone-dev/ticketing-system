@@ -11,7 +11,7 @@ export default function UsersTicketDetailsSection() {
             <h3 class="text-base font-semibold leading-7 text-gray-900">
                 Project Information
             </h3>
-            <UsersTicketChangeStatusSection />
+            {/* <UsersTicketChangeStatusSection /> */}
         </div>
         <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
             Project details and application.

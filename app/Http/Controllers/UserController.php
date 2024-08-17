@@ -4,30 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
 
     public function get_user_by_position($position){
-        $users = User::where('position',$position)->orderBy('name', 'desc')->paginate();
+        $user = Auth::user();
+        $users = User::where([['account_type','=',$position],['site_id','=',$user->site_id]])->orderBy('name', 'desc')->paginate();
         return response()->json([
             'result' =>$users
         ], 200);
     }
     public function index(){
-        $tickets = User::orderBy('id', 'desc')->paginate();
+        $user = Auth::user();
+        $tickets = User::orderBy([['id','=','desc'],['site_id','=',$user->site_id]])->paginate();
         return response()->json([
             'result' => $tickets
         ], 200);
     }
     public function store(Request $request)
     {
+        $user = Auth::user();
          User::create([
             'name'=>$request->name,
+            'site_id'=>$user->site_id,
             'email'=>$request->email,
-            'position'=>2,
-            'site'=>$request->site,
+            'account_type'=>$request->account_type,
+            'position'=>$request->position,
             'password'=>Hash::make($request->password),
         ]);
         $ticket = User::orderBy('id', 'desc')->get();

@@ -33,7 +33,7 @@ Route::get('/get_ticket_by_user_id/{userid}', [TicketController::class, 'get_tic
 Route::get('/search_ticket/{search}', [TicketController::class, 'search_ticket']);
 
 
-Route::get('/open_ticket_notification', [OpenTicketNotidicationController::class, 'open_ticket_notification']);
+Route::post('/open_ticket_notification', [OpenTicketNotidicationController::class, 'open_ticket_notification']);
 
 
 Route::resource('user', UserController::class);

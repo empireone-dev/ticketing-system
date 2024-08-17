@@ -16,7 +16,7 @@ export default function AdminTicketPage({ auth }) {
     }, []);
 
     useEffect(()=>{
-        store.dispatch(get_ticket_thunk());
+        store.dispatch(get_ticket_thunk(auth.user));
     },[refresh])
     return (
         <AdminLayout user={auth.user}>

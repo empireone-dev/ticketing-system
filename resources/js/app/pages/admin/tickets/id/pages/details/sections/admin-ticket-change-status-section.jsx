@@ -13,7 +13,7 @@ export default function AdminTicketChangeStatusSection() {
   const { user } = useSelector((state) => state.app);
   console.log('useruser',user)
   const [data, setData] = useState({
-      status: "Close ticket",
+      status: "Closed",
       user_id:user?.id,
       ticket_id: window.location.pathname.split("/")[3],
       assigned_to: users[0]?.id,
@@ -37,7 +37,7 @@ export default function AdminTicketChangeStatusSection() {
       if (data.notes) {
           await store.dispatch(update_ticket_status_thunk(data));
           setData({
-              status: "Close ticket",
+              status: "Closed",
               ticket_id: window.location.pathname.split("/")[3],
               assigned_to: users[0],
           });
@@ -76,14 +76,14 @@ export default function AdminTicketChangeStatusSection() {
                     })
                 }
                 options={[
-                    { value: "Assigned", label: "Assigned" },
-                    { value: "Close ticket", label: "Close Ticket" },
+                    // { value: "Assigned", label: "Assigned" },
+                    { value: "Closed", label: "Closed Ticket" },
                     {
-                        value: "Transfer Ticket",
+                        value: "Assigned",
                         label: "Transfer Ticket",
                     },
                     {
-                        value: "Declined Ticket",
+                        value: "Declined",
                         label: "Declined Ticket",
                     },
                 ]}

@@ -6,7 +6,6 @@ import { createInertiaApp } from "@inertiajs/react";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import store from "./app/store/store";
 import { Provider } from "react-redux";
-import PusherNotifications from "./app/realtime/push-notifications";
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
 
@@ -22,7 +21,6 @@ createInertiaApp({
 
         root.render(
             <Provider store={store}>
-                <PusherNotifications />
                 <App {...props} />
             </Provider>
         );

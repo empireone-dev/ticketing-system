@@ -36,7 +36,7 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
-        if ($request->user()->position == 1) {
+        if ($request->user()->account_type == 1) {
             return Redirect::route('settings');
         }
         

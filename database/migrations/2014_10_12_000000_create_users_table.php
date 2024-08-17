@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->unique();
-            $table->bigInteger('position')->nullable();
+            $table->bigInteger('account_type')->nullable();
+            $table->string('position')->nullable();
             $table->enum('isOnline', ['true', 'false'])->default('false');
             $table->bigInteger('pending_count')->default(0)->nullable();
             $table->bigInteger('declined_count')->default(0)->nullable();

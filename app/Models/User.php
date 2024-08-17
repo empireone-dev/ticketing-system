@@ -20,6 +20,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'site_id',
+        'account_type',
         'position',
         'isOnline',
         'pending_count',

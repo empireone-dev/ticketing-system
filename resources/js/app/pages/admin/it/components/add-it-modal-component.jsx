@@ -11,9 +11,11 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
         e.preventDefault();
         setLoading(true);
         try {
-            const result = await store.dispatch(create_it_thunk(data));
+            await store.dispatch(create_it_thunk({
+                ...data,
+                account_type:2
+            }));
             await store.dispatch(get_user_by_position_thunk(2));
-            console.log("result", result);
             setData({});
             closeModal();
             setLoading(false);
@@ -116,7 +118,7 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
                                 Password
                             </label>
                         </div>
-                        <div className="grid md:gap-6">
+                        {/* <div className="grid md:gap-6">
                             <div className="relative z-0 w-full mb-6 group mt-2">
                                 <select
                                     onChange={data_handler}
@@ -137,7 +139,7 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
                                     Site
                                 </label>
                             </div>
-                        </div>
+                        </div> */}
                     </form>
                 </div>
             </Modal>

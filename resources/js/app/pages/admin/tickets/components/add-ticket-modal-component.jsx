@@ -1,7 +1,7 @@
 import { TicketIcon } from "@heroicons/react/24/solid";
 import { Modal } from "antd";
 import React, { useState } from "react";
-import { create_ticket_thunk } from "../redux/tickets-thunk";
+import { create_ticket_thunk, get_ticket_thunk } from "../redux/tickets-thunk";
 import store from "@/app/store/store";
 import { stringify } from "postcss";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,7 +59,8 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         }
         await store.dispatch(create_ticket_thunk(fd));
         await store.dispatch(get_user_by_position_thunk(2));
-        await store.dispatch(send_push_notification())
+        await store.dispatch(get_ticket_thunk(user));
+        await store.dispatch(send_push_notification(fd))
         messageApi.success("Created Successfully!");
         setData({});
         closeModal();
@@ -149,7 +150,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                     <div className="relative z-0 w-full mb-6 group">
                         <Select
                             value={data.status}
-                            label="Select IT Personnel"
+                            label="Status"
                             name="status"
                             onChange={(e) =>
                                 setData({

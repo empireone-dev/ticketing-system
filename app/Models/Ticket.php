@@ -14,6 +14,7 @@ class Ticket extends Model
         'user_id',
         'ticket_id',
         'category_id',
+        'site_id',
         'details',
         'assigned_to',
         'status',

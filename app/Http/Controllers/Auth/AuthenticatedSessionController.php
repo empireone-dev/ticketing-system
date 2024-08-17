@@ -34,11 +34,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if(Auth::user()->position == 1){
+        if(Auth::user()->account_type == 1){
             return redirect()->intended(RouteServiceProvider::ADMIN);
-        }else if(Auth::user()->position == 2){
+        }else if(Auth::user()->account_type == 2){
             return redirect()->intended(RouteServiceProvider::EMPLOYEE_IT);
-        }else if(Auth::user()->position == 3){
+        }else if(Auth::user()->account_type == 3){
             return redirect()->intended(RouteServiceProvider::EMPLOYEE_USERS);
         }
     }

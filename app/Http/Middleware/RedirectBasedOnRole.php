@@ -11,11 +11,11 @@ class RedirectBasedOnRole
     {
         $account = $request->user(); 
         if ($account) {
-            if ($account->position == 1) {
+            if ($account->account_type == 1) {
                 return redirect('/admin/dashboard');
-            } else if ($account->position == 2) {
+            } else if ($account->account_type == 2) {
                 return redirect('/employee/it/dashboard');
-            } else if ($account->position == 3) {
+            } else if ($account->account_type == 3) {
                 return redirect('/employee/users/dashboard');
             } 
         }

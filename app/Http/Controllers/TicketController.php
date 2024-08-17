@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OpenTicketNotification;
 use App\Models\Activity;
 use App\Models\Category;
 use App\Models\File;
@@ -9,6 +10,7 @@ use App\Models\Note;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class TicketController extends Controller
@@ -22,13 +24,15 @@ class TicketController extends Controller
         $search = $request->search;
         $perPage = $request->input('per_page', 10);
         $user = User::where('id', $userid)->first();
-        if ($user->position == 2) {
+        if ($user->account_type == 2) {
             $query = Ticket::where('assigned_to', $userid);
-        } else if ($user->position == 3) {
+        } else if ($user->account_type == 3) {
             $query = Ticket::where('user_id', $userid);
         }
         if ($search == 'isUrgent') {
-            $query->where('isUrgent', 'true'); // Assuming 'isUrgent' is a boolean field
+            $query->where('status', '<>', 'Closed');
+            $query->orWhere('status', '<>', 'Declined');
+            $query->where('isUrgent', 'true'); 
         } else {
             if ($search) {
                 $query->where('status', $search);
@@ -99,10 +103,11 @@ class TicketController extends Controller
         $query = $request->input('query', '');
         $search = $request->input('search', ''); // Add search input
         $perPage = $request->input('per_page', 10);
+        $site_id = $request->input('site_id', '');
 
         // Build the query based on search criteria
         $queryBuilder = Ticket::query();
-
+        $queryBuilder->where('site_id', '=' ,$site_id);
         if ($query) {
             $queryBuilder->where(function ($q) use ($query) {
                 $q->where('ticket_id', 'like', '%' . $query . '%');
@@ -127,13 +132,14 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
-
+        $user = Auth::user();
         if ($request->category_id == 'Others') {
             $category  = Category::create([
                 'name' => $request->others
             ]);
         }
         $ticket = Ticket::create([
+            'site_id'=>$user->site_id,
             'user_id' => $request->user_id,
             'assigned_to' => intval($request->assigned_to),
             'category_id' => $request->category_id == 'Others' ? $category->id : intval($request->category_id),
@@ -175,6 +181,8 @@ class TicketController extends Controller
                 ]);
             }
         }
+        $message = $ticket;
+        event(new OpenTicketNotification($message));
         return response()->json([
             'result' => $tickets,
         ], 200);

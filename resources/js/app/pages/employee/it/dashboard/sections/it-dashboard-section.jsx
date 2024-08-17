@@ -18,9 +18,9 @@ export default function ItDashboardSection() {
         />
         <ItDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
-          title={`My Pending Tickets: ${dashboard.pending??0}`}
-          href="Go To Pending Tickets Section"
-          link='/employee/it/tickets?page=1&search=Pending'
+          title={`My Assigned Tickets: ${dashboard.assigned??0}`}
+          href="Go To Assigned Tickets Section"
+          link='/employee/it/tickets?page=1&search=Assigned'
         />
         <ItDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}

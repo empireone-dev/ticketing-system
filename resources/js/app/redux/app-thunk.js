@@ -10,6 +10,6 @@ export function get_user_thunk(data) {
 
 export function send_push_notification(data) {
     return async function (dispatch, getState) {
-        await send_push_notification_service()
+        await send_push_notification_service(data)
     };
 }

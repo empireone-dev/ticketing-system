@@ -3,7 +3,7 @@ import { Button, Modal, Select, Input, message } from "antd";
 import store from "@/app/store/store";
 import { useSelector } from "react-redux";
 import { get_it_thunk } from "@/app/pages/admin/it/redux/it-thunk";
-import { update_ticket_status_thunk } from "@/app/pages/admin/tickets/redux/tickets-thunk";
+import { get_ticket_by_id_thunk, update_ticket_status_thunk } from "@/app/pages/admin/tickets/redux/tickets-thunk";
 const { TextArea } = Input;
 
 export default function ITTicketChangeStatusSection() {
@@ -11,11 +11,11 @@ export default function ITTicketChangeStatusSection() {
   const [messageApi, contextHolder] = message.useMessage();
   const { users } = useSelector((state) => state.it);
   const { user } = useSelector((state) => state.app);
-  console.log('useruser',user)
+  const [loading,setLoading] =useState(false)
   const [data, setData] = useState({
-      status: "Close ticket",
+      status: "Closed",
       user_id:user?.id,
-      ticket_id: window.location.pathname.split("/")[3],
+      ticket_id: window.location.pathname.split("/")[4],
       assigned_to: users[0]?.id,
   });
   useEffect(() => {
@@ -32,17 +32,19 @@ export default function ITTicketChangeStatusSection() {
   const showModal = () => {
       setIsModalOpen(true);
   };
-
   async function handleOk(params) {
       if (data.notes) {
+        setLoading(true)
           await store.dispatch(update_ticket_status_thunk(data));
           setData({
               status: "Close ticket",
-              ticket_id: window.location.pathname.split("/")[3],
+              ticket_id: window.location.pathname.split("/")[4],
               assigned_to: users[0],
           });
+          store.dispatch(get_ticket_by_id_thunk());
           messageApi.success("Updated Success!");
-          setIsModalOpen(false);
+            setIsModalOpen(false);
+            setLoading(false)
       } else {
           messageApi.error("Notes is required!");
       }
@@ -62,6 +64,7 @@ export default function ITTicketChangeStatusSection() {
         onOk={handleOk}
         okText="Submit"
         onCancel={handleCancel}
+        confirmLoading={loading}
     >
         <div className="flex flex-col gap-4">
             <Select
@@ -75,13 +78,13 @@ export default function ITTicketChangeStatusSection() {
                     })
                 }
                 options={[
-                    { value: "Close ticket", label: "Close Ticket" },
+                    { value: "Closed", label: "Close Ticket" },
                     {
-                        value: "Transfer Ticket",
+                        value: "Assigned",
                         label: "Transfer Ticket",
                     },
                     {
-                        value: "Declined Ticket",
+                        value: "Declined",
                         label: "Declined Ticket",
                     },
                 ]}

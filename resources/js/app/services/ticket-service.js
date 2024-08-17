@@ -22,7 +22,7 @@ export function create_ticket_service(data) {
 export function get_ticket_service(data) {
     const search = window.location.search
     try {
-        const res = axios.get("/api/ticket"+search);
+        const res = axios.get("/api/ticket"+search+'&site_id='+data.site_id);
         return res;
     } catch (error) {
         return error;

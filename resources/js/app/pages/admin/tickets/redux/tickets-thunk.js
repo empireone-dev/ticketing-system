@@ -38,7 +38,7 @@ export function create_ticket_thunk(data) {
 
 export function get_ticket_thunk(data) {
     return async function (dispatch, getState) {
-        const result = await get_ticket_service()
+        const result = await get_ticket_service(data)
         dispatch(ticketSlice.actions.setTickets(result.data.result));
     };
 }

@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(){
-        $pending = Ticket::where('status', '=', 'Pending')->count();
-        $assigned = Ticket::where('status', '=', 'Assigned')->count();
-        $ongoing = Ticket::where('status', '=', 'Ongoing')->count();
-        $closed = Ticket::where('status', '=', 'Closed')->count();
-        $urgent = Ticket::where('isUrgent', '=', 'true')->count();
+    public function index(Request $request){
+        $pending = Ticket::where([['status', '=', 'Pending'],['site_id', '=', $request->site_id]])->count();
+        $assigned = Ticket::where([['status', '=', 'Assigned'],['site_id', '=', $request->site_id]])->count();
+        $ongoing = Ticket::where([['status', '=', 'Ongoing'],['site_id', '=', $request->site_id]])->count();
+        $closed = Ticket::where([['status', '=', 'Closed'],['site_id', '=', $request->site_id]])->count();
+        $urgent = Ticket::where([['isUrgent', '=', 'true'],['status', '<>', 'Closed'],['site_id', '=', $request->site_id]])->count();
         return response()->json([
             'pending' => $pending,
             'assigned' => $assigned,
@@ -25,18 +25,20 @@ class DashboardController extends Controller
     public function show($id)
     {
         $user =User::where('id',$id)->first();
-        if ($user->position == 2) {
+        if ($user->account_type == 2) {
             $pending = Ticket::where([['assigned_to', '=', $id], ['status', '=', 'Pending']])->count();
             $assigned = Ticket::where([['assigned_to', '=', $id], ['status', '=', 'Assigned']])->count();
             $ongoing = Ticket::where([['assigned_to', '=', $id], ['status', '=', 'Ongoing']])->count();
             $closed = Ticket::where([['assigned_to', '=', $id], ['status', '=', 'Closed']])->count();
-            $urgent = Ticket::where([['assigned_to', '=', $id], ['isUrgent', '=', 'true']])->count();
-        }else if ($user->position == 3) {
+            $urgent = Ticket::where([['assigned_to', '=', $id], ['isUrgent', '=', 'true'],['status', '<>', 'Closed']])
+            ->orWhere([['assigned_to', '=', $id], ['isUrgent', '=', 'true'],['status', '<>', 'Declined']])->count();
+        }else if ($user->account_type == 3) {
             $pending = Ticket::where([['user_id', '=', $id], ['status', '=', 'Pending']])->count();
             $assigned = Ticket::where([['user_id', '=', $id], ['status', '=', 'Assigned']])->count();
             $ongoing = Ticket::where([['user_id', '=', $id], ['status', '=', 'Ongoing']])->count();
             $closed = Ticket::where([['user_id', '=', $id], ['status', '=', 'Closed']])->count();
-            $urgent = Ticket::where([['user_id', '=', $id], ['isUrgent', '=', 'true']])->count();
+            $urgent = Ticket::where([['user_id', '=', $id], ['isUrgent', '=', 'true'],['status', '<>', 'Closed']])
+            ->orWhere([['assigned_to', '=', $id], ['isUrgent', '=', 'true'],['status', '<>', 'Declined']])->count();
         }
        
         return response()->json([
