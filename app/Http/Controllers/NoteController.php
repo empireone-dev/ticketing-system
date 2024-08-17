@@ -14,4 +14,11 @@ class NoteController extends Controller
             'result' => $ticket
         ], 200);
     }
+    public function store(Request $request)
+    {
+        $ticket = Note::create($request->all());
+        return response()->json([
+            'result' => $ticket
+        ], 200);
+    }
 }

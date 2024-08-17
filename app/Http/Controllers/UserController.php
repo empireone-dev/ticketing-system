@@ -33,7 +33,7 @@ class UserController extends Controller
             'email'=>$request->email,
             'account_type'=>$request->account_type,
             'position'=>$request->position,
-            'password'=>Hash::make($request->password),
+            'password'=>Hash::make('Business12'),
         ]);
         $ticket = User::orderBy('id', 'desc')->get();
         return response()->json([

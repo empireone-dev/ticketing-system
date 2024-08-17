@@ -6,6 +6,7 @@ import moment from "moment";
 import { router } from "@inertiajs/react";
 import Table from "@/app/components/table";
 import Pagination from "@/app/components/pagination";
+import { UserIcon } from "@heroicons/react/24/outline";
 
 export default function TicketsTableSection() {
     const { tickets } = useSelector((state) => state.tickets);
@@ -39,19 +40,19 @@ export default function TicketsTableSection() {
     const data = tickets?.data.map((res) => ({
         ...res,
         name: res?.user?.name ?? "",
-        assigned_to: res?.user?.email ?? "",
+        assigned_to: res?.assigned_to?.name ?? "",
         created_at: moment(res.created_at).format("LLL"),
         status: (
             <>
                 {res.isUrgent && (
                     <div class="bg-yellow-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                        {res.status}
+                         <UserIcon className="w-4 h-4 mr-1" /> {res.status}
                     </div>
                 )}
 
                 {res.isUrgent == "true" && (
-                    <div class="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                        <ExclamationTriangleIcon className="size-2 mr-1" />
+                 <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-transparent animate-border-glow">
+                        <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
                         Urgent
                     </div>
                 )}

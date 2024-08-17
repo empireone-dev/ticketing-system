@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request){
-        $pending = Ticket::where([['status', '=', 'Pending'],['site_id', '=', $request->site_id]])->count();
-        $assigned = Ticket::where([['status', '=', 'Assigned'],['site_id', '=', $request->site_id]])->count();
-        $ongoing = Ticket::where([['status', '=', 'Ongoing'],['site_id', '=', $request->site_id]])->count();
-        $closed = Ticket::where([['status', '=', 'Closed'],['site_id', '=', $request->site_id]])->count();
-        $urgent = Ticket::where([['isUrgent', '=', 'true'],['status', '<>', 'Closed'],['site_id', '=', $request->site_id]])->count();
+    public function index(){
+        
+        $user = Auth::user();
+        $pending = Ticket::where([['status', '=', 'Pending'],['site_id', '=', $user->site_id]])->count();
+        $assigned = Ticket::where([['status', '=', 'Assigned'],['site_id', '=', $user->site_id]])->count();
+        $ongoing = Ticket::where([['status', '=', 'Ongoing'],['site_id', '=', $user->site_id]])->count();
+        $closed = Ticket::where([['status', '=', 'Closed'],['site_id', '=', $user->site_id]])->count();
+        $urgent = Ticket::where([['isUrgent', '=', 'true'],['status', '<>', 'Closed'],['site_id', '=', $user->site_id]])->count();
         return response()->json([
             'pending' => $pending,
             'assigned' => $assigned,

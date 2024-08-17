@@ -9,7 +9,7 @@ export function get_dashboard_user_by_id_service(data) {
 
 export function get_admin_dashboard_service(data) {
   try {
-      const res = axios.get("/api/dashboard?site_id="+data.site_id);
+      const res = axios.get("/api/dashboard");
       return res;
   } catch (error) {
       return error;

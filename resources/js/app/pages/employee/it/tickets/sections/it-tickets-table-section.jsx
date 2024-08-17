@@ -5,6 +5,7 @@ import moment from "moment";
 import { router } from "@inertiajs/react";
 import Table from "@/app/components/table";
 import Pagination from "@/app/components/pagination";
+import { UserIcon } from "@heroicons/react/24/outline";
 
 export default function ItTicketsTableSection() {
     const { tickets } = useSelector((state) => state.it);
@@ -45,7 +46,7 @@ export default function ItTicketsTableSection() {
             <>
                 {res.isUrgent && (
                     <div class="bg-yellow-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                        {res.status}
+                         <UserIcon className="w-4 h-4 mr-1" />{res.status}
                     </div>
                 )}
 
