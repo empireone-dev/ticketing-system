@@ -38,6 +38,7 @@ export default function AdminTicketAsssignedSection() {
           await store.dispatch(update_ticket_status_thunk(data));
           await store.dispatch(get_ticket_by_id_thunk());
           messageApi.success("Updated Success!");
+          
           setTimeout(() => {
             setIsModalOpen(false);
           }, 2000);

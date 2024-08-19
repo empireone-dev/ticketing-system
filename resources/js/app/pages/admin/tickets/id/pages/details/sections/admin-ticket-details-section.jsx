@@ -16,12 +16,14 @@ export default function AdminTicketDetailsSection() {
                         {ticket.status == "Pending" && (
                             <AdminTicketAsssignedSection />
                         )}
-
                         <AdminTicketChangeStatusSection />
                     </div>
                 </div>
-                <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-                    Project details and application.
+                <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-800">
+                    Start At: {ticket.start}
+                </p>
+                <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-800">
+                    End At: {ticket.end}
                 </p>
             </div>
             <div class="mt-6 border-t border-gray-100">

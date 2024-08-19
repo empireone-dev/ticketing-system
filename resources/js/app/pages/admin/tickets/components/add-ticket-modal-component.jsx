@@ -14,13 +14,18 @@ import Textarea from "@/app/components/textarea";
 import { get_user_by_position_thunk } from "../../it/redux/it-thunk";
 import { setRefresh } from "@/app/redux/app-slice";
 import { send_push_notification } from "@/app/redux/app-thunk";
+import { DatePicker } from "antd";
+import moment from "moment";
 
 export default function AddTicketModalComponent({ isOpen, closeModal }) {
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState({});
+    const { RangePicker } = DatePicker;
+    const [data, setData] = useState({
+        status:'Pending'
+    });
     const { users } = useSelector((state) => state.it);
     const { user } = useSelector((state) => state.app);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const [messageApi, contextHolder] = message.useMessage();
 
     const { allCategories: categories } = useSelector(
@@ -46,6 +51,8 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         fd.append("status", data.status);
         fd.append("isUrgent", data.isUrgent);
         fd.append("user_id", user.id);
+        fd.append("start", data?.start??moment().format('LLLL'));
+        fd.append("end", data?.end??moment().format('LLLL'));
 
         if (checkStatus(data.files) && data.files) {
             for (let i = 0; i < data.files.length; i++) {
@@ -60,7 +67,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         await store.dispatch(create_ticket_thunk(fd));
         await store.dispatch(get_user_by_position_thunk(2));
         await store.dispatch(get_ticket_thunk(user));
-        await store.dispatch(send_push_notification(fd))
+        await store.dispatch(send_push_notification(fd));
         messageApi.success("Created Successfully!");
         setData({});
         closeModal();
@@ -80,7 +87,6 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
             >
                 <form className="max-w-full mx-auto mt-4 ">
                     <div className="grid md:gap-6">
-                     
                         <Select
                             value={data.category_id}
                             label="Category"
@@ -97,7 +103,6 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                             }))}
                         />
                         {data.category_id == "Others" && (
-                         
                             <Input
                                 onChange={(e) =>
                                     setData({
@@ -114,7 +119,14 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                         )}
                     </div>
                     <div className="grid md:gap-6 mt-4 ">
-                     
+                        <RangePicker 
+                        onChange={(e)=>setData({
+                            start:moment(e[0].$d).format('LLLL'),
+                            end:moment(e[1].$d).format('LLLL')
+                        })}
+                        showTime />
+                    </div>
+                    <div className="grid md:gap-6 mt-4 ">
                         <Textarea
                             onChange={(e) =>
                                 setData({
@@ -130,7 +142,6 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                         />
                     </div>
                     <div className="relative z-0 w-full mb-6 group mt-4 ">
-                     
                         <Select
                             value={data.assigned_to}
                             label="Select IT Personnel"
@@ -188,7 +199,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                         <input
                             id="default-checkbox"
                             type="checkbox"
-                            value=""
+                            checked={data.isUrgent == "true"}
                             name="isUrgent"
                             onChange={(e) =>
                                 setData({

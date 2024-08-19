@@ -1,4 +1,7 @@
-import { add_notes_thunk, get_notes_by_id_thunk } from "@/app/pages/admin/tickets/redux/tickets-thunk";
+import {
+    add_notes_thunk,
+    get_notes_by_id_thunk,
+} from "@/app/pages/admin/tickets/redux/tickets-thunk";
 import store from "@/app/store/store";
 import { Button } from "antd";
 import moment from "moment";
@@ -8,17 +11,17 @@ import { useSelector } from "react-redux";
 export default function AdminTicketNotesSection() {
     const { notes, path } = useSelector((state) => state.tickets);
     const { user } = useSelector((state) => state.app);
-    const [data,setData] =useState({})
-    const [loading,setLoading] =useState(false)
-    useEffect(()=>{
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
         if (user) {
             setData({
                 ...user,
-                user_id:user.id,
-                ticket_id:window.location.pathname.split("/")[4]
-            })
+                user_id: user.id,
+                ticket_id: window.location.pathname.split("/")[4],
+            });
         }
-    },[user])
+    }, [user]);
 
     useEffect(() => {
         store.dispatch(
@@ -27,17 +30,19 @@ export default function AdminTicketNotesSection() {
     }, [path]);
 
     async function submit_notes(params) {
-        setLoading(true)
-       try {
-        await store.dispatch(add_notes_thunk(data))
-        await store.dispatch(
-            get_notes_by_id_thunk(window.location.pathname.split("/")[4])
-        );
-        setLoading(false)
-       } catch (error) {
-        setLoading(false)
-       }
+        setLoading(true);
+        try {
+            await store.dispatch(add_notes_thunk(data));
+            await store.dispatch(
+                get_notes_by_id_thunk(window.location.pathname.split("/")[4])
+            );
+            setData({});
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+        }
     }
+
     return (
         <section class="bg-white antialiased">
             <div class="mx-auto px-4">
@@ -47,34 +52,39 @@ export default function AdminTicketNotesSection() {
                     </h2>
                 </div>
                 <form class="mb-6" onSubmit={submit_notes}>
-                        <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
-                            <label for="comment" class="sr-only">
-                                Your comment
-                            </label>
-                            <textarea
-                                onChange={(e)=>setData({
+                    <div class="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200">
+                        <label for="comment" class="sr-only">
+                            Your comment
+                        </label>
+                        <textarea
+                            onChange={(e) =>
+                                setData({
                                     ...data,
-                                    notes:e.target.value
-                                })}
-                                id="notes"
-                                rows="6"
-                                class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none  "
-                                placeholder="Write a comment..."
-                                required
-                            ></textarea>
-                        </div>
-                        {/* <button
+                                    notes: e.target.value,
+                                })
+                            }
+                            id="notes"
+                            value={data?.notes ?? ""}
+                            rows="6"
+                            class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none  "
+                            placeholder="Write a comment..."
+                            required
+                        ></textarea>
+                    </div>
+                    {/* <button
                             type="submit"
                             class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-indigo-600 text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-primary-800"
                         >
                             Post comment
                         </button> */}
-                        <Button 
+                    <Button
                         onClick={submit_notes}
-                        loading={loading} type="primary">
+                        loading={loading}
+                        type="primary"
+                    >
                         Post comment
-                        </Button>
-                    </form>
+                    </Button>
+                </form>
                 {notes &&
                     notes.map((res) => {
                         return (

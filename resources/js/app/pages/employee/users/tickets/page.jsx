@@ -20,8 +20,10 @@ export default function ItTicketsPage({ auth }) {
     }, [user]);
 
     useEffect(() => {
-        store.dispatch(get_ticket_by_user_id_thunk(user.id));
-    }, [refresh]);
+        if (user.id) {
+            store.dispatch(get_ticket_by_user_id_thunk(user.id));
+        }
+    }, [refresh,user.id]);
     return (
         <UsersLayout account={auth.user}>
             <UsersTicketAddSection />

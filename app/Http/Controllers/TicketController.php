@@ -15,10 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class TicketController extends Controller
 {
-    public function search_ticket(Request $request, $userid)
-    {
-
-    }
+    public function search_ticket(Request $request, $userid) {}
     public function get_ticket_by_user_id(Request $request, $userid)
     {
         $search = $request->search;
@@ -32,17 +29,18 @@ class TicketController extends Controller
         if ($search == 'isUrgent') {
             $query->where('status', '<>', 'Closed');
             $query->orWhere('status', '<>', 'Declined');
-            $query->where('isUrgent', 'true'); 
+            $query->where('isUrgent', 'true');
         } else {
             if ($search) {
                 $query->where('status', $search);
             }
         }
-        $tickets = $query
+        if ($query) {
+            $tickets = $query
             ->with(['user', 'assigned_to', 'category'])
             ->orderBy('id', 'desc')
             ->paginate($perPage);
-
+        }
         return response()->json([
             'result' => $tickets
         ], 200);
@@ -68,7 +66,11 @@ class TicketController extends Controller
         $user = User::where('id', $request->assigned_to)->first();
         $ticket = Ticket::where('id', $id);
         $ticket->with(['files', 'user', 'assigned_to', 'category', 'notes']);
-        $user2 = User::where('id', $ticket->first()->assigned_to)->first();
+        if ($ticket->first()->assigned_to == 0) {
+            $user2 = User::where('id', $request->assigned_to)->first();
+        } else {
+            $user2 = User::where('id', $ticket->first()->assigned_to)->first();
+        }
 
         if ($request->status == 'Assigned') {
             Activity::create([
@@ -94,6 +96,9 @@ class TicketController extends Controller
             'status' => $request->status,
             'assigned_to' => ($request->status == 'Assigned') ? $request->assigned_to : $ticket->first()->assigned_to,
         ]);
+        
+        $message = $ticket->first();
+        event(new OpenTicketNotification($message));
         return response()->json([
             'result' => $ticket->get()
         ], 200);
@@ -107,7 +112,7 @@ class TicketController extends Controller
 
         // Build the query based on search criteria
         $queryBuilder = Ticket::query();
-        $queryBuilder->where('site_id', '=' ,$site_id);
+        $queryBuilder->where('site_id', '=', $site_id);
         if ($query) {
             $queryBuilder->where(function ($q) use ($query) {
                 $q->where('ticket_id', 'like', '%' . $query . '%');
@@ -139,13 +144,15 @@ class TicketController extends Controller
             ]);
         }
         $ticket = Ticket::create([
-            'site_id'=>$user->site_id,
+            'site_id' => $user->site_id,
             'user_id' => $request->user_id,
             'assigned_to' => intval($request->assigned_to),
             'category_id' => $request->category_id == 'Others' ? $category->id : intval($request->category_id),
             'details' => $request->details,
             'status' => $request->status,
             'isUrgent' => $request->isUrgent,
+            'start' => $request->start,
+            'end' => $request->end,
         ]);
         $length = strlen($ticket->id);
 

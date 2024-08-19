@@ -13,15 +13,18 @@ import { get_category_thunk } from "@/app/pages/admin/category/redux/category-th
 import Select from "@/app/components/select";
 import Textarea from "@/app/components/textarea";
 import { send_push_notification } from "@/app/redux/app-thunk";
+import { DatePicker } from "antd";
+import moment from "moment";
 
 export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
-        status:'Pending'
+        status: "Pending",
     });
     const { users } = useSelector((state) => state.it);
     const { user } = useSelector((state) => state.app);
     const [messageApi, contextHolder] = message.useMessage();
+    const { RangePicker } = DatePicker;
 
     const { allCategories: categories } = useSelector(
         (state) => state.category
@@ -47,6 +50,8 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         fd.append("isUrgent", data.isUrgent);
         fd.append("user_id", user.id);
         fd.append("others", data.others);
+        fd.append("start", data?.start??moment().format('LLLL'));
+        fd.append("end", data?.end??moment().format('LLLL'));
 
         if (checkStatus(data.files) && data.files) {
             for (let i = 0; i < data.files.length; i++) {
@@ -60,12 +65,14 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         }
         await store.dispatch(create_ticket_thunk(fd));
         await store.dispatch(get_ticket_by_user_id_thunk(user.id));
-        await store.dispatch(send_push_notification(fd))
+        await store.dispatch(send_push_notification(fd));
         if (data.category_id == "Others") {
             store.dispatch(get_category_thunk());
         }
         messageApi.success("Created Successfully!");
-        setData({});
+        setData({
+            status: "Pending",
+        });
         closeModal();
         setLoading(false);
     }
@@ -115,6 +122,15 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                         )}
                     </div>
                     <div className="grid md:gap-6 mt-4 ">
+                        <RangePicker 
+                        onChange={(e)=>setData({
+                            start:moment(e[0].$d).format('LLLL'),
+                            end:moment(e[1].$d).format('LLLL')
+                        })}
+                        showTime />
+                    </div>
+
+                    <div className="grid md:gap-6 mt-4 ">
                         <Textarea
                             onChange={(e) =>
                                 setData({
@@ -129,45 +145,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                             type="text"
                         />
                     </div>
-                    {/* <div className="relative z-0 w-full mb-6 group mt-4 ">
-                        <Select
-                            value={data.assigned_to}
-                            label="Select IT Personnel"
-                            name="assigned_to"
-                            onChange={(e) =>
-                                setData({
-                                    ...data,
-                                    assigned_to: e.target.value,
-                                })
-                            }
-                            options={users?.data.map((res) => ({
-                                label: res.name,
-                                value: res.id,
-                            }))}
-                        />
-                    </div> */}
-                    {/* <div className="relative z-0 w-full mb-6 group mt-4 ">
-                        <Select
-                            value={data.status}
-                            label="Select Status"
-                            name="status"
-                            onChange={(e) =>
-                                setData({
-                                    ...data,
-                                    status: e.target.value,
-                                })
-                            }
-                            options={[
-                                { name: "Pending", value: "Pending" },
-                                { name: "Assigned", value: "Assigned" },
-                                { name: "Ongoing", value: "Ongoing" },
-                                { name: "Closed", value: "Closed" },
-                            ].map((res) => ({
-                                label: res.name,
-                                value: res.id,
-                            }))}
-                        />
-                    </div> */}
+
                     <Upload
                         onChange={(e) =>
                             setData({
@@ -189,6 +167,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                             type="checkbox"
                             value=""
                             name="isUrgent"
+                            checked={data.isUrgent == "true"}
                             onChange={(e) =>
                                 setData({
                                     ...data,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Select, Input, message } from "antd";
-import { update_ticket_status_thunk } from "../../../../redux/tickets-thunk";
+import { get_ticket_by_id_thunk, update_ticket_status_thunk } from "../../../../redux/tickets-thunk";
 import store from "@/app/store/store";
 import { get_it_thunk, get_user_by_position_thunk } from "../../../../../it/redux/it-thunk";
 import { useSelector } from "react-redux";
@@ -11,6 +11,7 @@ export default function AdminTicketChangeStatusSection() {
   const [messageApi, contextHolder] = message.useMessage();
   const { users } = useSelector((state) => state.it);
   const { user } = useSelector((state) => state.app);
+  const [loading,setLoading] = useState(false)
   console.log('useruser',user)
   const [data, setData] = useState({
       status: "Closed",
@@ -34,6 +35,7 @@ export default function AdminTicketChangeStatusSection() {
   };
 
   async function handleOk(params) {
+    setLoading(true)
       if (data.notes) {
           await store.dispatch(update_ticket_status_thunk(data));
           setData({
@@ -42,15 +44,17 @@ export default function AdminTicketChangeStatusSection() {
               assigned_to: users[0],
           });
           messageApi.success("Updated Success!");
+          store.dispatch(get_ticket_by_id_thunk());
           setIsModalOpen(false);
+          setLoading(false)
       } else {
           messageApi.error("Notes is required!");
+          setLoading(false)
       }
   }
   const handleCancel = () => {
       setIsModalOpen(false);
   };
-  console.log('data',data)
   return (
     <div>
     {contextHolder}
@@ -63,6 +67,7 @@ export default function AdminTicketChangeStatusSection() {
         onOk={handleOk}
         okText="Submit"
         onCancel={handleCancel}
+        confirmLoading={loading}
     >
         <div className="flex flex-col gap-4">
             <Select

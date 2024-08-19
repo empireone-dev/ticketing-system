@@ -20,6 +20,8 @@ class Ticket extends Model
         'status',
         'others',
         'isUrgent',
+        'start',
+        'end',
     ];
 
 

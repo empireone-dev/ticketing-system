@@ -34,6 +34,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('change_password', function () {
+        return Inertia::render('change_password/page');
+    })->name('change_password');
+});
+
 Route::middleware('redirectBasedOnRole')->get('/', function () {
     return Inertia::render('login/page');
 })->name('user.login');
