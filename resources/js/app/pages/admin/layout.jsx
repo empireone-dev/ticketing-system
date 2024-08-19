@@ -4,6 +4,7 @@ import AdministratorTopbarSection from "./_sections/administrator-topbar-section
 import { useEffect, useState } from "react";
 import { get_user_thunk } from "@/app/redux/app-thunk";
 import store from "@/app/store/store";
+import PusherNotifications from "@/app/realtime/push-notifications";
 
 export default function MainLayout({ children, user }) {
     const [show, setShow] = useState(true);
@@ -19,6 +20,8 @@ export default function MainLayout({ children, user }) {
                 title="Successfully Save"
                 subTitle="Anyone with a link can now view this file."
             /> */}
+            
+            <PusherNotifications />
             <AdministratorSidebarSection />
             <div className="lg:pl-72">
                 <AdministratorTopbarSection />
