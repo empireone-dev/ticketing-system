@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useForm, usePage } from "@inertiajs/react";
+import { GoogleOutlined } from "@ant-design/icons";
 
 export default function LoginPage({ status, canResetPassword }) {
     const { url } = usePage();
@@ -28,10 +29,12 @@ export default function LoginPage({ status, canResetPassword }) {
             onSubmit={submit}
             className="flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 "
         >
-            <div className="border border-gray-500 sm:mx-auto sm:w-full sm:max-w-sm p-5 rounded-lg shadow-2xl">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <div className="border border-gray-500 sm:mx-auto sm:w-full sm:max-w-md p-5 rounded-lg shadow-2xl">
+                <div className="flex items-center justify-center">
+                <img src="/images/logoIT.png" className="h-24" alt="" />
+                </div>
+                <div className="sm:mx-auto sm:w-full">
                     <img
-                        className="mx-auto h-full w-full"
                         src="/images/logo.jpeg"
                         alt="Your Company"
                     />
@@ -128,9 +131,10 @@ export default function LoginPage({ status, canResetPassword }) {
                             <a
                                 href="/auth/google"
                                 type="submit"
-                                className="flex gap-4 w-full justify-center shadow-md border border-blue-500 rounded-sm bg-white px-3 py-2.5 text-sm font-semibold leading-6 text-blue-500 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="flex gap-1 w-full justify-center shadow-md border border-blue-500 rounded-sm bg-white px-3 py-2.5 text-sm font-semibold leading-6 text-blue-500 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
                                 {/* <img src="/images/google.png" className="h-6" />{" "} */}
+                                <GoogleOutlined className="text-lg"/>
                                 Sign in with Google
                             </a>
                         </div>
