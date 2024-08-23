@@ -7,7 +7,7 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import store from "./app/store/store";
 import { Provider } from "react-redux";
 
-const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+const appName = import.meta.env.VITE_APP_NAME || "IT Dept. Ticketing";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
