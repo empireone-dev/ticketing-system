@@ -39,7 +39,7 @@ export default function Table({
     }
 
     return (
-        <div className="flow-root w-full">
+        <div className="flow-root w-full shadow-2xl">
             {/* <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8"> */}
             <div className="overflow-x-auto">
                 <div className="inline-block min-w-full py-2 align-middle ">

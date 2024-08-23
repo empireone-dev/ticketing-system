@@ -27,17 +27,19 @@ export default function LoginPage({ status, canResetPassword }) {
     return (
         <form
             onSubmit={submit}
-            className="flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 "
+            className="flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-blue-200"
         >
-            <div className="border border-gray-500 sm:mx-auto sm:w-full sm:max-w-md p-5 rounded-lg shadow-2xl">
-                <div className="flex items-center justify-center">
-                <img src="/images/logoIT.png" className="h-24" alt="" />
-                </div>
-                <div className="sm:mx-auto sm:w-full">
-                    <img
-                        src="/images/logo.jpeg"
-                        alt="Your Company"
-                    />
+            <div className="border border-gray-500 sm:mx-auto sm:w-full sm:max-w-md p-5 rounded-lg shadow-2xl bg-white">
+                <div className="flex flex-1">
+                    <div className="w-96">
+                        <img src="/images/new logo.png" className="w-80" />
+                    </div>
+                    <div className="w-16 mt-3">
+                        <img src="/images/vline.png" className="w-80 h-24" />
+                    </div>
+                    <div className="mt-4 w-40">
+                        <img src="/images/logoIT.png" className="h-24" alt="" />
+                    </div>
                 </div>
 
                 <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -131,10 +133,9 @@ export default function LoginPage({ status, canResetPassword }) {
                             <a
                                 href="/auth/google"
                                 type="submit"
-                                className="flex gap-1 w-full justify-center shadow-md border border-blue-500 rounded-sm bg-white px-3 py-2.5 text-sm font-semibold leading-6 text-blue-500 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="flex w-full justify-center shadow-md border border-blue-500 rounded-sm bg-white px-3 py-2.5 text-sm font-semibold leading-6 text-blue-500 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
-                                {/* <img src="/images/google.png" className="h-6" />{" "} */}
-                                <GoogleOutlined className="text-lg"/>
+                                <img src="/images/google.png" className="h-6" />{" "}
                                 Sign in with Google
                             </a>
                         </div>

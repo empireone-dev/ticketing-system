@@ -108,7 +108,7 @@ export default function Sidebar({ navigation }) {
                                                             className={classNames(
                                                                 item.current
                                                                     ? "text-indigo-600"
-                                                                    : "text-gray-400 group-hover:text-indigo-600",
+                                                                    : "text-black group-hover:text-indigo-600",
                                                                 "h-6 w-6 shrink-0"
                                                             )}
                                                         />
@@ -162,7 +162,7 @@ export default function Sidebar({ navigation }) {
                                         >
                                             <Cog6ToothIcon
                                                 aria-hidden="true"
-                                                className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                                                className="h-6 w-6 shrink-0 text-black group-hover:text-indigo-600"
                                             />
                                             Settings
                                         </a>
@@ -176,13 +176,19 @@ export default function Sidebar({ navigation }) {
 
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-0 lg:flex lg:w-72 lg:flex-col">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-white px-6 pb-4">
-                    <div className="flex h-16 shrink-0 items-center">
-                        <img
-                            alt="Your Company"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                            className="h-8 w-auto"
-                        />
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-blue-200 px-6 pb-4">
+                    <div className="flex flex-shrink-0 items-center">
+                        <div className="flex flex-1 ">
+                            <div className="mt-2">
+                                <img src="/images/new logo.png" className="w-40" />
+                            </div>
+                            <div className="mt-3">
+                                <img src="/images/vline.png" className="h-14" />
+                            </div>
+                            <div className="mt-3">
+                                <img src="/images/logoIT.png" className="h-14" alt="" />
+                            </div>
+                        </div>
                     </div>
                     <nav className="flex flex-1 flex-col">
                         <ul
@@ -210,7 +216,7 @@ export default function Sidebar({ navigation }) {
                                                         className={classNames(
                                                             item.current
                                                                 ? "text-indigo-600"
-                                                                : "text-gray-400 group-hover:text-indigo-600",
+                                                                : "text-black group-hover:text-indigo-600",
                                                             "h-6 w-6 shrink-0"
                                                         )}
                                                     />
@@ -229,14 +235,14 @@ export default function Sidebar({ navigation }) {
                                     >
                                         <Cog6ToothIcon
                                             aria-hidden="true"
-                                            className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                                            className="h-6 w-6 shrink-0 text-black group-hover:text-indigo-600"
                                         />
                                         Settings
                                     </Link>
                                 </li>
                             )}
 
-                            {path == "it" && path2 !== "admin"  && (
+                            {path == "it" && path2 !== "admin" && (
                                 <li className="mt-auto">
                                     <Link
                                         href="/employee/it/settings"
@@ -244,13 +250,13 @@ export default function Sidebar({ navigation }) {
                                     >
                                         <Cog6ToothIcon
                                             aria-hidden="true"
-                                            className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                                            className="h-6 w-6 shrink-0 text-black group-hover:text-indigo-600"
                                         />
                                         Settings
                                     </Link>
                                 </li>
                             )}
-                               {path == "users" && path2 !== "admin" && (
+                            {path == "users" && path2 !== "admin" && (
                                 <li className="mt-auto">
                                     <Link
                                         href="/employee/users/settings"
@@ -258,7 +264,7 @@ export default function Sidebar({ navigation }) {
                                     >
                                         <Cog6ToothIcon
                                             aria-hidden="true"
-                                            className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                                            className="h-6 w-6 shrink-0 text-black group-hover:text-indigo-600"
                                         />
                                         Settings
                                     </Link>
