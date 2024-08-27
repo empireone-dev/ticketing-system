@@ -21,7 +21,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
     const [loading, setLoading] = useState(false);
     const { RangePicker } = DatePicker;
     const [data, setData] = useState({
-        status:'Pending'
+        status: "Pending",
     });
     const { users } = useSelector((state) => state.it);
     const { user } = useSelector((state) => state.app);
@@ -51,8 +51,8 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         fd.append("status", data.status);
         fd.append("isUrgent", data.isUrgent);
         fd.append("user_id", user.id);
-        fd.append("start", data?.start??moment().format('LLLL'));
-        fd.append("end", data?.end??moment().format('LLLL'));
+        fd.append("start", data?.start ?? moment().format("LLLL"));
+        fd.append("end", data?.end ?? moment().format("LLLL"));
 
         if (checkStatus(data.files) && data.files) {
             for (let i = 0; i < data.files.length; i++) {
@@ -119,12 +119,15 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                         )}
                     </div>
                     <div className="grid md:gap-6 mt-4 ">
-                        <RangePicker 
-                        onChange={(e)=>setData({
-                            start:moment(e[0].$d).format('LLLL'),
-                            end:moment(e[1].$d).format('LLLL')
-                        })}
-                        showTime />
+                        <RangePicker
+                            onChange={(e) =>
+                                setData({
+                                    start: moment(e[0].$d).format("LLLL"),
+                                    end: moment(e[1].$d).format("LLLL"),
+                                })
+                            }
+                            showTime
+                        />
                     </div>
                     <div className="grid md:gap-6 mt-4 ">
                         <Textarea

@@ -37,9 +37,9 @@ class TicketController extends Controller
         }
         if ($query) {
             $tickets = $query
-            ->with(['user', 'assigned_to', 'category'])
-            ->orderBy('id', 'desc')
-            ->paginate($perPage);
+                ->with(['user', 'assigned_to', 'category'])
+                ->orderBy('id', 'desc')
+                ->paginate($perPage);
         }
         return response()->json([
             'result' => $tickets
@@ -96,7 +96,7 @@ class TicketController extends Controller
             'status' => $request->status,
             'assigned_to' => ($request->status == 'Assigned') ? $request->assigned_to : $ticket->first()->assigned_to,
         ]);
-        
+
         $message = $ticket->first();
         event(new OpenTicketNotification($message));
         return response()->json([
@@ -109,10 +109,15 @@ class TicketController extends Controller
         $search = $request->input('search', ''); // Add search input
         $perPage = $request->input('per_page', 10);
         $site_id = $request->input('site_id', '');
+        $user = Auth::user();
 
         // Build the query based on search criteria
         $queryBuilder = Ticket::query();
-        $queryBuilder->where('site_id', '=', $site_id);
+        if ($user->id == 0) {
+         
+        }else{
+            $queryBuilder->where('site_id', '=', $site_id);
+        }
         if ($query) {
             $queryBuilder->where(function ($q) use ($query) {
                 $q->where('ticket_id', 'like', '%' . $query . '%');
@@ -138,13 +143,14 @@ class TicketController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+        $at = User::where('id', $request->assigned_to)->first();
         if ($request->category_id == 'Others') {
             $category  = Category::create([
                 'name' => $request->others
             ]);
         }
         $ticket = Ticket::create([
-            'site_id' => $user->site_id,
+            'site_id' => ($request->user_id == 0) ? $at->site_id : $user->site_id,
             'user_id' => $request->user_id,
             'assigned_to' => intval($request->assigned_to),
             'category_id' => $request->category_id == 'Others' ? $category->id : intval($request->category_id),
