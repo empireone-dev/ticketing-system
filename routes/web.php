@@ -67,6 +67,15 @@ Route::middleware('auth:sanctum', 'role:1')->prefix('admin')->group(function () 
         });
     });
 
+    Route::prefix('users')->group(function () {
+        Route::get('', function () {
+            return Inertia::render('admin/users/page');
+        });
+        Route::get('{id}', function () {
+            return Inertia::render('admin/it/id/page');
+        });
+    });
+
     Route::prefix('tickets')->group(function () {
         Route::get('', function () {
             return Inertia::render('admin/tickets/page');

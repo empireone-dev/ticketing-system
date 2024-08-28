@@ -6,6 +6,7 @@ import categorySlice from '../pages/admin/category/redux/category-slice';
 import appSlice from '../redux/app-slice';
 import employeeSlice from '../pages/employee/_redux/employee-slice';
 import adminSlice from '../pages/admin/_redux/admin-slice';
+import usersSlice from '../pages/admin/users/redux/users-slice';
 const store = configureStore({
     reducer: {
         app:appSlice,
@@ -13,7 +14,8 @@ const store = configureStore({
         tickets:ticketSlice,
         category:categorySlice,
         employee:employeeSlice,
-        admin:adminSlice
+        admin:adminSlice,
+        users:usersSlice
     },
 });
 

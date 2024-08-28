@@ -30,6 +30,12 @@ export default function AdministratorSidebarSection() {
             current: path == "it",
         },
         {
+            name: "Users",
+            href: "/admin/users?page=1",
+            icon: UserGroupIcon,
+            current: path == "users",
+        },
+        {
             name: "Category Section",
             href: "/admin/category?page=1",
             icon: BarsArrowDownIcon,
