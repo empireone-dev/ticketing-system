@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\OpenTicketNotification;
+use App\Mail\SendCredentials;
 use App\Models\Activity;
 use App\Models\Category;
 use App\Models\File;
@@ -11,6 +12,7 @@ use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class TicketController extends Controller

@@ -124,6 +124,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                     <div className="grid md:gap-6 mt-4 ">
                         <RangePicker 
                         onChange={(e)=>setData({
+                            ...data,
                             start:moment(e[0].$d).format('LLLL'),
                             end:moment(e[1].$d).format('LLLL')
                         })}

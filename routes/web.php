@@ -49,6 +49,10 @@ Route::get('/logout', function () {
     return Inertia::render('logout');
 })->name('tickets.logout');
 
+Route::get('/send_credentials', function () {
+   return view('mail.send_credentials');
+})->name('email');
+
 Route::middleware('auth:sanctum', 'role:1')->prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('admin/dashboard/page');

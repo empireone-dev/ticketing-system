@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendCredentials;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -33,7 +35,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-        User::create([
+       $user_account =  User::create([
             'name' => $request->name,
             'site_id' => $request->user_id == 0 ? $request->site_id :  $user->site_id,
             'email' => $request->email,
@@ -42,6 +44,8 @@ class UserController extends Controller
             'password' => Hash::make('Business12'),
         ]);
         $ticket = User::orderBy('id', 'desc')->get();
+        
+        Mail::to($request->email)->send(new SendCredentials($request->all()));
         return response()->json([
             'result' => $ticket
         ], 200);

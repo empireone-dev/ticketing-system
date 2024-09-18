@@ -90,10 +90,6 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
                                 ]}
                             />
                         )}
-
-                        <div className="text-red-500">
-                            Business12 is the default password.
-                        </div>
                     </form>
                 </div>
             </Modal>

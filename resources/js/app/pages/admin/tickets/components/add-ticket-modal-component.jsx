@@ -122,6 +122,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                         <RangePicker
                             onChange={(e) =>
                                 setData({
+                                    ...data,
                                     start: moment(e[0].$d).format("LLLL"),
                                     end: moment(e[1].$d).format("LLLL"),
                                 })
