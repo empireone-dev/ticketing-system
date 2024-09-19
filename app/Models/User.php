@@ -74,4 +74,28 @@ class User extends Authenticatable
     {
         return $this->assigned()->count();
     }
+
+    public function pending()
+    {
+        return $this->hasMany(Ticket::class, 'assigned_to', 'id')
+                    ->where('status', 'Pending'); // Assuming 'status' indicates if the ticket is pending
+    }
+    
+    // Optional: Create a separate method for counting
+    public function pendingCount(): int
+    {
+        return $this->pending()->count();
+    }
+
+    public function declined()
+    {
+        return $this->hasMany(Ticket::class, 'assigned_to', 'id')
+                    ->where('status', 'Declined'); // Assuming 'status' indicates if the ticket is declined
+    }
+    
+    // Optional: Create a separate method for counting
+    public function declinedCount(): int
+    {
+        return $this->declined()->count();
+    }
 }

@@ -24,11 +24,19 @@ export default function ItPersonnelTableSection() {
             key: "status",
         },
         {
-            title: "Assigned Tickets",
+            title: "Assigned",
             key: "assigned_to",
         },
         {
-            title: "Closed Tickets",
+            title: "Pending",
+            key: "pending",
+        },
+        {
+            title: "Declined",
+            key: "declined",
+        },
+        {
+            title: "Closed",
             key: "closed",
         },
         {
@@ -55,6 +63,8 @@ export default function ItPersonnelTableSection() {
         ),
         assigned_to: res.assigned_count,
         closed: res.closed_count,
+        pending: res.pending_count,
+        declined: res.declined_count,
         action: (
             <div className="flex gap-4">
                 <button
