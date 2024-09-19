@@ -1,8 +1,4 @@
 <x-mail::message>
-  # Introduction
-
-  Subject: Your Login Credentials for IT Ticketing System
-
   Dear {{$data['name']}},
 
   We are pleased to provide you with your login credentials for accessing IT Ticketing System. Please find the details below:
