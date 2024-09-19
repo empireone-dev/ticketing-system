@@ -16,14 +16,26 @@ class UserController extends Controller
     {
         $user = Auth::user();
         if ($user->id == 0) {
-            $users = User::where('account_type', '=', $position)->orderBy('name', 'desc')->paginate();
-        }else{
-            $users = User::where([['account_type', '=', $position], ['site_id', '=', $user->site_id]])->orderBy('name', 'desc')->paginate();
+            // Fetch all users with the specified account_type and include closed ticket count
+            $users = User::where('account_type', $position)
+                         ->withCount(['closed','assigned']) // Use withCount to get the number of closed tickets
+                         ->orderBy('name', 'desc')
+                         ->paginate(10); // Optional: specify the page size
+        } else {
+            // Fetch users with the specified account_type and the same site_id as the logged-in user
+            $users = User::where('account_type', $position)
+                         ->where('site_id', $user->site_id)
+                         ->withCount(['closed','assigned']) // Use withCount to get the number of closed tickets
+                         ->orderBy('name', 'desc')
+                         ->paginate(10);
         }
+    
         return response()->json([
             'result' => $users
         ], 200);
     }
+    
+    
     public function index()
     {
         $user = Auth::user();

@@ -53,12 +53,12 @@ export default function ItPersonnelTableSection() {
                 </div>
             </>
         ),
-        assigned_to: "0",
-        closed: "100",
+        assigned_to: res.assigned_count,
+        closed: res.closed_count,
         action: (
             <div className="flex gap-4">
                 <button
-                   onClick={()=>router.visit(`/admin/it/${res.id}`)}
+                    onClick={() => router.visit(`/admin/it/${res.id}`)}
                     type="button"
                     class="text-white bg-[#2557D6] gap-2 hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center"
                 >
