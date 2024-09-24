@@ -31,14 +31,14 @@ const PusherNotifications = () => {
 
         const handleNotification = (data) => {
             console.log('data.message',data.message)
-            if (data.message.assigned_to == 0 && path == 'admin') {
+            if (data.message.status !== 'Closed' && data.message.assigned_to == 0 && path == 'admin') {
                 triggerAlert()
             }
 
-            if (data.message.assigned_to !== 0 && path !== 'admin' && user.id == data?.message?.assigned_to?.id) {
+            if (data.message.status !== 'Closed' && data.message.assigned_to !== 0 && path !== 'admin' && user.id == data?.message?.assigned_to?.id) {
                 triggerAlert()
             }
-            if (data.message.assigned_to !== 0 && path !== 'admin' && user.id == data?.assigned_to) {
+            if (data.message.status !== 'Closed' && data.message.assigned_to !== 0 && path !== 'admin' && user.id == data?.assigned_to) {
                 triggerAlert()
             }
 
@@ -89,11 +89,11 @@ const PusherNotifications = () => {
         }
     }
     function open_concern() {
-        if (user.site_id == 1) {
+        if (user.account_type == 1) {
             router.visit(`/admin/tickets/${data.id}/details`);
-        } else if (user.site_id == 2) {
+        } else if (user.account_type == 2) {
             router.visit(`/employee/it/tickets/${data.id}/details`);
-        } else if (user.site_id == 3) {
+        } else if (user.account_type == 3) {
             router.visit(`/employee/users/tickets/${data.id}/details`);
         }
         // router.visit(`/employee/it/tickets/${data.id}/details`);

@@ -8,7 +8,7 @@ import { get_dashboard_user_by_id_thunk } from "../_redux/admin-thunk";
 export default function AdminDashboardPage({ auth }) {
     useEffect(() => {
         store.dispatch(get_dashboard_user_by_id_thunk());
-        store.dispatch(get_user_by_position_thunk(2))
+        store.dispatch(get_user_by_position_thunk(2));
     }, []);
     return (
         <AdminLayout user={auth.user}>
