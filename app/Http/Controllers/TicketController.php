@@ -25,18 +25,28 @@ class TicketController extends Controller
         $user = User::where('id', $userid)->first();
         if ($user->account_type == 2) {
             $query = Ticket::where('assigned_to', $userid);
-        } else if ($user->account_type == 3) {
-            $query = Ticket::where('user_id', $userid);
-        }
-        if ($search == 'isUrgent') {
-            $query->where('status', '<>', 'Closed');
-            $query->orWhere('status', '<>', 'Declined');
-            $query->where('isUrgent', 'true');
-        } else {
-            if ($search) {
-                $query->where('status', $search);
+            if ($search == 'isUrgent') {
+                $query->where('status', '<>', 'Closed');
+                $query->orWhere('status', '<>', 'Declined');
+                $query->where('isUrgent', 'true');
+            } else {
+                if ($search) {
+                    $query->where('status', $search);
+                }
             }
+        } else if ($user->account_type == 3) {
+            $query = Ticket::where('user_id', $user->id);
+            // if ($search == 'isUrgent') {
+            //     $query->where('status', '<>', 'Closed');
+            //     $query->orWhere('status', '<>', 'Declined');
+            //     $query->where('isUrgent', 'true');
+            // } else {
+            //     if ($search) {
+            //         $query->where('status', $search);
+            //     }
+            // }
         }
+       
         if ($query) {
             $tickets = $query
                 ->with(['user', 'assigned_to', 'category'])
