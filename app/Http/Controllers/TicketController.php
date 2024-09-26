@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\OpenTicketNotification;
+use App\Mail\NewIncommingTicket;
 use App\Mail\SendCredentials;
 use App\Models\Activity;
 use App\Models\Category;
@@ -46,7 +47,7 @@ class TicketController extends Controller
             //     }
             // }
         }
-       
+
         if ($query) {
             $tickets = $query
                 ->with(['user', 'assigned_to', 'category'])
@@ -111,6 +112,14 @@ class TicketController extends Controller
 
         $message = $ticket->first();
         event(new OpenTicketNotification($message));
+
+        if ($request->status == 'Assigned') {
+            Mail::to($user->email)->send(new NewIncommingTicket([
+                'ticket_id' => $ticket->first()->ticket_id,
+                'details' => $ticket->first()->details,
+            ]));
+        }
+
         return response()->json([
             'result' => $ticket->get()
         ], 200);
@@ -126,8 +135,7 @@ class TicketController extends Controller
         // Build the query based on search criteria
         $queryBuilder = Ticket::query();
         if ($user->id == 0) {
-         
-        }else{
+        } else {
             $queryBuilder->where('site_id', '=', $site_id);
         }
         if ($query) {
@@ -195,7 +203,6 @@ class TicketController extends Controller
             'message' => 'created new ' . ($request->isUrgent == 'true' ? 'urgent ' : '') . 'ticket',
             'type' => 'create',
         ]);
-
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $uploadedFile) {
                 $path = $uploadedFile->store(date("Y"), 's3');
@@ -208,6 +215,11 @@ class TicketController extends Controller
         }
         $message = $ticket;
         event(new OpenTicketNotification($message));
+        $user = User::where('id', $request->assigned_to)->first();
+        Mail::to($user->email)->send(new NewIncommingTicket([
+            'ticket_id' => $ticket->ticket_id,
+            'details' => $ticket->details,
+        ]));
         return response()->json([
             'result' => $tickets,
         ], 200);
