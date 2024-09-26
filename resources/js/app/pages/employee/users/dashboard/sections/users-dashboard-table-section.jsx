@@ -14,42 +14,43 @@ export default function UsersDashboardTableSection() {
             title: "Position",
             key: "position",
         },
-        {
-            title: "Status",
-            key: "status",
-        },
+        // {
+        //     title: "Status",
+        //     key: "status",
+        // },
         {
             title: "Assigned Tickets",
-            key: "model",
+            key: "assigned_count",
         },
         {
             title: "Closed Tickets",
-            key: "serial",
+            key: "closed_count",
         },
-        {
-            title: "Action",
-            key: "action",
-        },
+        // {
+        //     title: "Action",
+        //     key: "action",
+        // },
     ];
     const data = users.data.map((res) => ({
         ...res,
-        status: (
-            <div className="flex gap-4">
-                <div
-                    class={`h-2.5 w-2.5 rounded-full ${
-                        res.isOnline == "true" ? "bg-green-500 " : "bg-red-500 "
-                    } me-2`}
-                ></div>{" "}
-                {res.isOnline == "true" ? "Online" : "Offline"}
-            </div>
-        ),
-        action: (
-            <div className="flex gap-4">
-                {/* <EditTnventorySection datas={res} /> */}ss
-                {/* <DeleteInventorySection datas={res} /> */}
-            </div>
-        ),
+        // status: (
+        //     <div className="flex gap-4">
+        //         <div
+        //             class={`h-2.5 w-2.5 rounded-full ${
+        //                 res.isOnline == "true" ? "bg-green-500 " : "bg-red-500 "
+        //             } me-2`}
+        //         ></div>{" "}
+        //         {res.isOnline == "true" ? "Online" : "Offline"}
+        //     </div>
+        // ),
+        // action: (
+        //     <div className="flex gap-4">
+        //         {/* <EditTnventorySection datas={res} /> */}ss
+        //         {/* <DeleteInventorySection datas={res} /> */}
+        //     </div>
+        // ),
     }));
+    console.log('users.data',users.data)
     return (
         <div>
             <Table

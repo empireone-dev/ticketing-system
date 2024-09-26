@@ -15,7 +15,7 @@ export default function ItTicketsPage({ auth }) {
     useEffect(() => {
         if (user) {
             store.dispatch(get_category_thunk());
-            store.dispatch(get_user_by_position_thunk(2));
+            // store.dispatch(get_user_by_position_thunk(2));
         }
     }, [user]);
 
