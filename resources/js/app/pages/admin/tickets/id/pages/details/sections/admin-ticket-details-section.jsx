@@ -5,6 +5,8 @@ import AdminTicketAsssignedSection from "./admin-ticket-assigned-section";
 
 export default function AdminTicketDetailsSection() {
     const { ticket } = useSelector((state) => state.tickets);
+
+    console.log('ticket', ticket)
     return (
         <div>
             <div class="px-4 sm:px-0">
@@ -65,7 +67,7 @@ export default function AdminTicketDetailsSection() {
                             Urgent?
                         </dt>
                         <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                            {ticket?.isUrgent == null ? "No" : "Yes"}
+                            {ticket?.isUrgent === null || ticket?.isUrgent === "undefined" ? "No" : "Yes"}
                         </dd>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
