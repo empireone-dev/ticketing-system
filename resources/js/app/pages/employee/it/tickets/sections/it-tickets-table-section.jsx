@@ -5,7 +5,8 @@ import moment from "moment";
 import { router } from "@inertiajs/react";
 import Table from "@/app/components/table";
 import Pagination from "@/app/components/pagination";
-import { UserIcon } from "@heroicons/react/24/outline";
+import { ArrowDownOnSquareIcon, CheckCircleIcon, CheckIcon, UserIcon, XCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { FieldTimeOutlined } from "@ant-design/icons";
 
 export default function ItTicketsTableSection() {
     const { tickets } = useSelector((state) => state.it);
@@ -44,14 +45,36 @@ export default function ItTicketsTableSection() {
         created_at: moment(res.created_at).format("LLL"),
         status: (
             <>
-                {res.isUrgent && (
-                    <div class="bg-yellow-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                         <UserIcon className="w-4 h-4 mr-1" />{res.status}
+                {/* {res.isUrgent && (
+                    <div className="bg-yellow-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                        <UserIcon className="w-4 h-4 mr-1" />{res.status}
+                    </div>
+                )} */}
+
+                {res.status === "Assigned" && (
+                    <div className="bg-blue-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                        <ArrowDownOnSquareIcon className="w-4 h-4" />&nbsp;Assigned
                     </div>
                 )}
 
-                {res.isUrgent == "true" && (
+                {res.status === "Pending" && (
+                    <div className="bg-yellow-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                        <FieldTimeOutlined />&nbsp;Pending
+                    </div>
+                )}
 
+                {res.status === "Closed" && (
+                    <div className="bg-green-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                        <CheckIcon className="w-4 h-4" />&nbsp;Closed
+                    </div>
+                )}
+
+                {res.status === "Declined" && (
+                    <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                        <XMarkIcon className="w-4 h-4" />&nbsp;Declined
+                    </div>
+                )}
+                {res.isUrgent === "true" && (
                     <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-transparent animate-border-glow">
                         <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
                         Urgent
