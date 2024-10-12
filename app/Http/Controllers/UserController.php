@@ -36,17 +36,36 @@ class UserController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->input('query', '');
+        $perPage = $request->input('per_page', 10);
         $user = Auth::user();
-        $users = User::where('site_id', $user->site_id)
-            ->orderBy('id', 'desc')
-            ->paginate();
+
+        // Build the query based on user site_id
+        $queryBuilder = User::query();
+
+        if ($user->id !== 0) {
+            $queryBuilder->where('site_id', $user->site_id);
+        }
+
+        // Add search functionality
+        if ($query) {
+            $queryBuilder->where(function ($q) use ($query) {
+                $q->where('name', 'like', '%' . $query . '%')
+                    ->orWhere('email', 'like', '%' . $query . '%'); // Adjust fields as needed
+            });
+        }
+
+        $users = $queryBuilder
+            ->orderBy('id', 'desc') // Sort results in descending order based on id
+            ->paginate($perPage);
 
         return response()->json([
             'result' => $users
         ], 200);
     }
+
 
 
     public function store(Request $request)
