@@ -16,6 +16,24 @@ export function get_it_thunk(data) {
         dispatch(usersSlice.actions.setUsers(result.data.result));
     };
 }
+
+// export function get_user_thunk(data) {
+//     return async function (dispatch, getState) {
+//         const result = (await get_user_service())
+//         dispatch(usersSlice.actions.setUsers(result.data.result));
+//     };
+// }
+
+export function get_user_thunk(data) {
+    return async function (dispatch, getState) {
+        const result = await get_user_service();
+        dispatch(usersSlice.actions.setUsers(result.data.result));
+        dispatch(usersSlice.actions.setAllUsers(result.data.users));
+    };
+}
+
+
+
 export function get_user_by_position_thunk(position) {
     return async function (dispatch, getState) {
         const result = await get_user_by_position_service(position)

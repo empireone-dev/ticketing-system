@@ -9,7 +9,7 @@ export const categorySlice = createSlice({
     allCategories:[],
     tickets:{
       data:[]
-    }
+    },
   },
   reducers: {
     setCategories: (state, action) => {
