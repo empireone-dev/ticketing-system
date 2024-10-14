@@ -71,7 +71,7 @@ export default function DashboardSection() {
                                 <div className='ml-1'>
                                     Pending:
                                 </div>
-                                <div className='ml-1 text-xl'>
+                                <div className='ml-1 text-md'>
                                     {dashboard?.pending ?? 0}
                                 </div>
                             </div>
@@ -79,7 +79,7 @@ export default function DashboardSection() {
                                 <div className='ml-1'>
                                     Urgent:
                                 </div>
-                                <div className='ml-1 text-xl'>
+                                <div className='ml-1 text-md'>
                                     {dashboard?.urgent ?? 0}
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ export default function DashboardSection() {
                                 <div className='ml-1'>
                                     Assigned:
                                 </div>
-                                <div className='ml-1 text-xl'>
+                                <div className='ml-1 text-md'>
                                     {dashboard?.assigned ?? 0}
                                 </div>
                             </div>
@@ -97,7 +97,7 @@ export default function DashboardSection() {
                                 <div className='ml-1'>
                                     Closed:
                                 </div>
-                                <div className='ml-1 text-xl'>
+                                <div className='ml-1 text-md'>
                                     {dashboard?.closed ?? 0}
                                 </div>
                             </div>
@@ -105,7 +105,7 @@ export default function DashboardSection() {
                                 <div className='ml-1'>
                                     Declined:
                                 </div>
-                                <div className=' ml-1 text-xl'>
+                                <div className=' ml-1 text-md'>
                                     {dashboard?.declined ?? 0}
                                 </div>
                             </div>
