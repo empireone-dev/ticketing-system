@@ -12,31 +12,31 @@ export default function DashboardSection() {
     const handleSegmentClick = (event, segmentIndex, data) => {
         console.log('Clicked segment:', segmentIndex);
     };
-console.log('dashboard',dashboard)
+    console.log('dashboard', dashboard)
     return (
         <div className='flex flex-col gap-8'>
             <div className='flex flex-wrap gap-7 rounded-md'>
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title={`Pending Tickets: ${dashboard?.pending??0}`}
+                    title={`Pending Tickets: ${dashboard?.pending ?? 0}`}
                     href="Go To Pending Tickets Section"
                     link='/admin/tickets?page=1&search=Pending'
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title={`Urgent Tickets: ${dashboard?.urgent??0}`}
+                    title={`Urgent Tickets: ${dashboard?.urgent ?? 0}`}
                     href="Go To Urgent Tickets Section"
                     link='/admin/tickets?page=1&search=isUrgent'
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title={`Ongoing Tickets: ${dashboard?.ongoing??0}`}
+                    title={`Ongoing Tickets: ${dashboard?.ongoing ?? 0}`}
                     href="Go To Ongoing Tickets Section"
                     link='/admin/tickets?page=1&search=Ongoing'
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className='h-12 text-white' />}
-                    title={`Closed Tickets: ${dashboard?.closed??0}`}
+                    title={`Closed Tickets: ${dashboard?.closed ?? 0}`}
                     href="Go To Closed Tickets Section"
                     link='/admin/tickets?page=1&search=Closed'
                 />
@@ -65,6 +65,54 @@ console.log('dashboard',dashboard)
                         <ChartPieIcon className='size-10' />
                         Inquiry Chart
                     </div>
+                    <div className='flex w-full items-start justify-between'>
+                        <div className='flex flex-1 flex-col gap-0.5 text-md'>
+                            <div className='flex items-center text-yellow-400'>
+                                <div className='ml-1'>
+                                    Pending:
+                                </div>
+                                <div className='ml-1 text-xl'>
+                                    {dashboard?.pending ?? 0}
+                                </div>
+                            </div>
+                            <div className='flex text-[#e86100] items-center'>
+                                <div className='ml-1'>
+                                    Urgent:
+                                </div>
+                                <div className='ml-1 text-xl'>
+                                    {dashboard?.urgent ?? 0}
+                                </div>
+                            </div>
+                            <div className='flex text-blue-400 items-center'>
+                                <div className='ml-1'>
+                                    Assigned:
+                                </div>
+                                <div className='ml-1 text-xl'>
+                                    {dashboard?.assigned ?? 0}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='flex flex-1 flex-col gap-0.5 text-md'>
+                            <div className='flex text-green-600 items-center'>
+                                <div className='ml-1'>
+                                    Closed:
+                                </div>
+                                <div className='ml-1 text-xl'>
+                                    {dashboard?.closed ?? 0}
+                                </div>
+                            </div>
+                            <div className='flex text-[#ff0000] items-center'>
+                                <div className='ml-1'>
+                                    Declined:
+                                </div>
+                                <div className=' ml-1 text-xl'>
+                                    {dashboard?.declined ?? 0}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <PieChart
                         style={{ height: '300px' }}
                         lineWidth={55}
@@ -75,11 +123,11 @@ console.log('dashboard',dashboard)
                             fill: 'black',
                             fontSize: '7px',
                             fontFamily: 'sans-serif',
-                            transform: index === hovered ? 'scale(1.1)' : 'scale(1)', 
-                            transition: 'transform 0.3s' 
+                            transform: index === hovered ? 'scale(1.1)' : 'scale(1)',
+                            transition: 'transform 0.3s'
                         })}
                         labelPosition={74}
-                        paddingAngle={1.8} 
+                        paddingAngle={1.8}
                         onMouseOver={(event, segmentIndex, data) => {
                             setHovered(segmentIndex);
                         }}
@@ -90,11 +138,11 @@ console.log('dashboard',dashboard)
                             handleSegmentClick(event, segmentIndex, data);
                         }}
                         data={[
-                            { title: 'One', value: 10, color: '#FF6B6B' },
-                            { title: 'Two', value: 15, color: '#48BB78' },
-                            { title: 'Three', value: 20, color: '#4299E1' },
-                            { title: 'Four', value: 23, color: '#FFFF00' },
-                            { title: 'Five', value: 20, color: '#FF00FF' },
+                            { title: 'Urgent', value: dashboard?.urgent ?? 0, color: '#e86100  ' },
+                            { title: 'Closed', value: dashboard?.closed ?? 0, color: '#009e60 ' },
+                            { title: 'Assigned', value: dashboard?.assigned ?? 0, color: '#4299E1' },
+                            { title: 'Pending', value: dashboard?.pending ?? 0, color: '#FFFF00' },
+                            { title: 'Declined', value: dashboard?.declined ?? 0, color: '#ff0000' },
                         ]}
                         segmentsStyle={(index) => ({
                             transition: 'transform 0.3s',

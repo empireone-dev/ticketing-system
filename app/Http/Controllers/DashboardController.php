@@ -15,6 +15,7 @@ class DashboardController extends Controller
         $pending = Ticket::where([['status', '=', 'Pending'],['site_id', '=', $user->site_id]])->count();
         $assigned = Ticket::where([['status', '=', 'Assigned'],['site_id', '=', $user->site_id]])->count();
         $ongoing = Ticket::where([['status', '=', 'Ongoing'],['site_id', '=', $user->site_id]])->count();
+        $declined = Ticket::where([['status', '=', 'Declined'],['site_id', '=', $user->site_id]])->count();
         $closed = Ticket::where([['status', '=', 'Closed'],['site_id', '=', $user->site_id]])->count();
         $urgent = Ticket::where([['isUrgent', '=', 'true'],['status', '<>', 'Closed'],['site_id', '=', $user->site_id]])->count();
         return response()->json([
@@ -23,6 +24,7 @@ class DashboardController extends Controller
             'ongoing' => $ongoing,
             'closed' => $closed,
             'urgent' => $urgent,
+            'declined' => $declined,
         ], 200);
     }
     public function show($id)
