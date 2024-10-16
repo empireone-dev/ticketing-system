@@ -18,6 +18,7 @@ class DashboardController extends Controller
         $ongoing = Ticket::where([['status', '=', 'Ongoing'], ['site_id', '=', $user->site_id]])->count();
         $declined = Ticket::where([['status', '=', 'Declined'], ['site_id', '=', $user->site_id]])->count();
         $closed = Ticket::where([['status', '=', 'Closed'], ['site_id', '=', $user->site_id]])->count();
+        $total = Ticket::where([['site_id', '=', $user->site_id]])->count();
         $urgent = Ticket::where([['isUrgent', '=', 'true'], ['site_id', '=', $user->site_id]])->count();
         $users = User::where('account_type', 2)->get();
         foreach ($users as $key => $value) {
@@ -48,6 +49,7 @@ class DashboardController extends Controller
             'closed' => $closed,
             'urgent' => $urgent,
             'declined' => $declined,
+            'total' => $total,
         ], 200);
     }
     public function show($id)
