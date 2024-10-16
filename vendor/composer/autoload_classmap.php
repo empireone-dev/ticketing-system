@@ -67,6 +67,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
+    'App\\Mail\\NewIncommingTicket' => $baseDir . '/app/Mail/NewIncommingTicket.php',
     'App\\Mail\\SendCredentials' => $baseDir . '/app/Mail/SendCredentials.php',
     'App\\Models\\Activity' => $baseDir . '/app/Models/Activity.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',

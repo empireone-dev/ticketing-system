@@ -46,12 +46,13 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         fd.append("assigned_to", data.assigned_to);
         fd.append("category_id", data.category_id);
         fd.append("details", data.details);
+        fd.append("station", data.station);
         fd.append("status", data.status);
         fd.append("isUrgent", data.isUrgent);
         fd.append("user_id", user.id);
         fd.append("others", data.others);
-        fd.append("start", data?.start??moment().format('LLLL'));
-        fd.append("end", data?.end??moment().format('LLLL'));
+        fd.append("start", data?.start ?? moment().format('LLLL'));
+        fd.append("end", data?.end ?? moment().format('LLLL'));
 
         if (checkStatus(data.files) && data.files) {
             for (let i = 0; i < data.files.length; i++) {
@@ -122,13 +123,13 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                         )}
                     </div>
                     <div className="grid md:gap-6 mt-4 ">
-                        <RangePicker 
-                        onChange={(e)=>setData({
-                            ...data,
-                            start:moment(e[0].$d).format('LLLL'),
-                            end:moment(e[1].$d).format('LLLL')
-                        })}
-                        showTime />
+                        <RangePicker
+                            onChange={(e) => setData({
+                                ...data,
+                                start: moment(e[0].$d).format('LLLL'),
+                                end: moment(e[1].$d).format('LLLL')
+                            })}
+                            showTime />
                     </div>
 
                     <div className="grid md:gap-6 mt-4 ">
@@ -143,6 +144,22 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                             required="true"
                             name="details"
                             label="Request Details"
+                            type="text"
+                        />
+                    </div>
+
+                    <div className="grid md:gap-6 mt-4 mb-7 ">
+                        <Input
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    station: e.target.value,
+                                })
+                            }
+                            value={data.station ?? ""}
+                            // required="true"
+                            name="station"
+                            label="PC/Station No."
                             type="text"
                         />
                     </div>

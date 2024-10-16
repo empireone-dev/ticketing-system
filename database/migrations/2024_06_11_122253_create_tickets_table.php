@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('others')->nullable();
             $table->bigInteger('assigned_to')->nullable();
             $table->string('status')->nullable();
+            $table->string('station')->nullable();
             $table->string('isUrgent')->nullable();
             $table->timestamps();
         });

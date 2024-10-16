@@ -16,6 +16,7 @@ class Ticket extends Model
         'category_id',
         'site_id',
         'details',
+        'station',
         'assigned_to',
         'status',
         'others',

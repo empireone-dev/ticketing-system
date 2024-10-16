@@ -12,14 +12,14 @@ import { Link } from "@inertiajs/react";
 export default function Topbar() {
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.app);
-    const [search,setSearch] =useState('')
+    const [search, setSearch] = useState('')
     const userNavigation = [
         { name: "Your profile", href: "#" },
         { name: "Sign out", href: "#" },
     ];
 
     function searchData(params) {
-        
+
     }
     return (
         <>
@@ -53,7 +53,7 @@ export default function Topbar() {
                             className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
                         />
                         <input
-                            onChange={(e)=>setSearch(e.target.value)}
+                            onChange={(e) => setSearch(e.target.value)}
                             id="search-field"
                             name="search"
                             type="search"
@@ -82,7 +82,8 @@ export default function Topbar() {
                                 <span className="sr-only">Open user menu</span>
                                 <img
                                     alt=""
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                    src="https://www.transparentpng.com/thumb/user/gray-user-profile-icon-png-fP8Q1P.png" 
+                                    // alt="gray user profile icon png @transparentpng.com"
                                     className="h-8 w-8 rounded-full bg-gray-50"
                                 />
                                 <span className="hidden lg:flex lg:items-center">

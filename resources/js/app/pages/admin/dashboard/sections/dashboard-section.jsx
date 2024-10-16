@@ -276,7 +276,7 @@ export default function DashboardSection() {
                 <div className="mb-10">
                     <div className="flex text-3xl items-center justify-center text-gray-900 font-bold mb-3 mt-6 p-3">
                         <ChartPieIcon className="size-10" />
-                        IT Personnel Tickets Inquiry Chart
+                        IT Personnel Tickets Data Inquiry
                     </div>
                     <select className="w-full flex items-center justify-center " onChange={(e) => handleSelect(e.target.value)}>
                         <option >Select an IT Personnel</option>
@@ -287,12 +287,10 @@ export default function DashboardSection() {
                         ))}
                     </select>
                     <div>
-                        {/* Render the chart and filtering section if selectedData exists */}
                         {selectedData && (
                             <>
-                                {/* Pass the selected data to the chart and filtering components */}
-                                {/* <DashboardLineChartSection data={selectedData} /> */}
-                                <DashboardITFilteringSection data={selectedData} />
+                                <DashboardLineChartSection data={selectedData} />
+                                {/* <DashboardITFilteringSection data={selectedData} /> */}
                             </>
                         )}
                     </div>

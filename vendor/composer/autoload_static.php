@@ -639,6 +639,7 @@ class ComposerStaticInit6d380db77c9088096810ebaa54d0435d
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
+        'App\\Mail\\NewIncommingTicket' => __DIR__ . '/../..' . '/app/Mail/NewIncommingTicket.php',
         'App\\Mail\\SendCredentials' => __DIR__ . '/../..' . '/app/Mail/SendCredentials.php',
         'App\\Models\\Activity' => __DIR__ . '/../..' . '/app/Models/Activity.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',

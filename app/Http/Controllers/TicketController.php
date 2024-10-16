@@ -175,6 +175,7 @@ class TicketController extends Controller
             'assigned_to' => intval($request->assigned_to),
             'category_id' => $request->category_id == 'Others' ? $category->id : intval($request->category_id),
             'details' => $request->details,
+            'station' => $request->station,
             'status' => $request->status,
             'isUrgent' => $request->isUrgent,
             'start' => $request->start,

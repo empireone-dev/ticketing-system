@@ -48,6 +48,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         fd.append("assigned_to", data.assigned_to);
         fd.append("category_id", data.category_id);
         fd.append("details", data.details);
+        fd.append("station", data.station);
         fd.append("status", data.status);
         fd.append("isUrgent", data.isUrgent);
         fd.append("user_id", user.id);
@@ -142,6 +143,21 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                             required="true"
                             name="details"
                             label="Request Details"
+                            type="text"
+                        />
+                    </div>
+                    <div className="grid md:gap-6 mt-4 mb-7 ">
+                        <Input
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    station: e.target.value,
+                                })
+                            }
+                            value={data.station ?? ""}
+                            // required="true"
+                            name="station"
+                            label="PC/Station No."
                             type="text"
                         />
                     </div>

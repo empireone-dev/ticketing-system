@@ -50,7 +50,7 @@ Route::get('/logout', function () {
 })->name('tickets.logout');
 
 Route::get('/send_credentials', function () {
-   return view('mail.send_credentials');
+    return view('mail.send_credentials');
 })->name('email');
 
 Route::middleware('auth:sanctum', 'role:1')->prefix('admin')->group(function () {
@@ -61,7 +61,7 @@ Route::middleware('auth:sanctum', 'role:1')->prefix('admin')->group(function () 
     Route::get('settings', function () {
         return Inertia::render('admin/settings/page');
     })->name('settings');
-    
+
     Route::prefix('it')->group(function () {
         Route::get('', function () {
             return Inertia::render('admin/it/page');
