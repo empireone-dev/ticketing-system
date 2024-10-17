@@ -99,7 +99,7 @@ export default function Sidebar({ navigation }) {
                                                         className={classNames(
                                                             item.current
                                                                 ? "bg-gray-50 text-indigo-600"
-                                                                : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                                                                : "hover:bg-gray-50 hover:text-indigo-600",
                                                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                                                         )}
                                                     >
@@ -133,7 +133,7 @@ export default function Sidebar({ navigation }) {
                                                         className={classNames(
                                                             team.current
                                                                 ? "bg-gray-50 text-indigo-600"
-                                                                : "text-gray-700 hover:bg-gray-50 hover:text-indigo-600",
+                                                                : "hover:bg-gray-50 hover:text-indigo-600",
                                                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                                                         )}
                                                     >
@@ -158,7 +158,7 @@ export default function Sidebar({ navigation }) {
                                     <li className="mt-auto">
                                         <a
                                             href="#"
-                                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:bg-gray-50 hover:text-indigo-600"
                                         >
                                             <Cog6ToothIcon
                                                 aria-hidden="true"
@@ -176,17 +176,17 @@ export default function Sidebar({ navigation }) {
 
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-0 lg:flex lg:w-72 lg:flex-col">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-blue-300 bg-blue-200 px-6 pb-4">
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-blue-400 bg-gradient-to-r from-sky-200 to-blue-300 px-6 pb-4">
                     <div className="flex flex-shrink-0 items-center">
                         <div className="flex flex-1 ">
-                            <div className="mt-2">
-                                <img src="/images/new logo.png" className="w-40" />
+                            <div className="mt-3">
+                                <img src="/images/logoIT.png" className="h-16" alt="" />
                             </div>
                             <div className="mt-3">
                                 <img src="/images/vline.png" className="h-14" />
                             </div>
-                            <div className="mt-3">
-                                <img src="/images/logoIT.png" className="h-14" alt="" />
+                            <div className="mt-2">
+                                <img src="/images/new logo.png" className="w-40" />
                             </div>
                         </div>
                     </div>
@@ -207,7 +207,7 @@ export default function Sidebar({ navigation }) {
                                                     className={classNames(
                                                         item.current
                                                             ? "bg-gray-200 text-indigo-600 w-full"
-                                                            : "text-gray-700 hover:bg-gray-100 w-full hover:text-indigo-600",
+                                                            : "hover:bg-gray-100 w-full hover:text-indigo-600",
                                                         "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                                                     )}
                                                 >
@@ -231,7 +231,7 @@ export default function Sidebar({ navigation }) {
                                 <li className="mt-auto">
                                     <Link
                                         href="/admin/settings"
-                                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:bg-gray-50 hover:text-indigo-600"
                                     >
                                         <Cog6ToothIcon
                                             aria-hidden="true"
@@ -246,7 +246,7 @@ export default function Sidebar({ navigation }) {
                                 <li className="mt-auto">
                                     <Link
                                         href="/employee/it/settings"
-                                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:bg-gray-50 hover:text-indigo-600"
                                     >
                                         <Cog6ToothIcon
                                             aria-hidden="true"
@@ -260,7 +260,7 @@ export default function Sidebar({ navigation }) {
                                 <li className="mt-auto">
                                     <Link
                                         href="/employee/users/settings"
-                                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                                        className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:bg-gray-50 hover:text-indigo-600"
                                     >
                                         <Cog6ToothIcon
                                             aria-hidden="true"

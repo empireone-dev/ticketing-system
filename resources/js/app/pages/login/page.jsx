@@ -27,7 +27,7 @@ export default function LoginPage({ status, canResetPassword }) {
     return (
         <form
             onSubmit={submit}
-            className="flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-blue-200"
+            className="flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-gradient-to-r from-sky-400 via-sky-100 to-blue-400"
         >
             <div className="border border-gray-500 sm:mx-auto sm:w-full sm:max-w-md p-5 rounded-lg shadow-2xl bg-white">
                 <div className="flex flex-1">
