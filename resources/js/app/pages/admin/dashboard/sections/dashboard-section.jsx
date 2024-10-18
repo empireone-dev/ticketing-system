@@ -290,7 +290,7 @@ export default function DashboardSection() {
                         {selectedData && (
                             <>
                                 <DashboardLineChartSection data={selectedData} />
-                                {/* <DashboardITFilteringSection data={selectedData} /> */}
+                                <DashboardITFilteringSection data={selectedData} />
                             </>
                         )}
                     </div>
