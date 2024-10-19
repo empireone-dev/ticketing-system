@@ -41,24 +41,24 @@ export default function ITMonthlyFilteringChartSection({ data }) {
             <div className='mb-2'>
                 Monthly Tickets: {monthCount}
             </div>
-            <div className="flex w-full items-start justify-between">
+            {/* <div className="flex w-full items-start justify-between">
                 <div className="flex flex-1 flex-col gap-0.5 text-md">
                     <div className="flex items-center text-yellow-400">
                         <div className="ml-1">Pending:</div>
                         <div className="ml-1 text-md">
-                            {/* {monthCount} */}
+
                         </div>
                     </div>
                     <div className="flex text-[#e86100] items-center">
                         <div className="ml-1">Urgent:</div>
                         <div className="ml-1 text-md">
-                            {/* {monthCount}  */}
+
                         </div>
                     </div>
                     <div className="flex text-blue-400 items-center">
                         <div className="ml-1">Assigned:</div>
                         <div className="ml-1 text-md">
-                            {/* {dashboard?.assigned ?? 0} */}
+
                         </div>
                     </div>
                 </div>
@@ -66,13 +66,13 @@ export default function ITMonthlyFilteringChartSection({ data }) {
                     <div className="flex text-green-600 items-center">
                         <div className="ml-1">Closed:</div>
                         <div className="ml-1 text-md">
-                            {/* {dashboard?.closed ?? 0} */}
+
                         </div>
                     </div>
                     <div className="flex text-[#ff0000] items-center">
                         <div className="ml-1">Declined:</div>
                         <div className="ml-1 text-md">
-                            {/* {dashboard?.declined ?? 0} */}
+
                         </div>
                     </div>
                 </div>
@@ -110,12 +110,12 @@ export default function ITMonthlyFilteringChartSection({ data }) {
                 data={[
                     {
                         title: "Urgent",
-                        value: monthCount, // Use monthly count
+                        value: monthCount,
                         color: "#e86100",
                     },
                     {
                         title: "Closed",
-                        value: monthCount, // Use monthly count
+                        value: monthCount,
                         color: "#009e60",
                     },
                     {
@@ -125,7 +125,7 @@ export default function ITMonthlyFilteringChartSection({ data }) {
                     },
                     {
                         title: "Pending",
-                        value: monthCount, // Use monthly count
+                        value: monthCount,
                         color: "#FFFF00",
                     },
                     {
@@ -141,7 +141,7 @@ export default function ITMonthlyFilteringChartSection({ data }) {
                             ? "scale(1.1)"
                             : "scale(1)",
                 })}
-            />
+            /> */}
         </div>
     );
 }
