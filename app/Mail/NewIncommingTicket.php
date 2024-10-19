@@ -53,7 +53,7 @@ class NewIncommingTicket extends Mailable
     // }
     public function build()
     {
-        return $this->from('scitdept@empireonegroup.com', 'No Reply')
+        return $this->from('scitdept@empireonegroup.com', 'IT Ticketing (No Reply')
             ->subject('Request for Assistance with EO Ticketing System - EmpireOne BPO Solutions Inc')
             ->markdown('mail.new_ticket_notification')
             ->with($this->data);
