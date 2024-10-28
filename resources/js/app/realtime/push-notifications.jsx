@@ -12,14 +12,13 @@ const PusherNotifications = () => {
     const [isUrgent, setIsUrgent] = useState(false);
     const audioRef = useRef(null);
     const [data, setData] = useState({});
-    const path = window.location.pathname.split('/')[1]
+    const path = window.location.pathname.split("/")[1];
     function playAudio(params) {
         if (audioRef.current) {
             audioRef.current.play();
             audioRef.current.loop = true;
         }
     }
-
     useEffect(() => {
         Pusher.logToConsole = true;
 
@@ -30,48 +29,65 @@ const PusherNotifications = () => {
         const channel = pusher.subscribe("my-channel");
 
         const handleNotification = (data) => {
-            console.log('data.message',data.message)
-            if (data.message.status !== 'Closed' && data.message.assigned_to == 0 && path == 'admin') {
-                triggerAlert()
-            }
+            console.log("data.message", data.message.site_id);
+            if (data.message.site_id == user.site_id) {
+                if (
+                    data.message.status !== "Closed" &&
+                    data.message.assigned_to == 0 &&
+                    path == "admin"
+                ) {
+                    triggerAlert();
+                }
 
-            if (data.message.status !== 'Closed' && data.message.assigned_to !== 0 && path !== 'admin' && user.id == data?.message?.assigned_to?.id) {
-                triggerAlert()
-            }
-            if (data.message.status !== 'Closed' && data.message.assigned_to !== 0 && path !== 'admin' && user.id == data?.assigned_to) {
-                triggerAlert()
-            }
+                if (
+                    data.message.status !== "Closed" &&
+                    data.message.assigned_to !== 0 &&
+                    path !== "admin" &&
+                    user.id == data?.message?.assigned_to?.id
+                ) {
+                    triggerAlert();
+                }
+                if (
+                    data.message.status !== "Closed" &&
+                    data.message.assigned_to !== 0 &&
+                    path !== "admin" &&
+                    user.id == data?.assigned_to
+                ) {
+                    triggerAlert();
+                }
 
+                function triggerAlert(params) {
+                    setOpen(true);
+                    setIsUrgent(data.message.isUrgent === "true");
+                    setData(data.message);
+                    if ("Notification" in window) {
+                        setTimeout(() => {
+                            playAudio();
+                        }, 1000);
 
-            function triggerAlert(params) {
-                setOpen(true);
-                setIsUrgent(data.message.isUrgent === "true");
-                setData(data.message);
-                if ("Notification" in window) {
-                    setTimeout(() => {
-                        playAudio();
-                    }, 1000);
-
-                    if (Notification.permission === "granted") {
-                        new Notification("Empireone Ticket Notification", {
-                            icon: "/images/logoIT.png",
-                        });
-                        dispatch(setRefresh(Math.random()));
-                    } else if (Notification.permission !== "denied") {
-                        Notification.requestPermission().then((permission) => {
-                            if (permission === "granted") {
-                                new Notification(
-                                    "Empireone Ticket Notification",
-                                    {
-                                        icon: "/images/logoIT.png",
+                        if (Notification.permission === "granted") {
+                            new Notification("Empireone Ticket Notification", {
+                                icon: "/images/logoIT.png",
+                            });
+                            dispatch(setRefresh(Math.random()));
+                        } else if (Notification.permission !== "denied") {
+                            Notification.requestPermission().then(
+                                (permission) => {
+                                    if (permission === "granted") {
+                                        new Notification(
+                                            "Empireone Ticket Notification",
+                                            {
+                                                icon: "/images/logoIT.png",
+                                            }
+                                        );
+                                        dispatch(setRefresh(Math.random()));
                                     }
-                                );
-                                dispatch(setRefresh(Math.random()));
-                            }
-                        });
+                                }
+                            );
+                        }
+                    } else {
+                        console.log("Browser does not support notifications.");
                     }
-                } else {
-                    console.log("Browser does not support notifications.");
                 }
             }
         };

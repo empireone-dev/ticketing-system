@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $closed = Ticket::where([['status', '=', 'Closed'], ['site_id', '=', $user->site_id]])->count();
         $total = Ticket::where([['site_id', '=', $user->site_id]])->count();
         $urgent = Ticket::where([['isUrgent', '=', 'true'], ['site_id', '=', $user->site_id]])->count();
-        $users = User::where('account_type', 2)->get();
+        $users = User::where([['account_type','=',2],['site_id','=',$user->site_id]])->get();
         foreach ($users as $key => $value) {
             $value['daily'] = Ticket::where('assigned_to', '=', $value->id)
                 ->selectRaw('DATE(created_at) as title, COUNT(*) as count')
