@@ -41,7 +41,7 @@ const CategoryChartSection = () => {
     }, [categorysWithPercentage]);
     const getChartOptions = () => ({
         series: series,
-        colors: ["#1C64F2", "#16BDCA", "#FDBA8C", "#E74694"],
+        // colors: ["#1C64F2", "#16BDCA", "#FDBA8C", "#E74694"],
         chart: {
             height: 320,
             width: "100%",

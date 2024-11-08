@@ -1,0 +1,1 @@
+import{j as o}from"./app-Bn6wxaMF.js";import{T as r}from"./topbar-BpKBx_l8.js";import"./portal-B45d_bMM.js";import"./use-server-handoff-complete-DnwT5-Un.js";import"./floating-ui.react-dom-DeFJSzED.js";function s(){return o.jsx(r,{})}export{s as default};
