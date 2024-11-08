@@ -59,9 +59,9 @@ export default function DashboardSection() {
             </div>
             <div>
                 <center>
-                    <div className="flex flex-1">
-                        <div className=" p-3 rounded-lg w-full">
-                            <div className="flex text-3xl text-gray-900 font-bold mb-3 p-3">
+                    <div className="flex flex-1 gap-9 ">
+                        <div className=" p-3 rounded-lg w-full shadow-2xl">
+                            <div className="flex text-3xl font-bold mb-3 p-3">
                                 <ChartPieIcon className="size-10" />
                                 Tickets Status Inquiry Chart
                             </div>

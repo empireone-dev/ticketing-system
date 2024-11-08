@@ -1,0 +1,1 @@
+import{r as l,u as r,j as o}from"./app-CudlOiIy.js";function a({data:t}){l.useState(null),r(s=>s.admin);const i=new Date().toISOString().split("T")[0],e=t==null?void 0:t.daily.find(s=>s.title===i),n=e?e.count:0;return console.log("datass",t),o.jsx("div",{children:o.jsxs("div",{className:"mb-2",children:["Daily Tickets: ",n]})})}export{a as default};

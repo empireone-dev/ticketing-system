@@ -1,0 +1,1 @@
+import{h as i,m as s}from"./app-CudlOiIy.js";function o(t){try{return i.post("/api/open_ticket_notification",t)}catch(n){return n}}function a(t){return async function(n,e){n(s.actions.setUser(t))}}function c(t){return async function(n,e){await o(t)}}export{a as g,c as s};
