@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,8 +41,15 @@ class DashboardController extends Controller
                 ->orderBy('title', 'asc')
                 ->get();
         }
+        
+        $categories = Category::get();
+        foreach ($categories as $key => $category) {
+            $ticket = Ticket::where('category_id',$category->id)->get();
+            $category['count'] = $ticket->count();
+        }
 
         return response()->json([
+            'categories'=>$categories,
             'data' => $users,
             'pending' => $pending,
             'assigned' => $assigned,
