@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ApexCharts from 'apexcharts';
 import { useSelector } from 'react-redux';
-import { ChartPieIcon } from '@heroicons/react/20/solid';
 
 const CategoryChartSection = () => {
     const chartRef = useRef(null);
@@ -41,7 +40,7 @@ const CategoryChartSection = () => {
     }, [categorysWithPercentage]);
     const getChartOptions = () => ({
         series: series,
-        // colors: ["#1C64F2", "#16BDCA", "#FDBA8C", "#E74694"],
+        colors: ["#1C64F2", "#16BDCA", "#FDBA8C", "#E74694"],
         chart: {
             height: 320,
             width: "100%",
@@ -71,6 +70,7 @@ const CategoryChartSection = () => {
                             show: true,
                             fontFamily: "Inter, sans-serif",
                             offsetY: 20,
+                            label: hoveredLabel,
                             formatter: (hoveredLabel) => hoveredLabel,
                         },
                         total: {
@@ -143,11 +143,8 @@ const CategoryChartSection = () => {
     }, [series, chart]);
 
     return (
-        <div className='p-3 rounded-lg shadow-2xl'>
-            <div className="flex text-3xl font-bold p-3">
-                <ChartPieIcon className="size-10" />
-                Tickets Categories Inquiry Chart
-            </div>
+        <div>
+            <div className="py-6" ref={chartRef}></div>
             <div>
                 <div className="flex flex-1 flex-col gap-0.5 text-md">
                     <div className="grid grid-cols-2 gap-2">
@@ -159,7 +156,6 @@ const CategoryChartSection = () => {
                     </div>
                 </div>
             </div>
-            <div className="py-6" ref={chartRef}></div>
         </div>
     );
 };

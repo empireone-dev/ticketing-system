@@ -7,10 +7,27 @@ import Table from "@/app/components/table";
 import Pagination from "@/app/components/pagination";
 import { ArrowDownOnSquareIcon, CheckIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FieldTimeOutlined } from "@ant-design/icons";
+import { Select } from "antd";
 
 export default function TicketsTableSection() {
     const { tickets } = useSelector((state) => state.tickets);
+    const { categories } = useSelector((state) => state.category);
     const [dataChecked, setDataChecked] = useState([]);
+
+    const urls = new URL(window.location.href);
+    const searchParams = new URLSearchParams(urls.search);
+    const pages = searchParams.get('page');
+    const category = searchParams.get('category');
+    function search_category(value) {
+        router.visit('?page=' + pages + '&category=' + (value || 'null'))
+    }
+
+    const options = categories?.data?.map((category) => ({
+        label: category.name,
+        value: category.value,
+    }));
+
+    console.log('categories', categories?.data)
     const columns = [
         {
             title: "Name of Requestor",
@@ -33,14 +50,36 @@ export default function TicketsTableSection() {
             key: "created_at",
         },
         {
+            title: <div className="flex gap-3 items-center justify-center">
+                {/* 
+                Account
+                <FilterOutlined /> */}
+                <Select
+                    allowClear
+                    className="w-32 mr-4"
+                    showSearch
+                    placeholder="Category"
+                    optionFilterProp="label"
+                    value={category == 'null' ? null : category}
+                    onChange={search_category}
+                    // onSearch={onSearch}
+                    options={options}
+                />
+            </div>,
+            key: "category_id",
+        },
+        {
             title: "Action",
             key: "action",
         },
     ];
+
+
     const data = tickets?.data.map((res) => ({
         ...res,
         name: res?.user?.name ?? "",
         assigned_to: res?.assigned_to?.name ?? "",
+        category_id: res?.category?.name ?? "",
         created_at: moment(res.created_at).format("LLL"),
         status: (
             <>
@@ -96,6 +135,8 @@ export default function TicketsTableSection() {
             </div>
         ),
     }));
+
+
     return (
         <>
             <div className="flex flex-col items-center justify-between h-[85vh] w-full">

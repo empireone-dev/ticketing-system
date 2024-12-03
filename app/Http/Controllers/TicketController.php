@@ -151,7 +151,7 @@ class TicketController extends Controller
         }
 
         $tickets = $queryBuilder
-            ->with(['user', 'assigned_to'])
+            ->with(['user', 'assigned_to', 'category'])
             ->orderBy('id', 'desc') // Sort results in descending order based on ticket_id
             ->paginate($perPage);
 
