@@ -92,6 +92,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                             value={data.category_id}
                             label="Category"
                             name="category_id"
+                            required="true"
                             onChange={(e) =>
                                 setData({
                                     ...data,

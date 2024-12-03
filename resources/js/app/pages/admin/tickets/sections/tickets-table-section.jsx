@@ -56,7 +56,7 @@ export default function TicketsTableSection() {
                 <FilterOutlined /> */}
                 <Select
                     allowClear
-                    className="w-32 mr-4"
+                    className="w-36 mr-4"
                     showSearch
                     placeholder="Category"
                     optionFilterProp="label"
