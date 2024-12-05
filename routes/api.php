@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\OpenTicketNotidicationController;
+use App\Http\Controllers\SendReportController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -24,6 +25,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/send_reports', [SendReportController::class, 'send_reports']);
+Route::get('/export_daily_report', [SendReportController::class, 'export_daily_report']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('ticket', TicketController::class);

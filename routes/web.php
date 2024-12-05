@@ -53,6 +53,10 @@ Route::get('/send_credentials', function () {
     return view('mail.send_credentials');
 })->name('email');
 
+Route::get('/send_reports', function () {
+    return view('mail.send_reports');
+});
+
 Route::middleware('auth:sanctum', 'role:1')->prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('admin/dashboard/page');
