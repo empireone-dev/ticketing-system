@@ -18,7 +18,7 @@ class SendReportController extends Controller
         // Query tickets created on the given day
         $tickets = Ticket::whereDate('created_at', $date)->with(['user', 'assigned_to'])
             ->get();
-        Mail::to('webdev@empireonegroup.com')->send(new SendReport($tickets));
+        Mail::to('compliance@empireonegroup.com')->send(new SendReport($tickets));
 
         // Return the results
         // return response()->json([
