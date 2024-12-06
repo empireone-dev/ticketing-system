@@ -124,41 +124,58 @@ class TicketController extends Controller
             'result' => $ticket->get()
         ], 200);
     }
+
+
     public function index(Request $request)
     {
         $query = $request->input('query', '');
-        $search = $request->input('search', ''); // Add search input
+        $search = $request->input('search', '');
         $perPage = $request->input('per_page', 10);
         $site_id = $request->input('site_id', '');
+        $category = $request->input('category_id', null); // Handle category input
+        $searching = $request->input('searching', '');
         $user = Auth::user();
-
-        // Build the query based on search criteria
+    
+        // Initialize query builder
         $queryBuilder = Ticket::query();
-        if ($user->id == 0) {
-        } else {
+    
+        // Filter by site_id if the user is not an admin
+        if ($user->id !== 0) {
             $queryBuilder->where('site_id', '=', $site_id);
         }
-        if ($query) {
-            $queryBuilder->where(function ($q) use ($query) {
-                $q->where('ticket_id', 'like', '%' . $query . '%');
+    
+        // Filter by ticket_id if `query` is provided
+        if (!empty($query)) {
+            $queryBuilder->where('ticket_id', 'like', '%' . $query . '%');
+        }
+    
+        // Filter by category
+        if ($category && $category !== 'null' && $category !== 'N/A') {
+            $queryBuilder->where('category_id', '=', $category);
+        } elseif ($category === 'N/A') {
+            $queryBuilder->where(function ($q) {
+                $q->whereNull('category_id')->orWhere('category_id', '');
             });
         }
-
-        if ($search == 'isUrgent') {
-            $queryBuilder->where('isUrgent', 'true'); // Assuming 'isUrgent' is a boolean field
-        } elseif ($search) {
+    
+        // Filter by status or `isUrgent` if `search` is provided
+        if ($search === 'isUrgent') {
+            $queryBuilder->where('isUrgent', 'true'); // Assuming `isUrgent` is stored as a string
+        } elseif (!empty($search)) {
             $queryBuilder->where('status', $search);
         }
-
+    
+        // Fetch tickets with related data and paginate
         $tickets = $queryBuilder
             ->with(['user', 'assigned_to', 'category'])
-            ->orderBy('id', 'desc') // Sort results in descending order based on ticket_id
+            ->orderBy('id', 'desc')
             ->paginate($perPage);
-
+    
         return response()->json([
-            'result' => $tickets
+            'result' => $tickets,
         ], 200);
     }
+    
 
     public function store(Request $request)
     {
