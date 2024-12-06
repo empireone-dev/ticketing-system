@@ -1,6 +1,6 @@
 <div style="position: relative; overflow-x: auto; width: 80%;">
-  <h3>Click the link below to export the daily report for {{ now()->toFormattedDateString() }}:</h3>
-  <a href="{{ url('/api/export_daily_report?date=' . now()->toDateString()) }}" target="_blank">
+  <h3>Click the link below to export the daily report for {{ now()->subDay()->toFormattedDateString() }}:</h3>
+  <a href="{{ url('/api/export_daily_report?date=' . now()->subDay()->toFormattedDateString() }}" target="_blank">
     Export Daily Report
   </a>
 
