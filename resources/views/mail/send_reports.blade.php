@@ -1,8 +1,9 @@
 <div style="position: relative; overflow-x: auto; width: 80%;">
-  <h3>Click the link below to export the daily report for {{ now()->subDay()->toFormattedDateString() }}:</h3>
-  <a href="{{ url('/api/export_daily_report?date=' . now()->subDay()->toFormattedDateString() }}" target="_blank">
-    Export Daily Report
-  </a>
+<h3>Click the link below to export the daily report for {{ now()->subDay()->toFormattedDateString() }}:</h3>
+<a href="{{ url('/api/export_daily_report?date=' . now()->subDay()->toFormattedDateString()) }}" target="_blank">
+  Export Daily Report
+</a>
+
 
   <table style="width: 100%; font-size: 0.875rem; text-align: left; color: #6b7280;">
     <thead style="font-size: 0.75rem; color: #374151; text-transform: uppercase; background-color: #f9fafb;">

@@ -13,7 +13,7 @@ class SendReportController extends Controller
 {
     public function send_reports()
     {
-        $date =  Carbon::today();
+        $date = Carbon::today()->subDay();
 
         // Query tickets created on the given day
         $tickets = Ticket::whereDate('created_at', $date)->with(['user', 'assigned_to'])

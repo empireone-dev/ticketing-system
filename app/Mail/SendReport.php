@@ -54,7 +54,7 @@ class SendReport extends Mailable
 
     public function build()
     {
-        $dateToday = now()->format('F j, Y');
+        $dateToday = now()->subDay()->format('F j, Y');
         return $this->markdown('mail.send_reports')
             ->subject("Daily Reports - $dateToday - EmpireOne BPO Solutions Inc");
     }
