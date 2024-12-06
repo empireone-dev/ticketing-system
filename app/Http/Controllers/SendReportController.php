@@ -56,7 +56,7 @@ class SendReportController extends Controller
             echo " Output";
         }, 200, [
             'Content-Type' => 'text/plain',
-            'Content-Disposition' => 'attachment; filename="' . now()->toDateString() . '.csv"',
+            'Content-Disposition' => 'attachment; filename="' . $date . '.csv"',
         ]);
     }
    
