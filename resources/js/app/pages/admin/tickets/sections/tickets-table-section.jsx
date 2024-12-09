@@ -8,6 +8,7 @@ import Pagination from "@/app/components/pagination";
 import { ArrowDownOnSquareIcon, CheckIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FieldTimeOutlined } from "@ant-design/icons";
 import { Select } from "antd";
+import TicketsSearchSection from "./tickets-search-section";
 
 export default function TicketsTableSection() {
     const { tickets } = useSelector((state) => state.tickets);
@@ -69,7 +70,6 @@ export default function TicketsTableSection() {
                     />
                 </div>
             ),
-
             key: "assigned_to",
         },
         {
@@ -182,7 +182,7 @@ export default function TicketsTableSection() {
 
     return (
         <>
-
+            <TicketsSearchSection />
             <div className="flex flex-col items-center justify-between h-[85vh] w-full">
                 <Table
                     pagination={false}

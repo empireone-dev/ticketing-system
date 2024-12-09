@@ -128,28 +128,37 @@ class TicketController extends Controller
 
     public function index(Request $request)
     {
-        $query = $request->input('query', '');
-        $search = $request->input('search', '');
-        $perPage = $request->input('per_page', 10);
-        $site_id = $request->input('site_id', '');
-        $category = $request->input('category_id', null); // Handle category input
-        $searching = $request->input('searching', '');
+        $query = $request->input('query', ''); // Search query for ticket_id or other fields
+        $search = $request->input('search', ''); // Filter by status or other attributes
+        $perPage = $request->input('per_page', 10); // Pagination limit
+        $site_id = $request->input('site_id', ''); // Site ID filter
+        $category = $request->input('category_id', null);
+        // $assigned = $request->input('assigned_to', null);  // Category filter
+        $searching = $request->input('searching', ''); // General search for multiple fields
         $user = Auth::user();
-    
-        // Initialize query builder
+
+        // Build the base query
         $queryBuilder = Ticket::query();
-    
-        // Filter by site_id if the user is not an admin
+
+        // Filter by site ID if the user is not an admin
         if ($user->id !== 0) {
             $queryBuilder->where('site_id', '=', $site_id);
         }
-    
-        // Filter by ticket_id if `query` is provided
+
+        // Filter by ticket_id or other attributes using `query`
         if (!empty($query)) {
             $queryBuilder->where('ticket_id', 'like', '%' . $query . '%');
         }
-    
-        // Filter by category
+
+        // Filter by category_id
+        // if ($assigned && $assigned !== 'null' && $assigned !== 'N/A') {
+        //     $queryBuilder->where('category_id', '=', $assigned);
+        // } elseif ($assigned === 'N/A') {
+        //     $queryBuilder->where(function ($q) {
+        //         $q->whereNull('category_id')->orWhere('category_id', '');
+        //     });
+        // }
+
         if ($category && $category !== 'null' && $category !== 'N/A') {
             $queryBuilder->where('category_id', '=', $category);
         } elseif ($category === 'N/A') {
@@ -157,25 +166,38 @@ class TicketController extends Controller
                 $q->whereNull('category_id')->orWhere('category_id', '');
             });
         }
-    
-        // Filter by status or `isUrgent` if `search` is provided
+
+        // Filter by urgency or status
         if ($search === 'isUrgent') {
-            $queryBuilder->where('isUrgent', 'true'); // Assuming `isUrgent` is stored as a string
+            $queryBuilder->where('isUrgent', true); // Assuming `isUrgent` is a boolean column
         } elseif (!empty($search)) {
             $queryBuilder->where('status', $search);
         }
-    
-        // Fetch tickets with related data and paginate
+
+        // General search for multiple fields
+        if (!empty($searching)) {
+            $queryBuilder->where(function ($subQuery) use ($searching) {
+                $subQuery->where('ticket_id', 'LIKE', '%' . $searching . '%')
+                    ->orWhere('user_id', 'LIKE', '%' . $searching . '%') // Search by user_id
+                    ->orWhereHas('user', function ($userQuery) use ($searching) {
+                        $userQuery->where('name', 'LIKE', '%' . $searching . '%'); // Search by user name
+                    });
+            });
+        }
+
+        // Retrieve and paginate results
         $tickets = $queryBuilder
-            ->with(['user', 'assigned_to', 'category'])
-            ->orderBy('id', 'desc')
+            ->with(['user', 'assigned_to', 'category']) // Include relations
+            ->orderBy('id', 'desc') // Sort by ID in descending order
             ->paginate($perPage);
-    
+
+        // Return the paginated results as JSON
         return response()->json([
             'result' => $tickets,
         ], 200);
     }
-    
+
+
 
     public function store(Request $request)
     {
