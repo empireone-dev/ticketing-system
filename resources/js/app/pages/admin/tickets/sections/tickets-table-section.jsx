@@ -9,6 +9,7 @@ import { ArrowDownOnSquareIcon, CheckIcon, UserIcon, XMarkIcon } from "@heroicon
 import { FieldTimeOutlined } from "@ant-design/icons";
 import { Select } from "antd";
 import TicketsSearchSection from "./tickets-search-section";
+import TicketsFilterByDate from "./tickets-filter-by-date";
 
 export default function TicketsTableSection() {
     const { tickets } = useSelector((state) => state.tickets);
@@ -182,7 +183,11 @@ export default function TicketsTableSection() {
 
     return (
         <>
-            <TicketsSearchSection />
+            <div className="flex flex-1 justify-between">
+                <TicketsSearchSection />
+                <TicketsFilterByDate />
+            </div>
+
             <div className="flex flex-col items-center justify-between h-[85vh] w-full">
                 <Table
                     pagination={false}
