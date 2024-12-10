@@ -1,4 +1,4 @@
-import { ArrowRightOutlined, CalendarOutlined } from '@ant-design/icons';
+import { ArrowRightOutlined, CalendarOutlined, SearchOutlined } from '@ant-design/icons';
 import { CalendarIcon } from '@heroicons/react/24/outline';
 import { DatePicker } from 'antd';
 import React, { useState } from 'react';
@@ -42,7 +42,7 @@ export default function TicketsFilterByDate() {
                     value={startDate ? startDate.format('YYYY-MM-DD') : ''} // Format the date to display
                     onChange={(e) => setStartDate(e.target.value)}
                     onFocus={handleStartDateFocus} // Show the picker when input is focused
-                    className='h-12 w-full pl-10 pr-10 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    className='h-12 w-full pl-10 pr-6 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
                 />
                 {/* Calendar Icon inside the input */}
                 <CalendarIcon
@@ -50,7 +50,7 @@ export default function TicketsFilterByDate() {
                     onClick={handleStartDateFocus} // Show date picker when icon is clicked
                 />
                 {isStartDatePickerVisible && (
-                    <div className="absolute top-12 left-0 z-10">
+                    <div className="absolute top-14 left-0 z-10">
                         <DatePicker
                             open={isStartDatePickerVisible}
                             onChange={handleStartDateChange}
@@ -72,7 +72,7 @@ export default function TicketsFilterByDate() {
                     value={endDate ? endDate.format('YYYY-MM-DD') : ''} // Format the date to display
                     onChange={(e) => setEndDate(e.target.value)}
                     onFocus={handleEndDateFocus} // Show the picker when input is focused
-                    className='h-12 w-full pl-10 pr-10 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
+                    className='h-12 w-full pl-10 pr-6 mt-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500'
                 />
                 {/* Calendar Icon inside the input */}
                 <CalendarIcon
@@ -80,7 +80,7 @@ export default function TicketsFilterByDate() {
                     onClick={handleEndDateFocus} // Show date picker when icon is clicked
                 />
                 {isEndDatePickerVisible && (
-                    <div className="absolute top-12 left-0 z-10">
+                    <div className="absolute top-14 left-0 z-10">
                         <DatePicker
                             open={isEndDatePickerVisible}
                             onChange={handleEndDateChange}
@@ -89,6 +89,11 @@ export default function TicketsFilterByDate() {
                         />
                     </div>
                 )}
+            </div>
+            <div>
+                <button className=' bg-blue-500 p-2 rounded-md text-white hover:bg-blue-600 mt-5'>
+                    <SearchOutlined /> GENERATE
+                </button>
             </div>
         </div>
     );
