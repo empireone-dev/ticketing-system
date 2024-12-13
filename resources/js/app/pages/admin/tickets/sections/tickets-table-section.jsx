@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import { router } from "@inertiajs/react";
 import Table from "@/app/components/table";
-import Pagination from "@/app/components/pagination";
 import { ArrowDownOnSquareIcon, CheckIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FieldTimeOutlined } from "@ant-design/icons";
-import { Select } from "antd";
+import { Pagination, Select } from "antd";
 import TicketsSearchSection from "./tickets-search-section";
 import TicketsFilterByDate from "./tickets-filter-by-date";
 
@@ -17,7 +16,6 @@ export default function TicketsTableSection() {
     const { users } = useSelector((state) => state.it);
     const [dataChecked, setDataChecked] = useState([]);
     const url = window.location.pathname + window.location.search;
-    console.log('categoriescategories', categories)
 
     const urls = new URL(window.location.href);
     const searchParams = new URLSearchParams(urls.search);
@@ -56,10 +54,11 @@ export default function TicketsTableSection() {
                         optionFilterProp="label"
                         defaultValue={users?.name ?? null}
                         onChange={(e) =>
-                            setData({
-                                ...data,
-                                assigned_to: e,
-                            })
+                            // setData({
+                            //     ...data,
+                            //     assigned_to: e,
+                            // })
+                            router.visit(window.location.pathname + "?page=1" + '&assigned_to=' + e)
                         }
                         options={[
                             { value: "", label: "SCIT Department" },  // Default option
@@ -169,12 +168,14 @@ export default function TicketsTableSection() {
     };
 
     const page = getQueryParam(url, "page");
-
+    const assigned_to = getQueryParam(url, "assigned_to");
     const currentPage = page ? parseInt(page, 10) : 1;
 
     const onChangePaginate = (page) => {
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set("page", page);
+        searchParams.set("assigned_to", assigned_to);
+
         const newUrl = window.location.pathname + "?" + searchParams.toString();
         router.visit(newUrl);
     };

@@ -147,6 +147,8 @@ class TicketController extends Controller
         $category = $request->input('category_id', null);
         // $assigned = $request->input('assigned_to', null);  // Category filter
         $searching = $request->input('searching', ''); // General search for multiple fields
+        $assigned_to = $request->input('assigned_to', ''); // General search for multiple fields
+        
         $user = Auth::user();
 
         // Build the base query
@@ -170,7 +172,10 @@ class TicketController extends Controller
         //         $q->whereNull('category_id')->orWhere('category_id', '');
         //     });
         // }
-
+        if ($assigned_to && $assigned_to !== 'null' && $assigned_to !== 'N/A') {
+            $queryBuilder->where('assigned_to', '=', $assigned_to);
+        }
+        
         if ($category && $category !== 'null' && $category !== 'N/A') {
             $queryBuilder->where('category_id', '=', $category);
         } elseif ($category === 'N/A') {
