@@ -20,7 +20,6 @@ export default function MainLayout({ children, user }) {
                 title="Successfully Save"
                 subTitle="Anyone with a link can now view this file."
             /> */}
-            
             <PusherNotifications />
             <AdministratorSidebarSection />
             <div className="lg:pl-72">

@@ -11,6 +11,7 @@ use App\Models\File;
 use App\Models\Note;
 use App\Models\Ticket;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -18,6 +19,17 @@ use Illuminate\Support\Facades\Storage;
 
 class TicketController extends Controller
 {
+
+    public function export_generate_ticket(Request $request) {
+
+        $startDate = Carbon::createFromFormat('m-d-Y', $request->start)->format('Y-m-d');
+        $endDate = Carbon::createFromFormat('m-d-Y', $request->end)->format('Y-m-d');
+
+        $tickets = Ticket::whereBetween('created_at', [$startDate,$endDate])->with(['user','assigned_to'])->get();
+        return response()->json([
+            'result' => $tickets
+        ], 200);
+    }
     public function search_ticket(Request $request, $userid) {}
     public function get_ticket_by_user_id(Request $request, $userid)
     {

@@ -183,7 +183,7 @@ export default function TicketsTableSection() {
 
     return (
         <>
-            <div className="flex flex-1 justify-between">
+            <div className="flex items-center justify-between">
                 <TicketsSearchSection />
                 <TicketsFilterByDate />
             </div>

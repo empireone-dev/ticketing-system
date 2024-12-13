@@ -19,6 +19,15 @@ export function create_ticket_service(data) {
     }
 }
 
+export function export_generate_ticket_service(data) {
+    try {
+        const res = axios.post("/api/export_generate_ticket", data);
+        return res;
+    } catch (error) {
+        return error;
+    }
+}
+
 export function get_ticket_service(data) {
     const search = window.location.search
     try {

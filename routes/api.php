@@ -35,8 +35,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/get_categories_by_category/{category}', [TicketController::class, 'get_categories_by_category']);
     Route::get('/get_ticket_by_user_id/{userid}', [TicketController::class, 'get_ticket_by_user_id']);
     Route::get('/search_ticket/{search}', [TicketController::class, 'search_ticket']);
+    Route::post('/export_generate_ticket', [TicketController::class, 'export_generate_ticket']);
 
-
+    
     Route::post('/open_ticket_notification', [OpenTicketNotidicationController::class, 'open_ticket_notification']);
 
 
