@@ -46,8 +46,8 @@ export default function DashboardSection() {
                 />
                 <DashboardCardSection
                     icon={<TicketIcon className="h-12 text-white" />}
-                    title={`Ongoing Tickets: ${dashboard?.assigned ?? 0}`}
-                    href="Go To Ongoing Tickets Section"
+                    title={`Ongoing/Assigned Tickets: ${dashboard?.assigned ?? 0}`}
+                    href="Go To Ongoing/Assigned Tickets Section"
                     link="/admin/tickets?page=1&search=Assigned"
                 />
                 <DashboardCardSection

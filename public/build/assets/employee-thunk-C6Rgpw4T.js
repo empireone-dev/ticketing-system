@@ -1,0 +1,1 @@
+import{a as r}from"./dashboard-Dv8NLExD.js";import{w as s}from"./app-EG9EVtxA.js";function _(a){return async function(e,o){const t=await r(a);return e(s.actions.setDashboard(t.data)),t}}export{_ as g};
