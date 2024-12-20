@@ -54,7 +54,7 @@ class NoteController extends Controller
         }
 
         return response()->json([
-            $ticket->assigned_to,
+            $ticket,
             'result' =>  'Notification sent successfully.'
         ], 200);
     }
