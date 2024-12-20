@@ -40,20 +40,21 @@ class NoteController extends Controller
             } else {
                 $email = $ticket->user['email'];
             }
-            if (isset($link)) {
+            // if (isset($link)) {
 
-                Mail::to($email)->send(new MessageNotification([
-                    'id' => (string)$ticket->id,
-                    'name' => $ticket->user['name'],
-                    'email' => $ticket->user['email'],
-                    'account_type' => $ticket->user['account_type'],
-                    'link' => $link,
-                    'message' => $request->notes,
-                ]));
-            }
+            //     Mail::to($email)->send(new MessageNotification([
+            //         'id' => (string)$ticket->id,
+            //         'name' => $ticket->user['name'],
+            //         'email' => $ticket->user['email'],
+            //         'account_type' => $ticket->user['account_type'],
+            //         'link' => $link,
+            //         'message' => $request->notes,
+            //     ]));
+            // }
         }
 
         return response()->json([
+            $email,
             'result' =>  'Notification sent successfully.'
         ], 200);
     }
