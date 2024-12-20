@@ -24,20 +24,32 @@ class NoteController extends Controller
         if ($ticket) {
             $link = null;
             $email = null;
-            switch ($ticket->user['account_type']) {
-                case 1:
-                    $link = 'https://eo-iticketing.com/admin/tickets/' . (string)$ticket->id . '/notes';
-                    break;
-                case 2:
-                    $link = 'https://eo-iticketing.com/employee/it/tickets/' . (string)$ticket->id . '/notes';
-                    break;
-                case 3:
-                    $link = 'https://eo-iticketing.com/employee/users/tickets/' . (string)$ticket->id . '/notes';
-                    break;
-            }
+           
             if ($request->user_id == $ticket->user_id) {
                 $email = $ticket->assigned['email'];
+                switch ($ticket->user['account_type']) {
+                    case 1:
+                        $link = 'https://eo-iticketing.com/admin/tickets/' . (string)$ticket->id . '/notes';
+                        break;
+                    case 2:
+                        $link = 'https://eo-iticketing.com/employee/it/tickets/' . (string)$ticket->id . '/notes';
+                        break;
+                    case 3:
+                        $link = 'https://eo-iticketing.com/employee/users/tickets/' . (string)$ticket->id . '/notes';
+                        break;
+                }
             } else {
+                switch ($ticket->user['account_type']) {
+                    case 1:
+                        $link = 'https://eo-iticketing.com/admin/tickets/' . (string)$ticket->id . '/notes';
+                        break;
+                    case 2:
+                        $link = 'https://eo-iticketing.com/employee/it/tickets/' . (string)$ticket->id . '/notes';
+                        break;
+                    case 3:
+                        $link = 'https://eo-iticketing.com/employee/users/tickets/' . (string)$ticket->id . '/notes';
+                        break;
+                }
                 $email = $ticket->user['email'];
             }
             if (isset($link)) {
