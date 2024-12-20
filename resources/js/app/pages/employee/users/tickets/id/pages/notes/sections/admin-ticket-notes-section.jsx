@@ -36,7 +36,11 @@ export default function AdminTicketNotesSection() {
             await store.dispatch(
                 get_notes_by_id_thunk(window.location.pathname.split("/")[4])
             );
-            setData({});
+            setData({
+                ...user,
+                user_id: user.id,
+                ticket_id: window.location.pathname.split("/")[4],
+            });
             setLoading(false);
         } catch (error) {
             setLoading(false);

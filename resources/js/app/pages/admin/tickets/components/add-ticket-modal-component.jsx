@@ -69,7 +69,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         await store.dispatch(get_user_by_position_thunk(2));
         await store.dispatch(get_ticket_thunk(user));
         await store.dispatch(send_push_notification(fd));
-        messageApi.success("Created Successfully!");
+        await messageApi.success("Created Successfully!");
         setData({});
         closeModal();
         setLoading(false);

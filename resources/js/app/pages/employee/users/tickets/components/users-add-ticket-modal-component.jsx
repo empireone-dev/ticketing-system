@@ -51,8 +51,8 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         fd.append("isUrgent", data.isUrgent);
         fd.append("user_id", user.id);
         fd.append("others", data.others);
-        fd.append("start", data?.start ?? moment().format('LLLL'));
-        fd.append("end", data?.end ?? moment().format('LLLL'));
+        fd.append("start", data?.start ?? moment().format("LLLL"));
+        fd.append("end", data?.end ?? moment().format("LLLL"));
 
         if (checkStatus(data.files) && data.files) {
             for (let i = 0; i < data.files.length; i++) {
@@ -68,9 +68,9 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         await store.dispatch(get_ticket_by_user_id_thunk(user.id));
         await store.dispatch(send_push_notification(fd));
         if (data.category_id == "Others") {
-            store.dispatch(get_category_thunk());
+            await store.dispatch(get_category_thunk());
         }
-        messageApi.success("Created Successfully!");
+        await messageApi.success("Created Successfully!");
         setData({
             status: "Pending",
         });
@@ -124,12 +124,15 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                     </div>
                     <div className="grid md:gap-6 mt-4 ">
                         <RangePicker
-                            onChange={(e) => setData({
-                                ...data,
-                                start: moment(e[0].$d).format('LLLL'),
-                                end: moment(e[1].$d).format('LLLL')
-                            })}
-                            showTime />
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    start: moment(e[0].$d).format("LLLL"),
+                                    end: moment(e[1].$d).format("LLLL"),
+                                })
+                            }
+                            showTime
+                        />
                     </div>
 
                     <div className="grid md:gap-6 mt-4 ">

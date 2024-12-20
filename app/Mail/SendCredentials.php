@@ -53,7 +53,7 @@ class SendCredentials extends Mailable
     // }
     public function build()
     {
-        return $this->from('scitdept@empireonegroup.com', 'IT Ticketing (No Reply)')
+        return $this->from('webdev@empireonegroup.com', 'IT Ticketing (No Reply)')
             ->subject('Login Credentials - EmpireOne BPO Solutions Inc')
             ->markdown('mail.send_credentials')
             ->with($this->data);
