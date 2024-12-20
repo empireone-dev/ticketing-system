@@ -35,11 +35,11 @@ class NoteController extends Controller
                     $link = 'https://eo-iticketing.com/employee/users/tickets/' . (string)$ticket->id . '/notes';
                     break;
             }
-            if ($request->user_id == $ticket->user_id) {
-                $email = $ticket->assigned_to['email'];
-            } else {
-                $email = $ticket->user['email'];
-            }
+            // if ($request->user_id == $ticket->user_id) {
+            //     $email = $ticket->assigned_to['email'];
+            // } else {
+            //     $email = $ticket->user['email'];
+            // }
             // if (isset($link)) {
 
             //     Mail::to($email)->send(new MessageNotification([
@@ -54,7 +54,8 @@ class NoteController extends Controller
         }
 
         return response()->json([
-            $email,
+            $request->user_id,
+            $ticket->user_id,
             'result' =>  'Notification sent successfully.'
         ], 200);
     }
