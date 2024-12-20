@@ -27,7 +27,7 @@ class NoteController extends Controller
            
             if ($request->user_id == $ticket->user_id) {
                 $email = $ticket->assigned['email'];
-                switch ($ticket->user['account_type']) {
+                switch ($ticket->assigned['account_type']) {
                     case 1:
                         $link = 'https://eo-iticketing.com/admin/tickets/' . (string)$ticket->id . '/notes';
                         break;
