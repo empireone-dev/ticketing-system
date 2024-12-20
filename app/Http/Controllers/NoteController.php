@@ -27,18 +27,19 @@ class NoteController extends Controller
             switch ($ticket->user['account_type']) {
                 case 1:
                     $link = 'https://eo-iticketing.com/admin/tickets/' . (string)$ticket->id . '/notes';
-                    $email = $ticket->user['email'];
                     break;
                 case 2:
                     $link = 'https://eo-iticketing.com/employee/it/tickets/' . (string)$ticket->id . '/notes';
-                    $email = $ticket->user['email'];
                     break;
                 case 3:
                     $link = 'https://eo-iticketing.com/employee/users/tickets/' . (string)$ticket->id . '/notes';
-                    $email = $ticket->assigned_to['email'];
                     break;
             }
-
+            if ($request->user_id == $ticket->user_id) {
+                $email = $ticket->assigned_to['email'];
+            } else {
+                $email = $ticket->user['email'];
+            }
             if (isset($link)) {
 
                 Mail::to($email)->send(new MessageNotification([
