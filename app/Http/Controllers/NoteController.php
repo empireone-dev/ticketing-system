@@ -56,6 +56,7 @@ class NoteController extends Controller
 
                 Mail::to($email)->send(new MessageNotification([
                     'id' => (string)$ticket->id,
+                    'ticket_id' => (string)$ticket->ticket_id,
                     'name' => $ticket->user['name'],
                     'email' => $ticket->user['email'],
                     'account_type' => $ticket->user['account_type'],

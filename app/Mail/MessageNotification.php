@@ -55,7 +55,7 @@ class MessageNotification extends Mailable
     public function build()
     {
         return $this->from('webdev@empireonegroup.com', 'IT Ticketing (No Reply)')
-            ->subject('New Message IT Personnel - EmpireOne BPO Solutions Inc')
+            ->subject('New Message IT Personnel ' . $this->data['ticket_id'] . ' - EmpireOne BPO Solutions Inc')
             ->markdown('mail.message_notification')
             ->with($this->data);
     }
