@@ -35,6 +35,10 @@ class Ticket extends Model
     {
         return $this->hasOne(User::class, 'id', 'assigned_to');
     }
+    public function assigned(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'assigned_to');
+    }
     public function category(): HasOne
     {
         return $this->hasOne(Category::class, 'id', 'category_id');

@@ -20,7 +20,7 @@ class NoteController extends Controller
     public function store(Request $request)
     {
         Note::create($request->all());
-        $ticket = Ticket::where('id', '=', $request->ticket_id)->with(['assigned_to', 'user'])->first();
+        $ticket = Ticket::where('id', '=', $request->ticket_id)->with(['assigned', 'user'])->first();
         if ($ticket) {
             $link = null;
             $email = null;
@@ -35,26 +35,25 @@ class NoteController extends Controller
                     $link = 'https://eo-iticketing.com/employee/users/tickets/' . (string)$ticket->id . '/notes';
                     break;
             }
-            // if ($request->user_id == $ticket->user_id) {
-            //     $email = $ticket->assigned_to['email'];
-            // } else {
-            //     $email = $ticket->user['email'];
-            // }
-            // if (isset($link)) {
+            if ($request->user_id == $ticket->user_id) {
+                $email = $ticket->assigned['email'];
+            } else {
+                $email = $ticket->user['email'];
+            }
+            if (isset($link)) {
 
-            //     Mail::to($email)->send(new MessageNotification([
-            //         'id' => (string)$ticket->id,
-            //         'name' => $ticket->user['name'],
-            //         'email' => $ticket->user['email'],
-            //         'account_type' => $ticket->user['account_type'],
-            //         'link' => $link,
-            //         'message' => $request->notes,
-            //     ]));
-            // }
+                Mail::to($email)->send(new MessageNotification([
+                    'id' => (string)$ticket->id,
+                    'name' => $ticket->user['name'],
+                    'email' => $ticket->user['email'],
+                    'account_type' => $ticket->user['account_type'],
+                    'link' => $link,
+                    'message' => $request->notes,
+                ]));
+            }
         }
 
         return response()->json([
-            $ticket,
             'result' =>  'Notification sent successfully.'
         ], 200);
     }
