@@ -20,7 +20,6 @@ export default function AdminTicketIdTabsSection() {
         {
             id: "details",
             name: <div className="mt-2" style={{ fontSize: "18px" }}>Project Details</div>,
-            // description: "Vitae sed mi luctus laoreet.",
             href: `/admin/tickets/${ticketid}/details`,
             status: path === "details" ? "current" : "complete",
             icon: InformationCircleIcon,
@@ -28,7 +27,6 @@ export default function AdminTicketIdTabsSection() {
         {
             id: "files",
             name: <div className="mt-2" style={{ fontSize: "18px" }}>Files</div>,
-            // description: "Cursus semper viverra.",
             href: `/admin/tickets/${ticketid}/files`,
             status: path === "files" ? "current" : "upcoming",
             icon: DocumentCheckIcon,
@@ -36,7 +34,6 @@ export default function AdminTicketIdTabsSection() {
         {
             id: "activities",
             name: <div className="mt-2" style={{ fontSize: "18px" }}>Activities</div>,
-            // description: "Penatibus eu quis ante.",
             href: `/admin/tickets/${ticketid}/activities`,
             status: path === "activities" ? "current" : "upcoming",
             icon: ClockIcon,
@@ -44,7 +41,6 @@ export default function AdminTicketIdTabsSection() {
         {
             id: "notes",
             name: <div className="mt-2" style={{ fontSize: "18px" }}>I.T Personnel Notes</div>,
-            // description: "Penatibus eu quis ante.",
             href: `/admin/tickets/${ticketid}/notes`,
             status: path === "notes" ? "current" : "upcoming",
             icon: PencilSquareIcon,
