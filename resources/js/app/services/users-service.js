@@ -1,5 +1,15 @@
 import axios from "axios";
 
+
+export function change_site_service(data) {
+    try {
+        const res = axios.post("/api/change_site",data);
+        return res;
+    } catch (error) {
+        return error;
+    }
+}
+
 export function create_user_service(data) {
     try {
         const res = axios.post("/api/user", data);

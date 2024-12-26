@@ -40,8 +40,9 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::post('/open_ticket_notification', [OpenTicketNotidicationController::class, 'open_ticket_notification']);
 
-
+    
     Route::resource('user', UserController::class);
+    Route::post('/change_site', [UserController::class, 'change_site']);
     Route::get('/get_user_by_position/{userid}', [UserController::class, 'get_user_by_position']);
     Route::resource('category', CategoryController::class);
     Route::resource('activity', ActivityController::class);

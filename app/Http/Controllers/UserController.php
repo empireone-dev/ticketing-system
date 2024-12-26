@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
 
+    public function change_site(Request $request){
+       $user = User::where('id', $request->id)->first();
+       if ($user) {
+        $user->update([
+            'site_id'=>$request->site_id
+        ]);
+       }
+    }
     public function get_user_by_position($position)
     {
         $user = Auth::user();

@@ -7,7 +7,10 @@ import {
     MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import { setSidebarOpen } from "@/app/redux/app-slice";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
+import { change_site_service } from "../services/users-service";
+import store from "../store/store";
+import { get_user_thunk } from "../redux/app-thunk";
 
 export default function Topbar() {
     const dispatch = useDispatch();
@@ -20,6 +23,18 @@ export default function Topbar() {
 
     function searchData(params) {
 
+    }
+    async function change_site(e) {
+        try {
+           await change_site_service({
+                ...user,
+                site_id: e.target.value
+            })
+            // await store.dispatch(get_user_thunk(user));
+            router.visit(window.location.href)
+        } catch (error) {
+
+        }
     }
     return (
         <>
@@ -62,6 +77,16 @@ export default function Topbar() {
                         />
                     </form>
                     <div className="flex items-center gap-x-4 lg:gap-x-6">
+                        {
+                            user.account_type == 3 && <select
+                                onChange={change_site}
+                                value={user.site_id}
+                            >
+                                <option value="1">San Carlos Site</option>
+                                <option value="2">Carcar Site</option>
+                            </select>
+                        }
+
                         <button
                             type="button"
                             className="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
@@ -82,7 +107,7 @@ export default function Topbar() {
                                 <span className="sr-only">Open user menu</span>
                                 <img
                                     alt=""
-                                    src="https://www.transparentpng.com/thumb/user/gray-user-profile-icon-png-fP8Q1P.png" 
+                                    src="https://www.transparentpng.com/thumb/user/gray-user-profile-icon-png-fP8Q1P.png"
                                     // alt="gray user profile icon png @transparentpng.com"
                                     className="h-8 w-8 rounded-full bg-gray-50"
                                 />

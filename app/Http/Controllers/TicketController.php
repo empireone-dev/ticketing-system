@@ -48,7 +48,7 @@ class TicketController extends Controller
                 }
             }
         } else if ($user->account_type == 3) {
-            $query = Ticket::where('user_id', $user->id);
+            $query = Ticket::where([['user_id','=',$user->id],['site_id','=',$user->site_id]]);
             // if ($search == 'isUrgent') {
             //     $query->where('status', '<>', 'Closed');
             //     $query->orWhere('status', '<>', 'Declined');

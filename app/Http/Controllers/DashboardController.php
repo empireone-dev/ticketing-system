@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $closed = Ticket::where([['status', '=', 'Closed'], ['site_id', '=', $user->site_id]])->count();
         $total = Ticket::where([['site_id', '=', $user->site_id]])->count();
         $urgent = Ticket::where([['isUrgent', '=', 'true'], ['site_id', '=', $user->site_id]])->count();
-        $users = User::where([['account_type','=',2],['site_id','=',$user->site_id]])->get();
+        $users = User::where([['account_type', '=', 2], ['site_id', '=', $user->site_id]])->get();
         foreach ($users as $key => $value) {
             $value['daily'] = Ticket::where('assigned_to', '=', $value->id)
                 ->selectRaw('DATE(created_at) as title, COUNT(*) as count')
@@ -41,15 +41,15 @@ class DashboardController extends Controller
                 ->orderBy('title', 'asc')
                 ->get();
         }
-        
+
         $categories = Category::get();
         foreach ($categories as $key => $category) {
-            $ticket = Ticket::where('category_id',$category->id)->get();
+            $ticket = Ticket::where('category_id', $category->id)->get();
             $category['count'] = $ticket->count();
         }
 
         return response()->json([
-            'categories'=>$categories,
+            'categories' => $categories,
             'data' => $users,
             'pending' => $pending,
             'assigned' => $assigned,
@@ -71,12 +71,12 @@ class DashboardController extends Controller
             $urgent = Ticket::where([['assigned_to', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Closed']])
                 ->orWhere([['assigned_to', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Declined']])->count();
         } else if ($user->account_type == 3) {
-            $pending = Ticket::where([['user_id', '=', $id], ['status', '=', 'Pending']])->count();
-            $assigned = Ticket::where([['user_id', '=', $id], ['status', '=', 'Assigned']])->count();
-            $ongoing = Ticket::where([['user_id', '=', $id], ['status', '=', 'Ongoing']])->count();
-            $closed = Ticket::where([['user_id', '=', $id], ['status', '=', 'Closed']])->count();
-            $urgent = Ticket::where([['user_id', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Closed']])
-                ->orWhere([['assigned_to', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Declined']])->count();
+            $pending = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['status', '=', 'Pending']])->count();
+            $assigned = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['status', '=', 'Assigned']])->count();
+            $ongoing = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['status', '=', 'Ongoing']])->count();
+            $closed = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['status', '=', 'Closed']])->count();
+            $urgent = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Closed']])
+                ->orWhere([['site_id', '=', $user->site_id],['assigned_to', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Declined']])->count();
         }
 
         return response()->json([
