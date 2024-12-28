@@ -91,7 +91,7 @@ export default function AdminTicketDetailsSection() {
                             PC/Station No.:
                         </dt>
                         <dd class="mt-1 text-sm leading-6 sm:col-span-2 sm:mt-0">
-                            {ticket?.station ?? 'N/A'}
+                            {ticket?.station === "undefined" ? "N/A" : ticket?.station ?? ""}
                         </dd>
                     </div>
                 </dl>
