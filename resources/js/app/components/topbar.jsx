@@ -78,7 +78,7 @@ export default function Topbar() {
                     </form>
                     <div className="flex items-center gap-x-4 lg:gap-x-6">
                         {
-                            user.account_type == 3 && <select
+                            user.account_type == 1 && <select
                                 onChange={change_site}
                                 value={user.site_id}
                             >

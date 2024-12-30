@@ -39,6 +39,7 @@ class NoteController extends Controller
                         break;
                 }
             } else {
+                $email = $ticket->user['email'];
                 switch ($ticket->user['account_type']) {
                     case 1:
                         $link = 'https://eo-iticketing.com/admin/tickets/' . (string)$ticket->id . '/notes';
@@ -50,7 +51,6 @@ class NoteController extends Controller
                         $link = 'https://eo-iticketing.com/employee/users/tickets/' . (string)$ticket->id . '/notes';
                         break;
                 }
-                $email = $ticket->user['email'];
             }
             if (isset($link)) {
 
