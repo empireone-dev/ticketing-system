@@ -44,7 +44,7 @@ export default function ItPersonnelTableSection() {
             key: "action",
         },
     ];
-    const data = users.data.map((res) => ({
+    const data = users.map((res) => ({
         ...res,
         name: res?.name ?? "",
         status: (
@@ -88,7 +88,7 @@ export default function ItPersonnelTableSection() {
                     data={data}
                     isCheckbox={true}
                 />
-                <Pagination data={users} />
+                {/* <Pagination data={users} /> */}
             </div>
         </>
     );

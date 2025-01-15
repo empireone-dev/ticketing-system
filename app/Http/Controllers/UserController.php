@@ -27,15 +27,13 @@ class UserController extends Controller
             // Fetch all users with the specified account_type and include closed ticket count
             $users = User::where('account_type', $position)
                 ->withCount(['closed', 'assigned', 'pending', 'declined']) // Use withCount to get the number of closed tickets
-                ->orderBy('name', 'desc')
-                ->paginate(10); // Optional: specify the page size
+                ->orderBy('name', 'desc')->get(); // Optional: specify the page size
         } else {
             // Fetch users with the specified account_type and the same site_id as the logged-in user
             $users = User::where('account_type', $position)
                 ->where('site_id', $user->site_id)
                 ->withCount(['closed', 'assigned', 'pending', 'declined']) // Use withCount to get the number of closed tickets
-                ->orderBy('name', 'desc')
-                ->paginate(10);
+                ->orderBy('name', 'desc')->get();
         }
 
         return response()->json([
