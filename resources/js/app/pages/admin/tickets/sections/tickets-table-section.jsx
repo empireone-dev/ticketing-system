@@ -62,7 +62,7 @@ export default function TicketsTableSection() {
                         }
                         options={[
                             { value: "", label: "SCIT Department" },  // Default option
-                            ...users?.data?.map((res) => ({
+                            ...users?.map((res) => ({
                                 value: res?.id,
                                 label: res?.name,
                             })),

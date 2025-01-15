@@ -173,7 +173,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                                     assigned_to: e.target.value,
                                 })
                             }
-                            options={users?.data.map((res) => ({
+                            options={users?.map((res) => ({
                                 label: res.name,
                                 value: res.id,
                             }))}
