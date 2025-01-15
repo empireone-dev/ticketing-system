@@ -18,12 +18,14 @@ export default function AdminTicketAsssignedSection() {
     const { users } = useSelector((state) => state.it);
     const { user } = useSelector((state) => state.app);
     const [loading, setLoading] = useState(false);
+    
     const [data, setData] = useState({
         status: "Assigned",
         user_id: user?.id,
         ticket_id: window.location.pathname.split("/")[3],
         assigned_to: users[0]?.id,
     });
+    
     useEffect(() => {
         setData({
             ...data,
@@ -33,7 +35,7 @@ export default function AdminTicketAsssignedSection() {
     }, [data.status]);
 
     useEffect(() => {
-        store.dispatch(get_user_by_position_thunk(2));
+        store.dispatch(get_it_thunk(2));
     }, []);
     const showModal = () => {
         setIsModalOpen(true);
