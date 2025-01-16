@@ -8,31 +8,33 @@ export default function UsersDashboardSection() {
 
 
   const { dashboard } = useSelector((state) => state.employee);
- 
+
+  console.log('dashboard', dashboard)
+
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex flex-wrap gap-7 rounded-md'>
         <UsersDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
-          title={`My Urgent Tickets: ${dashboard.urgent??0}`}
+          title={`My Urgent Tickets: ${dashboard.urgent ?? 0}`}
           href="Go To Urgent Tickets Section"
           link='/employee/users/tickets?page=1&search=isUrgent'
         />
         <UsersDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
-          title={`My Pending Tickets: ${dashboard.pending??0}`}
+          title={`My Pending Tickets: ${dashboard.pending ?? 0}`}
           href="Go To Pending Tickets Section"
           link='/employee/users/tickets?page=1&search=Pending'
         />
         <UsersDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
-          title={`My Ongoing Tickets: ${dashboard.ongoing??0}`}
+          title={`My Ongoing Tickets: ${dashboard.ongoing ?? 0}`}
           href="Go To Ongoing Tickets Section"
           link='/employee/users/tickets?page=1&search=Ongoing'
         />
         <UsersDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
-          title={`My Closed Tickets: ${dashboard.closed??0}`}
+          title={`My Closed Tickets: ${dashboard.closed ?? 0}`}
           href="Go To Closed Tickets Section"
           link='/employee/users/tickets?page=1&search=Closed'
         />
