@@ -75,6 +75,8 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         setLoading(false);
     }
 
+    console.log('usersss', users)
+
     return (
         <>
             {contextHolder}
@@ -173,7 +175,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                                     assigned_to: e.target.value,
                                 })
                             }
-                            options={users?.map((res) => ({
+                            options={users?.data?.map((res) => ({
                                 label: res.name,
                                 value: res.id,
                             }))}

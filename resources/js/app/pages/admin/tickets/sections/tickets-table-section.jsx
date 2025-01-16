@@ -21,18 +21,23 @@ export default function TicketsTableSection() {
     const searchParams = new URLSearchParams(urls.search);
     const pages = searchParams.get("page");
     const category_id = searchParams.get("category_id") || null;
+    const assigned_to = searchParams.get("assigned_to") || null;
+
     function search_category(value) {
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set("category_id", value || "null");
         router.visit(window.location.pathname + "?" + searchParams.toString());
     }
 
-    const options = Object.values(categories.data).map((category) => ({
-        label: category.name,
-        value: category.id,
-    })); // D
+    // Ensure categories and users are in the expected format
+    const options = Array.isArray(categories.data)
+        ? categories.data.map((category) => ({
+            label: category.name,
+            value: category.id,
+        }))
+        : [];
 
-    const category = Object.values(categories.data).find(res => res.id == category_id)
+    const category = categories?.data?.find(res => res.id == category_id);
 
     const columns = [
         {
@@ -52,20 +57,16 @@ export default function TicketsTableSection() {
                         showSearch
                         placeholder="I.T Personnel"
                         optionFilterProp="label"
-                        defaultValue={users?.name ?? null}
+                        defaultValue={assigned_to || null}
                         onChange={(e) =>
-                            // setData({
-                            //     ...data,
-                            //     assigned_to: e,
-                            // })
                             router.visit(window.location.pathname + "?page=1" + '&assigned_to=' + e)
                         }
                         options={[
                             { value: "", label: "SCIT Department" },  // Default option
-                            ...users?.map((res) => ({
+                            ...(Array.isArray(users) ? users.map((res) => ({
                                 value: res?.id,
                                 label: res?.name,
-                            })),
+                            })) : []),
                         ]}
                     />
                 </div>
@@ -103,7 +104,7 @@ export default function TicketsTableSection() {
         },
     ];
 
-    const data = tickets?.data.map((res) => ({
+    const data = Array.isArray(tickets?.data) ? tickets.data.map((res) => ({
         ...res,
         name: res?.user?.name ?? "",
         assigned_to: res?.assigned_to?.name ?? "",
@@ -153,28 +154,22 @@ export default function TicketsTableSection() {
                         router.visit("/admin/tickets/" + res.id + "/details")
                     }
                     type="button"
-                    class="text-white bg-[#2557D6] gap-2 hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center"
+                    className="text-white bg-[#2557D6] gap-2 hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center"
                 >
                     <TicketIcon className="size-5 " />
                     View Ticket
                 </button>
             </div>
         ),
-    }));
+    })) : [];
 
-    const getQueryParam = (url, paramName) => {
-        const searchParams = new URLSearchParams(url.split("?")[1]);
-        return searchParams.get(paramName);
-    };
-
-    const page = getQueryParam(url, "page");
-    const assigned_to = getQueryParam(url, "assigned_to");
-    const currentPage = page ? parseInt(page, 10) : 1;
+    const page = parseInt(searchParams.get("page"), 10) || 1;
+    const currentPage = page;
 
     const onChangePaginate = (page) => {
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set("page", page);
-        searchParams.set("assigned_to", assigned_to);
+        searchParams.set("assigned_to", assigned_to || "");
 
         const newUrl = window.location.pathname + "?" + searchParams.toString();
         router.visit(newUrl);
@@ -209,11 +204,10 @@ export default function TicketsTableSection() {
                 </div>
                 <Pagination
                     onChange={onChangePaginate}
-                    defaultCurrent={currentPage}
+                    current={currentPage}
                     total={tickets.total}
                     pageSize={pageSize}
                     showSizeChanger={false}
-                    data={tickets}
                 />
             </div>
         </>

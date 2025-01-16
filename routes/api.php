@@ -37,10 +37,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/search_ticket/{search}', [TicketController::class, 'search_ticket']);
     Route::post('/export_generate_ticket', [TicketController::class, 'export_generate_ticket']);
 
-    
+
     Route::post('/open_ticket_notification', [OpenTicketNotidicationController::class, 'open_ticket_notification']);
 
-    
+
     Route::resource('user', UserController::class);
     Route::post('/change_site', [UserController::class, 'change_site']);
     Route::get('/get_user_by_position/{userid}', [UserController::class, 'get_user_by_position']);

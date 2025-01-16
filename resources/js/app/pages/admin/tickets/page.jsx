@@ -13,11 +13,12 @@ export default function AdminTicketPage({ auth }) {
     useEffect(() => {
         store.dispatch(get_user_by_position_thunk(2));
         store.dispatch(get_category_thunk());
+        store.dispatch(get_it_thunk());
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         store.dispatch(get_ticket_thunk(auth.user));
-    },[refresh])
+    }, [refresh])
     return (
         <AdminLayout user={auth.user}>
             <div className="py-3">
