@@ -31,7 +31,7 @@ export default function UsersDashboardTableSection() {
         //     key: "action",
         // },
     ];
-    const data = users.data.map((res) => ({
+    const data = users?.data.map((res) => ({
         ...res,
         // status: (
         //     <div className="flex gap-4">
