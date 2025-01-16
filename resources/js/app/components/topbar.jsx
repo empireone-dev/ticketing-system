@@ -26,7 +26,7 @@ export default function Topbar() {
     }
     async function change_site(e) {
         try {
-           await change_site_service({
+            await change_site_service({
                 ...user,
                 site_id: e.target.value
             })
@@ -107,7 +107,7 @@ export default function Topbar() {
                                 <span className="sr-only">Open user menu</span>
                                 <img
                                     alt=""
-                                    src="https://www.transparentpng.com/thumb/user/gray-user-profile-icon-png-fP8Q1P.png"
+                                    src="/images/user.png"
                                     // alt="gray user profile icon png @transparentpng.com"
                                     className="h-8 w-8 rounded-full bg-gray-50"
                                 />

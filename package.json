@@ -24,7 +24,7 @@
         "@heroicons/react": "^2.1.5",
         "@reduxjs/toolkit": "^2.2.5",
         "antd": "^5.18.3",
-        "apexcharts": "^3.54.1",
+        "apexcharts": "^4.3.0",
         "chart.js": "^4.4.4",
         "flowbite-react": "^0.9.0",
         "laravel-echo": "^1.16.1",
