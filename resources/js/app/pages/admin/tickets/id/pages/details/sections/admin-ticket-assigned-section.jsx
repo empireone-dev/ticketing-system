@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal, Select, Input, message } from "antd";
-import { get_ticket_by_id_thunk, update_ticket_status_thunk } from "../../../../redux/tickets-thunk";
+import {
+    get_ticket_by_id_thunk,
+    update_ticket_status_thunk,
+} from "../../../../redux/tickets-thunk";
 import store from "@/app/store/store";
-import { get_user_by_position_thunk } from "../../../../../it/redux/it-thunk";
+import {
+    get_it_thunk,
+    get_user_by_position_thunk,
+} from "../../../../../it/redux/it-thunk";
 import { useSelector } from "react-redux";
-
 const { TextArea } = Input;
 
 export default function AdminTicketAsssignedSection() {
@@ -16,58 +21,43 @@ export default function AdminTicketAsssignedSection() {
     const [data, setData] = useState({
         status: "Assigned",
         user_id: user?.id,
-        ticket_id: window.location.pathname.split("/")[3], // Ensure ticket_id is correct
-        assigned_to: users?.[0]?.id || "", // Default to an empty string if no users
-        notes: "",
+        ticket_id: window.location.pathname.split("/")[3],
+        assigned_to: users[0]?.id,
     });
-
-    // Fetch users on initial load
     useEffect(() => {
-        store.dispatch(get_user_by_position_thunk(2)); // Fetch users by position, e.g., IT personnel
+        setData({
+            ...data,
+            user_id: user?.id,
+            assigned_to: users[0]?.id,
+        });
+    }, [data.status]);
+
+    useEffect(() => {
+        store.dispatch(get_user_by_position_thunk(2));
     }, []);
-
-    // Update assigned_to when users data changes
-    useEffect(() => {
-        if (users?.length > 0) {
-            setData((prevData) => ({
-                ...prevData,
-                assigned_to: users[0]?.id, // Set default assigned user to the first one
-            }));
-        }
-    }, [users]); // This effect runs only when `users` changes
-
     const showModal = () => {
         setIsModalOpen(true);
     };
 
-    const handleOk = async () => {
-        if (!data.notes) {
-            messageApi.error("Notes are required!");
-            return;
-        }
-
+    async function handleOk(params) {
         setLoading(true);
-
-        try {
-            // Dispatch the update ticket action
+        if (data.notes) {
             await store.dispatch(update_ticket_status_thunk(data));
-            await store.dispatch(get_ticket_by_id_thunk(data.ticket_id));
+            await store.dispatch(get_ticket_by_id_thunk());
+            messageApi.success("Updated Success!");
 
-            messageApi.success("Updated successfully!");
             setTimeout(() => {
                 setLoading(false);
                 setIsModalOpen(false);
             }, 2000);
-        } catch (error) {
-            messageApi.error("An error occurred while updating the ticket.");
+        } else {
             setLoading(false);
+            messageApi.error("Notes is required!");
         }
-    };
-
+    }
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-
     return (
         <div>
             {contextHolder}
@@ -83,33 +73,36 @@ export default function AdminTicketAsssignedSection() {
                 onCancel={handleCancel}
             >
                 <div className="flex flex-col gap-4">
-                    {data.status === "Assigned" && (
+                    {data.status == "Assigned" && (
                         <Select
                             size="large"
                             value={data.assigned_to}
                             className="w-full"
-                            onChange={(value) =>
-                                setData((prevData) => ({
-                                    ...prevData,
-                                    assigned_to: value,
-                                }))
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    assigned_to: e,
+                                })
                             }
-                            options={users?.map((user) => ({
-                                value: user.id,
-                                label: user.name,
+                            options={users?.map((res) => ({
+                                value: res.id,
+                                label: res.name,
                             }))}
                         />
                     )}
                     <TextArea
-                        value={data.notes}
+                        value={data.notes ?? ""}
                         onChange={(e) =>
-                            setData((prevData) => ({
-                                ...prevData,
+                            setData({
+                                ...data,
                                 notes: e.target.value,
-                            }))
+                            })
                         }
                         placeholder="Notes"
-                        autoSize={{ minRows: 3, maxRows: 5 }}
+                        autoSize={{
+                            minRows: 3,
+                            maxRows: 5,
+                        }}
                     />
                 </div>
             </Modal>
