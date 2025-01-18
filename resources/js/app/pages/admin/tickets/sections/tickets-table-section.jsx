@@ -4,7 +4,12 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import { router } from "@inertiajs/react";
 import Table from "@/app/components/table";
-import { ArrowDownOnSquareIcon, CheckIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+    ArrowDownOnSquareIcon,
+    CheckIcon,
+    UserIcon,
+    XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { FieldTimeOutlined } from "@ant-design/icons";
 import { Pagination, Select } from "antd";
 import TicketsSearchSection from "./tickets-search-section";
@@ -14,6 +19,7 @@ export default function TicketsTableSection() {
     const { tickets } = useSelector((state) => state.tickets);
     const { categories } = useSelector((state) => state.category);
     const { users } = useSelector((state) => state.it);
+
     const [dataChecked, setDataChecked] = useState([]);
     const url = window.location.pathname + window.location.search;
 
@@ -23,22 +29,24 @@ export default function TicketsTableSection() {
     const category_id = searchParams.get("category_id") || null;
     const assigned_to = searchParams.get("assigned_to") || null;
 
+    // Function to handle category filter
     function search_category(value) {
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set("category_id", value || "null");
         router.visit(window.location.pathname + "?" + searchParams.toString());
     }
 
-    // Ensure categories and users are in the expected format
-    const options = Array.isArray(categories.data)
+    // Prepare options for the Select components
+    const categoryOptions = Array.isArray(categories?.data)
         ? categories.data.map((category) => ({
             label: category.name,
             value: category.id,
         }))
         : [];
 
-    const category = categories?.data?.find(res => res.id == category_id);
+    const category = categories?.data?.find((res) => res.id == category_id);
 
+    // Define table columns
     const columns = [
         {
             title: "Name of Requestor",
@@ -59,14 +67,21 @@ export default function TicketsTableSection() {
                         optionFilterProp="label"
                         defaultValue={assigned_to || null}
                         onChange={(e) =>
-                            router.visit(window.location.pathname + "?page=1" + '&assigned_to=' + e)
+                            router.visit(
+                                window.location.pathname +
+                                "?page=1" +
+                                "&assigned_to=" +
+                                e
+                            )
                         }
                         options={[
-                            { value: "", label: "SCIT Department" },  // Default option
-                            ...(Array.isArray(users) ? users.map((res) => ({
-                                value: res?.id,
-                                label: res?.name,
-                            })) : []),
+                            { value: "", label: "SCIT Department" }, // Default option
+                            ...(Array.isArray(users)
+                                ? users.map((res) => ({
+                                    value: res?.id,
+                                    label: res?.name,
+                                }))
+                                : []),
                         ]}
                     />
                 </div>
@@ -92,7 +107,7 @@ export default function TicketsTableSection() {
                         optionFilterProp="label"
                         defaultValue={category?.name ?? null}
                         onChange={search_category}
-                        options={options}
+                        options={categoryOptions}
                     />
                 </div>
             ),
@@ -104,64 +119,69 @@ export default function TicketsTableSection() {
         },
     ];
 
-    const data = Array.isArray(tickets?.data) ? tickets.data.map((res) => ({
-        ...res,
-        name: res?.user?.name ?? "",
-        assigned_to: res?.assigned_to?.name ?? "",
-        category_id: res?.category?.name ?? "",
-        created_at: moment(res.created_at).format("LLL"),
-        status: (
-            <>
-                {res.status === "Assigned" && (
-                    <div className="bg-blue-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                        <ArrowDownOnSquareIcon className="w-4 h-4" />
-                        &nbsp;Assigned
-                    </div>
-                )}
+    // Prepare table data
+    const data = Array.isArray(tickets?.data)
+        ? tickets.data.map((res) => ({
+            ...res,
+            name: res?.user?.name ?? "",
+            assigned_to: res?.assigned_to?.name ?? "",
+            category_id: res?.category?.name ?? "",
+            created_at: moment(res.created_at).format("LLL"),
+            status: (
+                <>
+                    {res.status === "Assigned" && (
+                        <div className="bg-blue-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                            <ArrowDownOnSquareIcon className="w-4 h-4" />
+                            &nbsp;Assigned
+                        </div>
+                    )}
 
-                {res.status === "Pending" && (
-                    <div className="bg-yellow-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                        <FieldTimeOutlined />
-                        &nbsp;Pending
-                    </div>
-                )}
+                    {res.status === "Pending" && (
+                        <div className="bg-yellow-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                            <FieldTimeOutlined />
+                            &nbsp;Pending
+                        </div>
+                    )}
 
-                {res.status === "Closed" && (
-                    <div className="bg-green-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                        <CheckIcon className="w-4 h-4" />
-                        &nbsp;Closed
-                    </div>
-                )}
+                    {res.status === "Closed" && (
+                        <div className="bg-green-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                            <CheckIcon className="w-4 h-4" />
+                            &nbsp;Closed
+                        </div>
+                    )}
 
-                {res.status === "Declined" && (
-                    <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                        <XMarkIcon className="w-4 h-4" />
-                        &nbsp;Declined
-                    </div>
-                )}
-                {res.isUrgent === "true" && (
-                    <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-transparent animate-border-glow">
-                        <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
-                        Urgent
-                    </div>
-                )}
-            </>
-        ),
-        action: (
-            <div className="flex gap-4">
-                <button
-                    onClick={() =>
-                        router.visit("/admin/tickets/" + res.id + "/details")
-                    }
-                    type="button"
-                    className="text-white bg-[#2557D6] gap-2 hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center"
-                >
-                    <TicketIcon className="size-5 " />
-                    View Ticket
-                </button>
-            </div>
-        ),
-    })) : [];
+                    {res.status === "Declined" && (
+                        <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                            <XMarkIcon className="w-4 h-4" />
+                            &nbsp;Declined
+                        </div>
+                    )}
+                    {res.isUrgent === "true" && (
+                        <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-transparent animate-border-glow">
+                            <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
+                            Urgent
+                        </div>
+                    )}
+                </>
+            ),
+            action: (
+                <div className="flex gap-4">
+                    <button
+                        onClick={() =>
+                            router.visit(
+                                "/admin/tickets/" + res.id + "/details"
+                            )
+                        }
+                        type="button"
+                        className="text-white bg-[#2557D6] gap-2 hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center"
+                    >
+                        <TicketIcon className="size-5 " />
+                        View Ticket
+                    </button>
+                </div>
+            ),
+        }))
+        : [];
 
     const page = parseInt(searchParams.get("page"), 10) || 1;
     const currentPage = page;
@@ -192,11 +212,12 @@ export default function TicketsTableSection() {
                     columns={columns}
                     data={data}
                     isCheckbox={true}
-                    dataSource={tickets.data}
+                    dataSource={tickets?.data || []}
                 />
                 <div className="w-full mt-3.5">
-                    {tickets.total > 0
-                        ? `Showing ${(currentPage - 1) * pageSize + 1} to ${Math.min(
+                    {tickets?.total > 0
+                        ? `Showing ${(currentPage - 1) * pageSize + 1
+                        } to ${Math.min(
                             currentPage * pageSize,
                             tickets.total
                         )} of ${tickets.total} entries`
@@ -205,7 +226,7 @@ export default function TicketsTableSection() {
                 <Pagination
                     onChange={onChangePaginate}
                     current={currentPage}
-                    total={tickets.total}
+                    total={tickets?.total || 0}
                     pageSize={pageSize}
                     showSizeChanger={false}
                 />
