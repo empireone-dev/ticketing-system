@@ -36,7 +36,7 @@ export default function TicketsTableSection() {
         router.visit(window.location.pathname + "?" + searchParams.toString());
     }
 
-    // Prepare options for the Select components
+    // Safely prepare options for the Select components
     const categoryOptions = Array.isArray(categories?.data)
         ? categories.data.map((category) => ({
             label: category.name,
@@ -44,7 +44,12 @@ export default function TicketsTableSection() {
         }))
         : [];
 
-    const category = categories?.data?.find((res) => res.id == category_id);
+    // Safely retrieve the selected category
+    const category = Array.isArray(categories?.data)
+        ? categories.data.find((res) => res.id == category_id)
+        : null;
+
+    console.log('Categories:', categories);
 
     // Define table columns
     const columns = [

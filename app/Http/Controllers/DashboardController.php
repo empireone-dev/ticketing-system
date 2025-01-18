@@ -71,12 +71,12 @@ class DashboardController extends Controller
             $urgent = Ticket::where([['assigned_to', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Closed']])
                 ->orWhere([['assigned_to', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Declined']])->count();
         } else if ($user->account_type == 3) {
-            $pending = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['status', '=', 'Pending']])->count();
-            $assigned = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['status', '=', 'Assigned']])->count();
-            $ongoing = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['status', '=', 'Ongoing']])->count();
-            $closed = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['status', '=', 'Closed']])->count();
-            $urgent = Ticket::where([['site_id', '=', $user->site_id],['user_id', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Closed']])
-                ->orWhere([['site_id', '=', $user->site_id],['assigned_to', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Declined']])->count();
+            $pending = Ticket::where([['site_id', '=', $user->site_id], ['user_id', '=', $id], ['status', '=', 'Pending']])->count();
+            $assigned = Ticket::where([['site_id', '=', $user->site_id], ['user_id', '=', $id], ['status', '=', 'Assigned']])->count();
+            $ongoing = Ticket::where([['site_id', '=', $user->site_id], ['user_id', '=', $id], ['status', '=', 'Ongoing']])->count();
+            $closed = Ticket::where([['site_id', '=', $user->site_id], ['user_id', '=', $id], ['status', '=', 'Closed']])->count();
+            $urgent = Ticket::where([['site_id', '=', $user->site_id], ['user_id', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Closed']])
+                ->orWhere([['site_id', '=', $user->site_id], ['assigned_to', '=', $id], ['isUrgent', '=', 'true'], ['status', '<>', 'Declined']])->count();
         }
 
         return response()->json([
