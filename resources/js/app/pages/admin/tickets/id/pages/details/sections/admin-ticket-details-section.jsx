@@ -15,17 +15,17 @@ export default function AdminTicketDetailsSection() {
                         Project Information
                     </h3>
                     <div className="flex gap-3">
-                        {ticket.status == "Pending" && (
+                        {ticket?.status == "Pending" && (
                             <AdminTicketAsssignedSection />
                         )}
                         <AdminTicketChangeStatusSection />
                     </div>
                 </div>
                 <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-800">
-                    Start At: {ticket.start}
+                    Start At: {ticket?.start}
                 </p>
                 <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-800">
-                    End At: {ticket.end}
+                    End At: {ticket?.end}
                 </p>
             </div>
             <div class="mt-6 border-t border-gray-100">
@@ -35,7 +35,7 @@ export default function AdminTicketDetailsSection() {
                             Ticket ID:
                         </dt>
                         <dd class="mt-1 text-sm leading-6 sm:col-span-2 sm:mt-0">
-                            #{ticket.ticket_id}
+                            #{ticket?.ticket_id}
                         </dd>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -43,7 +43,7 @@ export default function AdminTicketDetailsSection() {
                             Filed by:
                         </dt>
                         <dd class="mt-1 text-sm leading-6 sm:col-span-2 sm:mt-0">
-                            {ticket.user?.name}
+                            {ticket?.user?.name}
                         </dd>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
