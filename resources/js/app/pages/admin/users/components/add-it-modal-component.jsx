@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { create_it_thunk, get_user_by_position_thunk } from "../redux/users-thunk";
+import {
+    create_it_thunk,
+    get_user_by_position_thunk,
+    get_user_thunk,
+} from "../redux/users-thunk";
 import store from "@/app/store/store";
 import { Button, Modal } from "antd";
 import Input from "@/app/components/input";
@@ -18,11 +22,11 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
             await store.dispatch(
                 create_it_thunk({
                     ...data,
-                    user_id:user.id,
+                    user_id: user.id,
                     account_type: 3,
                 })
             );
-            await store.dispatch(get_user_by_position_thunk(3));
+            await store.dispatch(get_user_thunk());
             setData({});
             closeModal();
             setLoading(false);
@@ -79,7 +83,7 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
                             label="Position"
                             type="text"
                         />
-                        {user.id == 0 && (
+                        {/* {user.id == 0 && (
                             <Select
                                 label="Select Site"
                                 onChange={(e) => data_handler(e)}
@@ -89,8 +93,7 @@ export default function AddItModalComponent({ isOpen, closeModal }) {
                                     { label: "Carcar", value: 2 },
                                 ]}
                             />
-                        )}
-
+                        )} */}
                     </form>
                 </div>
             </Modal>

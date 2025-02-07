@@ -36,7 +36,7 @@ export default function UsersPersonnelTableSection() {
             key: "action",
         },
     ];
-    const data = users.data.map((res) => ({
+    const data = users?.data?.map((res) => ({
         ...res,
         name: res?.name ?? "",
         status: (
