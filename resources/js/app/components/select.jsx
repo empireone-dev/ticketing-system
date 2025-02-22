@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Select({ options, value, onChange, label,name, required }) {
+export default function Select({ options, value, onChange, label, name, required }) {
     return (
         <div className="w-full">
             <div className="relative">
@@ -14,9 +14,9 @@ export default function Select({ options, value, onChange, label,name, required 
                     {
                         !value && <option disabled selected></option>
                     }
-                    { options.map((option, index) => (
-                        <option key={index} value={option.value}>
-                            {option.label}
+                    {options?.map((option, index) => (
+                        <option key={index} value={option?.value}>
+                            {option?.label}
                         </option>
                     ))}
                 </select>

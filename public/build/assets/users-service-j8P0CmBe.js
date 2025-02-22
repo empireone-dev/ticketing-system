@@ -1,1 +1,0 @@
-import{f as t}from"./app-D64YapS9.js";function a(e){try{return t.post("/api/change_site",e)}catch(r){return r}}function c(e){try{return t.post("/api/user",e)}catch(r){return r}}async function n(e){try{return await t.get("/api/user"+window.location.search)}catch(r){return r}}export{c as a,a as c,n as g};

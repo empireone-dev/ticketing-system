@@ -12,13 +12,14 @@ use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
 
-    public function change_site(Request $request){
-       $user = User::where('id', $request->id)->first();
-       if ($user) {
-        $user->update([
-            'site_id'=>$request->site_id
-        ]);
-       }
+    public function change_site(Request $request)
+    {
+        $user = User::where('id', $request->id)->first();
+        if ($user) {
+            $user->update([
+                'site_id' => $request->site_id
+            ]);
+        }
     }
     public function get_user_by_position($position)
     {
@@ -26,7 +27,7 @@ class UserController extends Controller
         if ($user->id == 0) {
             // Fetch all users with the specified account_type and include closed ticket count
             $users = User::where('account_type', $position)
-               ->where('site_id', $user->site_id)
+                ->where('site_id', $user->site_id)
                 ->withCount(['closed', 'assigned', 'pending', 'declined']) // Use withCount to get the number of closed tickets
                 ->orderBy('name', 'desc')->get(); // Optional: specify the page size
         } else {
