@@ -60,6 +60,7 @@ class DashboardController extends Controller
             'total' => $total,
         ], 200);
     }
+    
     public function show($id)
     {
         $user = User::where('id', $id)->first();

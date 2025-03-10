@@ -94,6 +94,7 @@ class UserController extends Controller
             'result' => $ticket
         ], 200);
     }
+    
     public function show(string $id)
     {
         $ticket = User::where('id', $id)->first();

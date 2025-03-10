@@ -28,7 +28,7 @@ export default function UsersDashboardSection() {
         />
         <UsersDashboardCardSection
           icon={<TicketIcon className='h-12 text-white' />}
-          title={`My Ongoing Tickets: ${dashboard.ongoing ?? 0}`}
+          title={`My Ongoing Tickets: ${dashboard.assigned ?? 0}`}
           href="Go To Ongoing Tickets Section"
           link='/employee/users/tickets?page=1&search=Ongoing'
         />
@@ -41,7 +41,7 @@ export default function UsersDashboardSection() {
       </div>
       <div className='flex gap-7 rounded-md'>
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
+        {/* <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
           <div class="flex items-center justify-between flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 px-4 bg-slate-700 ">
             <div>
               <h3 className='text-gray-300 font-bold text-3xl inline-flex items-center'><img src="/images/Final I.T Logo.png" class="h-12 me-2" alt="FlowBite Logo" /> I.T Personnel</h3>
@@ -57,7 +57,7 @@ export default function UsersDashboardSection() {
             </div>
           </div>
           <UsersDashboardTableSection />
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ export default function UsersSidebarSection() {
           current: path == "dashboard",
       },
       {
-          name: "Tickets",
+          name: "My Tickets",
           href: "/employee/users/tickets?page=1",
           icon: TicketIcon,
           current: path == "tickets",
