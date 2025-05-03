@@ -148,6 +148,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                                 })
                             }
                             value={data?.details ?? ""}
+                            label="Request Details"
                         />
                     </div>
                     <div className="grid md:gap-6 mt-9 mb-7 ">

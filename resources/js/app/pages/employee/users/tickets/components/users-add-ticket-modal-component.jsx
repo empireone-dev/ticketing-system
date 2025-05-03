@@ -170,6 +170,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                                 })
                             }
                             value={data?.details ?? ""}
+                            label="Request Details"
                         />
 
                     </div>
