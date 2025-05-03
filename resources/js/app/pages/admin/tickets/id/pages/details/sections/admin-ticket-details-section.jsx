@@ -82,8 +82,8 @@ export default function AdminTicketDetailsSection() {
                         <dt class="text-sm font-medium leading-6">
                             Details:
                         </dt>
-                        <dd class="mt-1 text-sm leading-6 sm:col-span-2 sm:mt-0">
-                            {ticket?.details}
+                        <dd class="prose prose-custom prose-sm">
+                            <div dangerouslySetInnerHTML={{ __html: ticket?.details }} />
                         </dd>
                     </div>
                     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">

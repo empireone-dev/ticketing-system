@@ -16,6 +16,7 @@ import { setRefresh } from "@/app/redux/app-slice";
 import { send_push_notification } from "@/app/redux/app-thunk";
 import { DatePicker } from "antd";
 import moment from "moment";
+import Wysiwyg from "@/app/components/wysiwyg";
 
 export default function AddTicketModalComponent({ isOpen, closeModal }) {
     const [loading, setLoading] = useState(false);
@@ -49,6 +50,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         fd.append("category_id", data.category_id);
         fd.append("details", data.details);
         fd.append("station", data.station);
+        fd.append("scsite", data.scsite);
         fd.append("status", data.status);
         fd.append("isUrgent", data.isUrgent);
         fd.append("user_id", user.id);
@@ -74,6 +76,9 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         closeModal();
         setLoading(false);
     }
+
+    const scsite = ['2nd Site', '3rd Site'];
+
 
     console.log('usersss', users)
 
@@ -135,21 +140,17 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                         />
                     </div>
                     <div className="grid md:gap-6 mt-4 ">
-                        <Textarea
-                            onChange={(e) =>
+                        <Wysiwyg
+                            onChange={(value) =>
                                 setData({
                                     ...data,
-                                    details: e.target.value,
+                                    details: value,
                                 })
                             }
-                            value={data.details ?? ""}
-                            required="true"
-                            name="details"
-                            label="Request Details"
-                            type="text"
+                            value={data?.details ?? ""}
                         />
                     </div>
-                    <div className="grid md:gap-6 mt-4 mb-7 ">
+                    <div className="grid md:gap-6 mt-9 mb-7 ">
                         <Input
                             onChange={(e) =>
                                 setData({
@@ -166,6 +167,23 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                     </div>
                     <div className="relative z-0 w-full mb-6 group mt-4 ">
                         <Select
+                            value={data.scsite}
+                            label="Site"
+                            name="scsite"
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    scsite: e.target.value,
+                                })
+                            }
+                            options={scsite.map((site) => ({
+                                label: site,
+                                value: site,
+                            }))}
+                        />
+                    </div>
+                    {/* <div className="relative z-0 w-full mb-6 group mt-4 ">
+                        <Select
                             value={data.assigned_to}
                             label="Select IT Personnel"
                             name="assigned_to"
@@ -175,10 +193,12 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                                     assigned_to: e.target.value,
                                 })
                             }
-                            options={users?.data?.map((res) => ({
-                                label: res.name,
-                                value: res.id,
-                            }))}
+                            options={users?.data
+                                ?.filter((res) => res.account_type == "2")
+                                .map((res) => ({
+                                    label: res.name,
+                                    value: res.id,
+                                }))}
                         />
                     </div>
                     <div className="relative z-0 w-full mb-6 group">
@@ -202,7 +222,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                                 value: res.id,
                             }))}
                         />
-                    </div>
+                    </div> */}
                     <Upload
                         onChange={(e) =>
                             setData({

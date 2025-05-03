@@ -21,16 +21,20 @@ export default {
             },
             keyframes: {
                 'border-glow': {
-                    '0%, 100%': { 
-                        'box-shadow': '0 0 10px 2px #FFFF00', 
+                    '0%, 100%': {
+                        'box-shadow': '0 0 10px 2px #FFFF00',
                     },
-                    '50%': { 
-                        'box-shadow': '0 0 20px 2px #FF0000', 
+                    '50%': {
+                        'box-shadow': '0 0 20px 2px #FF0000',
                     },
                 },
             },
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        forms,
+        require('@tailwindcss/typography'),
+    ],
+
 };
