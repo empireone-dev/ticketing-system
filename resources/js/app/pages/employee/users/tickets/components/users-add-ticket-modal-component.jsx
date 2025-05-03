@@ -15,6 +15,9 @@ import Textarea from "@/app/components/textarea";
 import { send_push_notification } from "@/app/redux/app-thunk";
 import { DatePicker } from "antd";
 import moment from "moment";
+import Wysiwyg from "@/app/components/wysiwyg";
+
+
 
 export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
     const [loading, setLoading] = useState(false);
@@ -47,6 +50,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         fd.append("category_id", data.category_id);
         fd.append("details", data.details);
         fd.append("station", data.station);
+        fd.append("scsite", data.scsite);
         fd.append("status", data.status);
         fd.append("isUrgent", data.isUrgent);
         fd.append("user_id", user.id);
@@ -78,6 +82,9 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         setLoading(false);
     }
 
+
+    const scsite = ['2nd Site', '3rd Site'];
+
     return (
         <>
             {contextHolder}
@@ -88,6 +95,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                 confirmLoading={loading}
                 open={isOpen}
                 onCancel={closeModal}
+                width={800}
             >
                 <form className="max-w-full mx-auto mt-4 ">
                     <div className="grid md:gap-6">
@@ -101,11 +109,16 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                                     category_id: e.target.value,
                                 })
                             }
-                            options={categories.map((res) => ({
-                                label: res.name,
-                                value: res.id,
-                            }))}
+                            options={categories
+                                .slice() // makes a copy to avoid mutation
+                                .sort((a, b) => a.name.localeCompare(b.name))
+                                .map((res) => ({
+                                    label: res.name,
+                                    value: res.id,
+                                }))
+                            }
                         />
+
                         {data.category_id == "Others" && (
                             <Input
                                 onChange={(e) =>
@@ -136,7 +149,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                     </div>
 
                     <div className="grid md:gap-6 mt-4 ">
-                        <Textarea
+                        {/* <Textarea
                             onChange={(e) =>
                                 setData({
                                     ...data,
@@ -148,7 +161,17 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                             name="details"
                             label="Request Details"
                             type="text"
+                        /> */}
+                        <Wysiwyg
+                            onChange={(value) =>
+                                setData({
+                                    ...data,
+                                    details: value,
+                                })
+                            }
+                            value={data?.details ?? ""}
                         />
+
                     </div>
 
                     <div className="grid md:gap-6 mt-4 mb-7 ">
@@ -164,6 +187,23 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                             name="station"
                             label="PC/Station No."
                             type="text"
+                        />
+                    </div>
+                    <div className="grid md:gap-6 mb-4">
+                        <Select
+                            value={data.scsite}
+                            label="Site"
+                            name="scsite"
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    scsite: e.target.value,
+                                })
+                            }
+                            options={scsite.map((site) => ({
+                                label: site,
+                                value: site,
+                            }))}
                         />
                     </div>
 

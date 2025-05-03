@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('assigned_to')->nullable();
             $table->string('status')->nullable();
             $table->string('station')->nullable();
+            $table->string('scsite')->nullable();
             $table->string('isUrgent')->nullable();
             $table->timestamps();
         });

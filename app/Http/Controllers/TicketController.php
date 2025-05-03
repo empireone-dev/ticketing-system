@@ -20,12 +20,13 @@ use Illuminate\Support\Facades\Storage;
 class TicketController extends Controller
 {
 
-    public function export_generate_ticket(Request $request) {
+    public function export_generate_ticket(Request $request)
+    {
 
         $startDate = Carbon::createFromFormat('m-d-Y', $request->start)->format('Y-m-d');
         $endDate = Carbon::createFromFormat('m-d-Y', $request->end)->format('Y-m-d');
 
-        $tickets = Ticket::whereBetween('created_at', [$startDate,$endDate])->with(['user','assigned_to'])->get();
+        $tickets = Ticket::whereBetween('created_at', [$startDate, $endDate])->with(['user', 'assigned_to'])->get();
         return response()->json([
             'result' => $tickets
         ], 200);
@@ -48,7 +49,7 @@ class TicketController extends Controller
                 }
             }
         } else if ($user->account_type == 3) {
-            $query = Ticket::where([['user_id','=',$user->id],['site_id','=',$user->site_id]]);
+            $query = Ticket::where([['user_id', '=', $user->id], ['site_id', '=', $user->site_id]]);
             // if ($search == 'isUrgent') {
             //     $query->where('status', '<>', 'Closed');
             //     $query->orWhere('status', '<>', 'Declined');
@@ -148,7 +149,7 @@ class TicketController extends Controller
         // $assigned = $request->input('assigned_to', null);  // Category filter
         $searching = $request->input('searching', ''); // General search for multiple fields
         $assigned_to = $request->input('assigned_to', ''); // General search for multiple fields
-        
+
         $user = Auth::user();
 
         // Build the base query
@@ -175,7 +176,7 @@ class TicketController extends Controller
         if ($assigned_to && $assigned_to !== 'null' && $assigned_to !== 'N/A') {
             $queryBuilder->where('assigned_to', '=', $assigned_to);
         }
-        
+
         if ($category && $category !== 'null' && $category !== 'N/A') {
             $queryBuilder->where('category_id', '=', $category);
         } elseif ($category === 'N/A') {
@@ -232,6 +233,7 @@ class TicketController extends Controller
             'category_id' => $request->category_id == 'Others' ? $category->id : intval($request->category_id),
             'details' => $request->details,
             'station' => $request->station,
+            'scsite' => $request->scsite,
             'status' => $request->status,
             'isUrgent' => $request->isUrgent,
             'start' => $request->start,
