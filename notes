@@ -1,3 +1,5 @@
-close ticket
-transfer ticket
-declined ticket
+UPDATE `tickets` SET `isUrgent` = 'Low Priority' WHERE `isUrgent` = 'false';
+
+UPDATE `tickets` SET `isUrgent` = 'Medium Priority' WHERE `isUrgent` = 'undefined';
+
+UPDATE `tickets` SET `isUrgent` = 'High Priority' WHERE `isUrgent` = 'true';

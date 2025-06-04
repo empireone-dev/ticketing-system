@@ -58,7 +58,7 @@ const PusherNotifications = () => {
 
                 function triggerAlert(params) {
                     setOpen(true);
-                    setIsUrgent(data.message.isUrgent === "true");
+                    setIsUrgent(data.message.isUrgent);
                     setData(data.message);
                     if ("Notification" in window) {
                         setTimeout(() => {
@@ -125,7 +125,7 @@ const PusherNotifications = () => {
                     <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                         <div>
                             <div className="mt-3 text-center sm:mt-5">
-                                {isUrgent && (
+                                {isUrgent == "Medium Priority" && (
                                     <>
                                         <audio ref={audioRef}>
                                             <source
@@ -140,11 +140,11 @@ const PusherNotifications = () => {
                                         />
                                     </>
                                 )}
-                                {!isUrgent && (
+                                {!isUrgent == "High Priority" && (
                                     <>
                                         <audio ref={audioRef}>
                                             <source
-                                                src="/audio/normal.mp3"
+                                                src="/audio/alert2.mp3"
                                                 type="audio/mpeg"
                                             />
                                         </audio>

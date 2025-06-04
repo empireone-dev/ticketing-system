@@ -77,10 +77,9 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         setLoading(false);
     }
 
-    const scsite = ['2nd Site', '3rd Site'];
+    const scsite = ["2nd Site", "3rd Site"];
 
-
-    console.log('usersss', users)
+    console.log("usersss", users);
 
     return (
         <>
@@ -240,7 +239,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                         <Button icon={<UploadOutlined />}>Upload</Button>
                     </Upload>
                     <div class="flex items-center my-4">
-                        <input
+                        {/* <input
                             id="default-checkbox"
                             type="checkbox"
                             checked={data.isUrgent == "true"}
@@ -260,7 +259,35 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                             Is Urgent
-                        </label>
+                        </label> */}
+                        <Select
+                            value={data?.isUrgent}
+                            label="Urgent Type"
+                            name="isUrgent"
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    isUrgent: e.target.value,
+                                })
+                            }
+                            options={[
+                                {
+                                    label: "Low Priority",
+                                    value: "Low Priority",
+                                },
+                                {
+                                    label: "Medium Priority",
+                                    value: "Medium Priority",
+                                },
+                                {
+                                    label: "High Priority",
+                                    value: "High Priority",
+                                },
+                            ].map((site) => ({
+                                label: site.label,
+                                value: site.value,
+                            }))}
+                        />
                     </div>
                 </form>
             </Modal>

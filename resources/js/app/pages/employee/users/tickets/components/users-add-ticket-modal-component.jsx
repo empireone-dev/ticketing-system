@@ -17,8 +17,6 @@ import { DatePicker } from "antd";
 import moment from "moment";
 import Wysiwyg from "@/app/components/wysiwyg";
 
-
-
 export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState({
@@ -82,8 +80,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         setLoading(false);
     }
 
-
-    const scsite = ['2nd Site', '3rd Site'];
+    const scsite = ["2nd Site", "3rd Site"];
 
     return (
         <>
@@ -115,8 +112,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                                 .map((res) => ({
                                     label: res.name,
                                     value: res.id,
-                                }))
-                            }
+                                }))}
                         />
 
                         {data.category_id == "Others" && (
@@ -172,7 +168,6 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                             value={data?.details ?? ""}
                             label="Request Details"
                         />
-
                     </div>
 
                     <div className="grid md:gap-6 mt-4 mb-7 ">
@@ -224,7 +219,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                         <Button icon={<UploadOutlined />}>Upload</Button>
                     </Upload>
                     <div class="flex items-center my-4">
-                        <input
+                        {/* <input
                             id="default-checkbox"
                             type="checkbox"
                             value=""
@@ -245,7 +240,35 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
                             class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                         >
                             Is Urgent
-                        </label>
+                        </label> */}
+                        <Select
+                            value={data?.isUrgent}
+                            label="Urgent Type"
+                            name="isUrgent"
+                            onChange={(e) =>
+                                setData({
+                                    ...data,
+                                    isUrgent: e.target.value,
+                                })
+                            }
+                            options={[
+                                {
+                                    label: "Low Priority",
+                                    value: "Low Priority",
+                                },
+                                {
+                                    label: "Medium Priority",
+                                    value: "Medium Priority",
+                                },
+                                {
+                                    label: "High Priority",
+                                    value: "High Priority",
+                                },
+                            ].map((site) => ({
+                                label: site.label,
+                                value: site.value,
+                            }))}
+                        />
                     </div>
                 </form>
             </Modal>

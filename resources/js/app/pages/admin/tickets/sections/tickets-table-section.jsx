@@ -39,9 +39,9 @@ export default function TicketsTableSection() {
     // Safely prepare options for the Select components
     const categoryOptions = Array.isArray(categories?.data)
         ? categories.data.map((category) => ({
-            label: category.name,
-            value: category.id,
-        }))
+              label: category.name,
+              value: category.id,
+          }))
         : [];
 
     // Safely retrieve the selected category
@@ -49,7 +49,7 @@ export default function TicketsTableSection() {
         ? categories.data.find((res) => res.id == category_id)
         : null;
 
-    console.log('Categories:', categories);
+    console.log("Categories:", categories);
 
     // Define table columns
     const columns = [
@@ -74,18 +74,18 @@ export default function TicketsTableSection() {
                         onChange={(e) =>
                             router.visit(
                                 window.location.pathname +
-                                "?page=1" +
-                                "&assigned_to=" +
-                                e
+                                    "?page=1" +
+                                    "&assigned_to=" +
+                                    e
                             )
                         }
                         options={[
                             { value: "", label: "SCIT Department" }, // Default option
                             ...(Array.isArray(users)
                                 ? users.map((res) => ({
-                                    value: res?.id,
-                                    label: res?.name,
-                                }))
+                                      value: res?.id,
+                                      label: res?.name,
+                                  }))
                                 : []),
                         ]}
                     />
@@ -118,74 +118,77 @@ export default function TicketsTableSection() {
             ),
             key: "category_id",
         },
-        {
-            title: "Action",
-            key: "action",
-        },
     ];
 
     // Prepare table data
     const data = Array.isArray(tickets?.data)
         ? tickets.data.map((res) => ({
-            ...res,
-            name: res?.user?.name ?? "",
-            assigned_to: res?.assigned_to?.name ?? "",
-            category_id: res?.category?.name ?? "",
-            created_at: moment(res.created_at).format("LLL"),
-            status: (
-                <>
-                    {res.status === "Assigned" && (
-                        <div className="bg-blue-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                            <ArrowDownOnSquareIcon className="w-4 h-4" />
-                            &nbsp;Assigned
-                        </div>
-                    )}
+              ...res,
+              ticket_id: (
+                  <button
+                      onClick={() =>
+                          router.visit("/admin/tickets/" + res.id + "/details")
+                      }
+                      className="underline"
+                  >
+                      {res.ticket_id}
+                  </button>
+              ),
+              name: res?.user?.name ?? "",
+              assigned_to: res?.assigned_to?.name ?? "",
+              category_id: res?.category?.name ?? "",
+              created_at: moment(res.created_at).format("LLL"),
+              status: (
+                  <>
+                      {res.status === "Assigned" && (
+                          <div className="bg-blue-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                              <ArrowDownOnSquareIcon className="w-4 h-4" />
+                              &nbsp;Assigned
+                          </div>
+                      )}
 
-                    {res.status === "Pending" && (
-                        <div className="bg-yellow-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                            <FieldTimeOutlined />
-                            &nbsp;Pending
-                        </div>
-                    )}
+                      {res.status === "Pending" && (
+                          <div className="bg-yellow-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                              <FieldTimeOutlined />
+                              &nbsp;Pending
+                          </div>
+                      )}
 
-                    {res.status === "Closed" && (
-                        <div className="bg-green-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                            <CheckIcon className="w-4 h-4" />
-                            &nbsp;Closed
-                        </div>
-                    )}
+                      {res.status === "Closed" && (
+                          <div className="bg-green-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                              <CheckIcon className="w-4 h-4" />
+                              &nbsp;Closed
+                          </div>
+                      )}
 
-                    {res.status === "Declined" && (
-                        <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
-                            <XMarkIcon className="w-4 h-4" />
-                            &nbsp;Declined
-                        </div>
-                    )}
-                    {res.isUrgent === "true" && (
-                        <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-transparent animate-border-glow">
-                            <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
-                            Urgent
-                        </div>
-                    )}
-                </>
-            ),
-            action: (
-                <div className="flex gap-4">
-                    <button
-                        onClick={() =>
-                            router.visit(
-                                "/admin/tickets/" + res.id + "/details"
-                            )
-                        }
-                        type="button"
-                        className="text-white bg-[#2557D6] gap-2 hover:bg-[#2557D6]/90 focus:ring-4 focus:ring-[#2557D6]/50 focus:outline-none font-medium rounded-lg text-sm px-5 py-1.5 text-center inline-flex items-center"
-                    >
-                        <TicketIcon className="size-5 " />
-                        View Ticket
-                    </button>
-                </div>
-            ),
-        }))
+                      {res.status === "Declined" && (
+                          <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border-gray-500">
+                              <XMarkIcon className="w-4 h-4" />
+                              &nbsp;Declined
+                          </div>
+                      )}
+                      {res.isUrgent === "Low Priority" && (
+                          <div className="bg-green-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-transparent animate-border-glow">
+                              <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
+                              {res.isUrgent}
+                          </div>
+                      )}
+                      {res.isUrgent === "Medium Priority" && (
+                          <div className="bg-orange-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-transparent animate-border-glow">
+                              <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
+                              {res.isUrgent}
+                          </div>
+                      )}
+                      {res.isUrgent === "High Priority" && (
+                          <div className="bg-red-600 text-white text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded me-2 border border-transparent animate-border-glow">
+                              <ExclamationTriangleIcon className="w-4 h-4 mr-1" />
+                              {res.isUrgent}
+                          </div>
+                      )}
+                  </>
+              ),
+             
+          }))
         : [];
 
     const page = parseInt(searchParams.get("page"), 10) || 1;
@@ -221,11 +224,12 @@ export default function TicketsTableSection() {
                 />
                 <div className="w-full mt-3.5">
                     {tickets?.total > 0
-                        ? `Showing ${(currentPage - 1) * pageSize + 1
-                        } to ${Math.min(
-                            currentPage * pageSize,
-                            tickets.total
-                        )} of ${tickets.total} entries`
+                        ? `Showing ${
+                              (currentPage - 1) * pageSize + 1
+                          } to ${Math.min(
+                              currentPage * pageSize,
+                              tickets.total
+                          )} of ${tickets.total} entries`
                         : "No entries available"}
                 </div>
                 <Pagination
