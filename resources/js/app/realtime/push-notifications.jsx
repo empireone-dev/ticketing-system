@@ -140,7 +140,7 @@ const PusherNotifications = () => {
                                         />
                                     </>
                                 )}
-                                {!isUrgent == "High Priority" && (
+                                {isUrgent == "High Priority" && (
                                     <>
                                         <audio ref={audioRef}>
                                             <source
