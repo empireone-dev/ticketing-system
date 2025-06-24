@@ -125,11 +125,11 @@ const PusherNotifications = () => {
                     <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                         <div>
                             <div className="mt-3 text-center sm:mt-5">
-                                {isUrgent == "Medium Priority" && (
+                                {isUrgent == "High Priority" && (
                                     <>
                                         <audio ref={audioRef}>
                                             <source
-                                                src="/audio/alert1.mp3"
+                                                src="/audio/alert2.mp3"
                                                 type="audio/mpeg"
                                             />
                                         </audio>
@@ -140,11 +140,11 @@ const PusherNotifications = () => {
                                         />
                                     </>
                                 )}
-                                {isUrgent == "High Priority" && (
+                                {isUrgent == "Medium Priority" && (
                                     <>
                                         <audio ref={audioRef}>
                                             <source
-                                                src="/audio/alert2.mp3"
+                                                src="/audio/alert1.mp3"
                                                 type="audio/mpeg"
                                             />
                                         </audio>
