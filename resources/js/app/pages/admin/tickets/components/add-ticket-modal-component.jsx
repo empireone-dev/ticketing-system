@@ -77,7 +77,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         setLoading(false);
     }
 
-    const scsite = ["2nd Site", "3rd Site"];
+    const scsite = ["2nd Site", "3rd Site" , "Carcar Site"];
 
     console.log("usersss", users);
 
