@@ -156,9 +156,17 @@ class TicketController extends Controller
         $queryBuilder = Ticket::query();
 
         // Filter by site ID if the user is not an admin
-        if ($user->id !== 0) {
-            $queryBuilder->where('site_id', '=', $site_id);
+        if ($user->site_id == 2) {
+            // For Carcar site users, show all tickets including Carcar Site
+            $queryBuilder->where(function ($q) {
+                $q->where('scsite', '=', 'Carcar Site')
+                    ->orWhere('site_id', '=', 2);
+            });
+        } else {
+            // For other site users, exclude Carcar Site tickets
+            $queryBuilder->where('scsite', '!=', 'Carcar Site');
         }
+
 
         // Filter by ticket_id or other attributes using `query`
         if (!empty($query)) {

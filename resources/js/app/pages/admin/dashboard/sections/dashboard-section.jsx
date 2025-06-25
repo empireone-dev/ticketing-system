@@ -28,7 +28,7 @@ export default function DashboardSection() {
         store.dispatch(get_category_thunk())
     }, []);
 
-    console.log("dashboardss", dashboard?.pending);
+    console.log("dashboardss", dashboard);
     return (
         <div className="flex flex-col gap-8">
             <div className="flex flex-wrap gap-7 rounded-md">
@@ -183,11 +183,12 @@ export default function DashboardSection() {
                     </div>
                     <select className="w-full flex items-center justify-center " onChange={(e) => handleSelect(e.target.value)}>
                         <option >Select an IT Personnel</option>
-                        {dashboard?.data?.map((res, index) => (
-                            <option key={index} value={JSON.stringify(res)}>
-                                {res?.name}
-                            </option>
-                        ))}
+                        {dashboard?.data?.map(
+                            (res, index) => (
+                                <option key={index} value={JSON.stringify(res)}>
+                                    {res?.name}
+                                </option>
+                            ))}
                     </select>
                     <div>
                         {selectedData && (

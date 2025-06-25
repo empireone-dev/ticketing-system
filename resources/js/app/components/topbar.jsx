@@ -76,16 +76,19 @@ export default function Topbar() {
                             className="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
                         />
                     </form>
-                    <div className="flex items-center gap-x-4 lg:gap-x-6">
-                        {
-                            user.account_type == 1 && <select
+                    <div className="flex items-center gap-x-4 lg:gap-x-6 rounded-md">
+                        {/* {
+                            user.account_type == 1
+                            // && user.site_id == 1 
+                            && <select
                                 onChange={change_site}
                                 value={user.site_id}
+                                className="rounded-md"
                             >
                                 <option value="1">San Carlos Site</option>
                                 <option value="2">Carcar Site</option>
                             </select>
-                        }
+                        } */}
 
                         <button
                             type="button"

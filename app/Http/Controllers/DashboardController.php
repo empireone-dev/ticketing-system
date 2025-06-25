@@ -12,40 +12,74 @@ class DashboardController extends Controller
 {
     public function index()
     {
-
         $user = Auth::user();
-        $pending = Ticket::where([['status', '=', 'Pending'], ['site_id', '=', $user->site_id]])->count();
-        $assigned = Ticket::where([['status', '=', 'Assigned'], ['site_id', '=', $user->site_id]])->count();
-        $ongoing = Ticket::where([['status', '=', 'Ongoing'], ['site_id', '=', $user->site_id]])->count();
-        $declined = Ticket::where([['status', '=', 'Declined'], ['site_id', '=', $user->site_id]])->count();
-        $closed = Ticket::where([['status', '=', 'Closed'], ['site_id', '=', $user->site_id]])->count();
-        $total = Ticket::where([['site_id', '=', $user->site_id]])->count();
-        $urgent = Ticket::where([['isUrgent', '=', 'true'], ['site_id', '=', $user->site_id]])->count();
-        $users = User::where([['account_type', '=', 2], ['site_id', '=', $user->site_id]])->get();
-        foreach ($users as $key => $value) {
-            $value['daily'] = Ticket::where('assigned_to', '=', $value->id)
+
+        // Define base ticket query condition
+        $ticketFilter = function ($query) use ($user) {
+            if ($user->site_id == 2) {
+                $query->where(function ($q) {
+                    $q->where('scsite', '=', 'Carcar Site')
+                        ->orWhere('site_id', '=', 2);
+                });
+            } else {
+                $query->where('scsite', '!=', 'Carcar Site');
+            }
+        };
+
+        // Ticket status counts
+        $pending = Ticket::where('status', 'Pending')->where($ticketFilter)->count();
+        $assigned = Ticket::where('status', 'Assigned')->where($ticketFilter)->count();
+        $ongoing = Ticket::where('status', 'Ongoing')->where($ticketFilter)->count();
+        $declined = Ticket::where('status', 'Declined')->where($ticketFilter)->count();
+        $closed = Ticket::where('status', 'Closed')->where($ticketFilter)->count();
+        $total = Ticket::where($ticketFilter)->count();
+        $urgent = Ticket::where('isUrgent', true)->where($ticketFilter)->count();
+
+        if ($user->site_id == 2) {
+            $users = User::where('site_id', 2)
+                ->where('account_type', 2)
+                ->get();
+        } else {
+            $users = User::where('account_type', 2)
+                ->where('site_id', $user->site_id)
+                ->get();
+        }
+
+
+        // Append daily/weekly/monthly ticket stats to each user
+        $users = $users->map(function ($value) use ($ticketFilter) {
+            $value['daily'] = Ticket::where('assigned_to', $value->id)
+                ->where($ticketFilter)
                 ->selectRaw('DATE(created_at) as title, COUNT(*) as count')
                 ->groupBy('title')
                 ->orderBy('title', 'asc')
                 ->get();
-            $value['weekly'] = Ticket::where('assigned_to', '=', $value->id)
+
+            $value['weekly'] = Ticket::where('assigned_to', $value->id)
+                ->where($ticketFilter)
                 ->selectRaw('YEAR(created_at) as year, WEEK(created_at) as title, COUNT(*) as count')
                 ->groupBy('year', 'title')
                 ->orderBy('year', 'asc')
                 ->orderBy('title', 'asc')
                 ->get();
-            $value['monthly'] = Ticket::where('assigned_to', '=', $value->id)
+
+            $value['monthly'] = Ticket::where('assigned_to', $value->id)
+                ->where($ticketFilter)
                 ->selectRaw('YEAR(created_at) as year, MONTH(created_at) as title, COUNT(*) as count')
                 ->groupBy('year', 'title')
                 ->orderBy('year', 'asc')
                 ->orderBy('title', 'asc')
                 ->get();
-        }
 
+            return $value;
+        });
+
+        // Category ticket counts
         $categories = Category::get();
         foreach ($categories as $key => $category) {
-            $ticket = Ticket::where('category_id', $category->id)->get();
-            $category['count'] = $ticket->count();
+            $category['count'] = Ticket::where('category_id', $category->id)
+                ->where($ticketFilter)
+                ->count();
         }
 
         return response()->json([
@@ -60,7 +94,9 @@ class DashboardController extends Controller
             'total' => $total,
         ], 200);
     }
-    
+
+
+
     public function show($id)
     {
         $user = User::where('id', $id)->first();

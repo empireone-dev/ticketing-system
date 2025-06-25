@@ -42,11 +42,14 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
             return true;
         }
     }
+
+    const assigned_to = data.scsite === "Carcar Site" ? 79 : 0;
+
     async function submitEvent(e) {
         e.preventDefault();
         setLoading(true);
         const fd = new FormData();
-        fd.append("assigned_to", data.assigned_to);
+        fd.append("assigned_to", assigned_to);
         fd.append("category_id", data.category_id);
         fd.append("details", data.details);
         fd.append("station", data.station);
@@ -77,7 +80,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         setLoading(false);
     }
 
-    const scsite = ["2nd Site", "3rd Site" , "Carcar Site"];
+    const scsite = ["2nd Site", "3rd Site", "Carcar Site"];
 
     console.log("usersss", users);
 
