@@ -49,16 +49,16 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         e.preventDefault();
         setLoading(true);
         const fd = new FormData();
-        fd.append("assigned_to", assigned_to);
-        fd.append("category_id", data.category_id);
-        fd.append("details", data.details);
-        fd.append("station", data.station);
-        fd.append("scsite", data.scsite);
-        fd.append("status", data.status);
-        fd.append("isUrgent", data.isUrgent);
-        fd.append("user_id", user.id);
-        fd.append("start", data?.start ?? moment().format("LLLL"));
-        fd.append("end", data?.end ?? moment().format("LLLL"));
+        fd.append("assigned_to", assigned_to ?? "");
+        fd.append("category_id", data.category_id ?? "");
+        fd.append("details", data.details ?? "");
+        fd.append("station", data.station ?? "");
+        fd.append("scsite", data.scsite ?? "");
+        fd.append("status", data.status ?? "");
+        fd.append("isUrgent", data.isUrgent ?? "");
+        fd.append("user_id", user.id ?? "");
+        fd.append("start", data?.start ?? moment().format("LLLL") ?? "");
+        fd.append("end", data?.end ?? moment().format("LLLL") ?? "");
 
         if (checkStatus(data.files) && data.files) {
             for (let i = 0; i < data.files.length; i++) {
@@ -80,7 +80,7 @@ export default function AddTicketModalComponent({ isOpen, closeModal }) {
         setLoading(false);
     }
 
-    const scsite = ["2nd Site", "3rd Site", "Carcar Site"];
+    const scsite = ["San Carlos 2nd Site", "San Carlos 3rd Site", "Carcar Site"];
 
     console.log("usersss", users);
 

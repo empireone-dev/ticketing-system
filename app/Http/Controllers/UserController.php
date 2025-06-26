@@ -53,7 +53,9 @@ class UserController extends Controller
         // Build the query based on user site_id
         $queryBuilder = User::query();
 
-        if ($user->id !== 0) {
+        if ($user->id !== 0 && $user->site_id == 2) {
+            $queryBuilder->where('site_id', 2);
+        } else {
             $queryBuilder->where('site_id', $user->site_id);
         }
 
@@ -94,7 +96,7 @@ class UserController extends Controller
             'result' => $ticket
         ], 200);
     }
-    
+
     public function show(string $id)
     {
         $ticket = User::where('id', $id)->first();

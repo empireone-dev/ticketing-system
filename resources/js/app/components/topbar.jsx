@@ -77,7 +77,7 @@ export default function Topbar() {
                         />
                     </form>
                     <div className="flex items-center gap-x-4 lg:gap-x-6 rounded-md">
-                        {/* {
+                        {
                             user.account_type == 1
                             // && user.site_id == 1 
                             && <select
@@ -88,7 +88,7 @@ export default function Topbar() {
                                 <option value="1">San Carlos Site</option>
                                 <option value="2">Carcar Site</option>
                             </select>
-                        } */}
+                        }
 
                         <button
                             type="button"
