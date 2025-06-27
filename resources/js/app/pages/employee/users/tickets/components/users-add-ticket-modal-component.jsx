@@ -41,7 +41,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         }
     }
 
-    const assigned_to = data.scsite === "Carcar Site" ? 79 : 0;
+    const assigned_to = data.scsite === "Carcar Site" ? 115 : 0;
     async function submitEvent(e) {
         e.preventDefault();
         setLoading(true);
