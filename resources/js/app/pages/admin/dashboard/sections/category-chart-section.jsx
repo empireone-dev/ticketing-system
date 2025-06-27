@@ -34,10 +34,13 @@ const CategoryChartSection = () => {
     const [hoveredValue, setHoveredValue] = useState('');
 
     useEffect(() => {
-        if (categorysWithPercentage) {
-            setHoveredValue(hardwareIssue.percentage + '%')
+        if (hardwareIssue) {
+            setHoveredValue(hardwareIssue.percentage + '%');
+        } else {
+            setHoveredValue('');
         }
     }, [categorysWithPercentage]);
+
     const getChartOptions = () => ({
         series: series,
         colors: ["#1C64F2", "#16BDCA", "#FDBA8C", "#E74694"],
