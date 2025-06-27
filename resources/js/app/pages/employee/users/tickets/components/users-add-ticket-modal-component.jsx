@@ -80,7 +80,7 @@ export default function UsersAddTicketModalComponent({ isOpen, closeModal }) {
         setLoading(false);
     }
 
-    const scsite = ["2nd Site", "3rd Site"];
+    const scsite = ["San Carlos 2nd Site", "San Carlos 3rd Site", "Carcar Site"];
 
     return (
         <>
